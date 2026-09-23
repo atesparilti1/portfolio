@@ -160,7 +160,7 @@
   "company": "NVIDIA CORP",
   "form": "10-K",
   "filed": "2026-02-25",
-  "summary": "NVIDIA's business is driven by the increasing demand for its data center-scale infrastructure and computing platforms, particularly in the data center and gaming markets. The company's rapid revenue and net income growth are driven by its ability to innovate and adapt to changing market conditions. However, the company's increasing capital expenditures and tax liabilities and uncertainties may impact its financial performance and cash flow.",
+  "summary": "NVIDIA's business continues to grow rapidly, driven by the increasing adoption of AI and HPC workloads in the data center. The company's revenue and net income have grown significantly in recent years, and its net margin remains high. However, the company faces several risks, including unrecognized tax benefits and a current tax examination by the Internal Revenue Service. To address these risks, the company is investing in research and development and expanding capital expenditures to support future growth.",
   "risks": [
    {
     "title": "Capital Expenditures",
@@ -175,22 +175,22 @@
    {
     "title": "Tax Examination",
     "severity": "Medium",
-    "evidence": "We are currently under examination by the Internal Revenue Service for our fiscal years 2023 and 2024. Refer to Note 13 of the Notes to the Consolidated Financial Statements in Part IV, Item 15 of this Annual Report on Form 10-K for further information."
+    "evidence": "We are currently under examination by the Internal Revenue Service for our fiscal years 2023 and 2024."
    }
   ],
   "growth": [
    {
-    "title": "Data Center Market",
-    "evidence": "Fueled by an expansion in AI and HPC workloads, the data center has become the new unit of computing, with networking as an integral part."
-   },
-   {
     "title": "Generative and Agentic AI",
     "evidence": "With the advent of generative and agentic AI, we expect a broader set of PC users to choose NVIDIA GPUs for running these applications locally on their PC, which is critical for privacy, latency, and cost-sensitive AI applications."
+   },
+   {
+    "title": "Data Center Growth",
+    "evidence": "Fueled by an expansion in AI and HPC workloads, the data center has become the new unit of computing, with networking as an integral part."
    }
   ],
   "priorities": [
    "Investing in research and development to drive innovation and growth",
-   "Increasing capital expenditures to support the future growth of the business",
+   "Expanding capital expenditures to support future growth",
    "Managing tax liabilities and uncertainties"
   ]
  }

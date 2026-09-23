@@ -119,11 +119,11 @@ export function Work() {
           <figure className="group overflow-hidden border-2 border-ink">
             <img
               src="/work/sec-filing-analyzer.png"
-              alt="The SEC Filing Analyzer showing NVIDIA's 10-K: an executive summary and three key risks rated High and Medium, each with the supporting quote from the filing."
+              alt="The SEC Filing Analyzer on NVIDIA's 10-K: revenue $215.94B, net income $120.07B, 65.5% revenue growth and 55.6% net margin, an executive summary, and three key risks each backed by a quote from the filing."
               width="1710"
-              height="1047"
+              height="1395"
               loading="lazy"
-              className="block aspect-[16/10] w-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.03] sm:aspect-[1710/1047]"
+              className="block aspect-[16/10] w-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.03] sm:aspect-[1710/1395]"
             />
             <figcaption className="border-t-2 border-ink bg-sheet px-3 py-2 text-xs text-ink-2">The shipped app, analyzing NVIDIA's 2026 10-K.</figcaption>
           </figure>
