@@ -2,7 +2,7 @@
 
 export const featured = [
   {
-    id: "forecaster",
+    id: "demand-forecaster",
     title: "Demand Forecaster",
     station: "Industrial Eng.",
     line: "Forecasts daily demand for 500 store-item series and flags which products will run out before the next restock.",
@@ -16,7 +16,7 @@ export const featured = [
     links: { github: "https://github.com/atesparilti1/demand-forecaster" },
   },
   {
-    id: "sec",
+    id: "sec-filing-analyzer",
     title: "SEC Filing Analyzer",
     station: "Finance",
     line: "Reads 10-K and 10-Q filings and returns risks, growth bets and priorities, each tied to a quote from the filing itself.",
@@ -24,7 +24,7 @@ export const featured = [
     links: { github: "https://github.com/atesparilti1/SEC-filer" },
   },
   {
-    id: "ops",
+    id: "supply-chain-analytics",
     title: "Supply Chain Analytics",
     station: "Full-stack",
     line: "Turns raw Superstore order data into KPIs, SQL reporting views and a dashboard that writes its own recommendations.",

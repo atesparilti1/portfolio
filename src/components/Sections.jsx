@@ -1,6 +1,6 @@
 import { Fragment, useState } from "react";
 import { motion, useReducedMotion } from "motion/react";
-import { ArrowUpRight, Check, Copy, DownloadSimple, EnvelopeSimple, GithubLogo, LinkedinLogo } from "@phosphor-icons/react";
+import { ArrowUp, ArrowUpRight, Check, Copy, DownloadSimple, EnvelopeSimple, GithubLogo, LinkSimple, LinkedinLogo } from "@phosphor-icons/react";
 import ForecastDemo from "../demos/ForecastDemo";
 import FilingDemo from "../demos/FilingDemo";
 import OpsDemo from "../demos/OpsDemo";
@@ -34,6 +34,35 @@ function Links({ links }) {
   );
 }
 
+// Copies a shareable link straight to one project, e.g. for a LinkedIn post.
+function CopyLink({ id, tone }) {
+  const [copied, setCopied] = useState(false);
+  const copy = async () => {
+    const url = `${location.origin}${location.pathname}#${id}`;
+    try {
+      await navigator.clipboard.writeText(url);
+      history.replaceState(null, "", `#${id}`);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1600);
+    } catch {
+      location.hash = id;
+    }
+  };
+  return (
+    <button
+      onClick={copy}
+      aria-label={copied ? "Link copied" : "Copy link to this project"}
+      title="Copy link to this project"
+      className={`inline-flex h-8 items-center gap-1.5 px-2 text-xs font-semibold transition-colors ${
+        tone === "band" ? "text-band-ink-2 hover:text-band-ink" : "text-ink-3 hover:text-ink"
+      }`}
+    >
+      {copied ? <Check size={15} weight="bold" className="text-flow" /> : <LinkSimple size={15} weight="bold" />}
+      <span aria-live="polite">{copied ? "Copied" : ""}</span>
+    </button>
+  );
+}
+
 // Station name set as a process-box title bar beside the project name, not above it.
 function Title({ p, tone = "ink" }) {
   return (
@@ -46,6 +75,7 @@ function Title({ p, tone = "ink" }) {
       >
         {p.station}
       </span>
+      <CopyLink id={p.id} tone={tone} />
     </div>
   );
 }
@@ -65,7 +95,7 @@ export function Work() {
         <PushArrow className="mb-14 mt-14 lg:mb-20" />
 
         {/* Demand Forecaster: text left, demo right */}
-        <article className="grid gap-10 lg:grid-cols-12 lg:gap-12">
+        <article id={fc.id} className="grid scroll-mt-24 gap-10 lg:grid-cols-12 lg:gap-12">
           <Reveal kind="settle" className="space-y-6 lg:col-span-4">
             <Title p={fc} />
             <p className="max-w-[48ch] text-lg leading-relaxed text-ink-2">{fc.line}</p>
@@ -101,7 +131,7 @@ export function Work() {
         <PushArrow className="my-16 lg:my-24" />
 
         {/* SEC Filing Analyzer: demo left, text right */}
-        <article className="grid gap-10 lg:grid-cols-12 lg:gap-12">
+        <article id={sec.id} className="grid scroll-mt-24 gap-10 lg:grid-cols-12 lg:gap-12">
           <Reveal className="order-2 lg:order-1 lg:col-span-7">
             <FilingDemo />
           </Reveal>
@@ -131,7 +161,7 @@ export function Work() {
       </section>
 
       {/* One deliberate color block: the ink band carries the ops project. */}
-      <div className="mt-24 bg-band text-band-ink lg:mt-32">
+      <div id={ops.id} className="mt-24 scroll-mt-16 bg-band text-band-ink lg:mt-32">
         <section className="mx-auto max-w-[1400px] px-4 pb-24 pt-20 sm:px-6 lg:px-10 lg:pb-32 lg:pt-28">
           <Reveal className="max-w-[70ch] space-y-5">
             <Title p={ops} tone="band" />
@@ -180,6 +210,10 @@ export function About() {
             <dd>B.Sc. Industrial Engineering, TU/e, 2025 to 2028</dd>
             <dt className="font-semibold text-ink">Languages</dt>
             <dd>Turkish (C2), English (C1), Dutch (A1)</dd>
+            <dt className="font-semibold text-ink">Coursework</dt>
+            <dd>Statistics, Data Analytics, Algorithmic Programming, Business Information Systems, Financial and Managerial Accounting</dd>
+            <dt className="font-semibold text-ink">Outside work</dt>
+            <dd>Tennis, padel, fitness and following the markets</dd>
             <dt className="font-semibold text-ink">Based in</dt>
             <dd>Eindhoven, Netherlands</dd>
           </dl>
@@ -285,6 +319,10 @@ export function Contact() {
       <footer className="border-t-2 border-ink">
         <div className="mx-auto flex max-w-[1400px] flex-wrap justify-between gap-3 px-4 py-6 text-sm text-ink-2 sm:px-6 lg:px-10">
           <p>© 2026 Ates Parilti</p>
+          <a href="#top" className="inline-flex items-center gap-1.5 font-semibold text-ink transition-colors hover:text-flow">
+            Back to top
+            <ArrowUp size={14} weight="bold" />
+          </a>
           <p>Built with React and a small discrete-event simulation.</p>
         </div>
       </footer>

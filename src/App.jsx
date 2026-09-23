@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { MotionConfig } from "motion/react";
 import { Ladder, Nav } from "./components/Chrome";
 import Hero from "./components/Hero";
@@ -5,6 +6,15 @@ import Hopper from "./components/Hopper";
 import { About, Contact, Work } from "./components/Sections";
 
 export default function App() {
+  // The page renders after load, so the browser's own jump to a #hash (a shared
+  // project link) finds nothing. Scroll there once fonts and layout are ready.
+  useEffect(() => {
+    const id = decodeURIComponent(location.hash.slice(1));
+    if (!id) return;
+    const go = () => document.getElementById(id)?.scrollIntoView({ block: "start" });
+    (document.fonts?.ready ?? Promise.resolve()).then(() => requestAnimationFrame(go));
+  }, []);
+
   return (
     <MotionConfig reducedMotion="user">
       <a
