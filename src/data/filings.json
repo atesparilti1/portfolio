@@ -1,0 +1,197 @@
+[
+ {
+  "ticker": "AAPL",
+  "company": "Apple Inc.",
+  "form": "10-K",
+  "filed": "2025-10-31",
+  "summary": "The Company faces significant risks and challenges, including macroeconomic and industry risks, supply chain disruptions, and intellectual property risks. However, the Company also has opportunities for growth and expansion, driven by its focus on introducing new products and services and expanding its market opportunities. The Company's financial position is strong, with a cash balance of $132.4 billion as of September 27, 2025, and it has the ability to generate cash from ongoing operations and access debt markets.",
+  "risks": [
+   {
+    "title": "Macroeconomic and Industry Risks",
+    "severity": "High",
+    "evidence": "The Company's operations and performance depend significantly on global and regional economic conditions. Adverse economic conditions can materially adversely affect the Company's business, results of operations, financial condition and stock price."
+   },
+   {
+    "title": "Supply Chain Disruptions",
+    "severity": "High",
+    "evidence": "The Company's global supply chain is large and complex, and a majority of the Company's supplier facilities, including manufacturing and assembly sites, are located outside the U.S."
+   },
+   {
+    "title": "Intellectual Property Risks",
+    "severity": "Medium",
+    "evidence": "The Company relies primarily on the innovative skills, technical competence and marketing abilities of its personnel."
+   }
+  ],
+  "growth": [
+   {
+    "title": "Expanding Market Opportunities",
+    "evidence": "The Company is focused on expanding its market opportunities related to smartphones, personal computers, tablets, wearables and accessories, and services."
+   },
+   {
+    "title": "New Product and Service Offerings",
+    "evidence": "The Company announces new product, service and software offerings at various times during the year."
+   }
+  ],
+  "priorities": [
+   "Ensuring the continuing and timely introduction of innovative new products, services and technologies to the marketplace",
+   "Protecting and enforcing the Company's intellectual property rights",
+   "Managing the Company's global supply chain and mitigating the risks associated with it"
+  ]
+ },
+ {
+  "ticker": "AMD",
+  "company": "ADVANCED MICRO DEVICES INC",
+  "form": "10-K",
+  "filed": "2026-02-04",
+  "summary": "AMD delivered strong annual revenue growth in 2025, driven by the performance of our Data Center and Client and Gaming segments. We continue to execute our AI strategy, investing in software capabilities and the open ecosystem. However, we face risks related to highly competitive and rapidly evolving markets, highly cyclical semiconductor industry, and dependence on significant customers. We also face challenges related to inventory and related charges associated with U.S. government export control on AMD Instinct™ MI308 Data Center GPU products and potential impact of U.S. government regulations on revenue generated from licensed MI308 sales to China.",
+  "risks": [
+   {
+    "title": "Highly competitive and rapidly evolving markets",
+    "severity": "High",
+    "evidence": "Economic and Strategic Risks"
+   },
+   {
+    "title": "Highly cyclical semiconductor industry",
+    "severity": "High",
+    "evidence": "Economic and Strategic Risks"
+   },
+   {
+    "title": "Dependence on significant customers",
+    "severity": "Medium",
+    "evidence": "Economic and Strategic Risks"
+   }
+  ],
+  "growth": [
+   {
+    "title": "Growing demand for AI infrastructure",
+    "evidence": "Economic and Strategic Risks"
+   },
+   {
+    "title": "Increasing adoption of cloud computing",
+    "evidence": "Business"
+   }
+  ],
+  "priorities": [
+   "Accelerating growth in the Data Center segment",
+   "Executing our AI strategy",
+   "Continuing to invest in software capabilities and the open ecosystem"
+  ]
+ },
+ {
+  "ticker": "META",
+  "company": "Meta Platforms, Inc.",
+  "form": "10-K",
+  "filed": "2026-01-29",
+  "summary": "Our mission is to build the future of human connection and the technology that makes it possible. Our financial results and key Family metrics for 2025 are set forth below. Total revenue for 2025 was $200.97 billion, an increase of 22% compared to 2024, due to an increase in advertising revenue. Ad impressions delivered across our Family of Apps in 2025 increased 12% year-over-year, and our average price per ad increased 9% year-over-year. We are making significant investments in AI, including generative AI, to improve our delivery, targeting, and measurement capabilities, and we are also investing in Reels and in AI initiatives across our products, including our AI-powered discovery engine to recommend relevant content.",
+  "risks": [
+   {
+    "title": "User Retention and Growth",
+    "severity": "High",
+    "evidence": "Our size of active user base and our users' level of engagement across our products are critical to our success. Our financial performance has been and will continue to be significantly determined by our success in adding, retaining, and engaging active users of our products that deliver ad impressions, particularly for Facebook and Instagram."
+   },
+   {
+    "title": "Advertising Revenue",
+    "severity": "High",
+    "evidence": "Legislative and regulatory developments such as the General Data Protection Regulation, including its evolving interpretation through decisions of the Court of Justice of the European Union, ePrivacy Directive, European Digital Services Act, Digital Markets Act, and U.S. state privacy laws have impacted our ability to use data signals in our ad products, and an increasing number of laws have been introduced limiting or prohibiting the provision of our services to younger users."
+   },
+   {
+    "title": "Competition",
+    "severity": "Medium",
+    "evidence": "We face significant competition in every aspect of our business, including, but not limited to, companies that facilitate the ability of users to create, share, communicate, and discover content and information online or enable marketers to reach their existing or prospective audiences."
+   }
+  ],
+  "growth": [
+   {
+    "title": "Artificial Intelligence (AI)",
+    "evidence": "We are developing privacy enhancing technologies to deliver relevant ads and measurement capabilities while reducing the amount of personal information we process, including by relying more on anonymized or aggregated third-party data."
+   },
+   {
+    "title": "Reels and AI-Powered Discovery Engine",
+    "evidence": "We are developing tools that enable marketers to share their data into our systems, as well as ad products that generate more valuable signals within our apps."
+   }
+  ],
+  "priorities": [
+   "AI",
+   "Reels and AI-Powered Discovery Engine",
+   "Wearables"
+  ]
+ },
+ {
+  "ticker": "MSFT",
+  "company": "MICROSOFT CORP",
+  "form": "10-K",
+  "filed": "2026-07-29",
+  "summary": "Microsoft's business model is highly competitive, with intense competition across all markets for its products and services. However, the company has been able to adapt to changing market conditions and has seen steady revenue and net income growth over the past few years. The company's cloud and AI strategy requires substantial investments and depends on evolving customer demand, technological developments, competitive dynamics, and regulatory conditions. Despite these risks, the company has seen significant growth in its commercial remaining performance obligation and Microsoft Cloud revenue.",
+  "risks": [
+   {
+    "title": "Competition in the technology sector",
+    "severity": "High",
+    "evidence": "Our operations and financial results are subject to various risks and uncertainties, including those described below, that could adversely affect our business, operations, financial condition, results of operations, liquidity, and the trading price of our common stock."
+   },
+   {
+    "title": "Competition among platform-based ecosystems",
+    "severity": "High",
+    "evidence": "A competing vertically-integrated model, in which a single firm controls the hardware and software elements of a product and related services, has succeeded with some consumer products such as PCs, tablets, smartphones, gaming consoles, wearables, and other endpoint devices."
+   },
+   {
+    "title": "Cloud and AI strategy risks",
+    "severity": "High",
+    "evidence": "Our AI strategy also depends in part on strategic relationships with third parties that provide technologies, models, products, and services that enhance our offerings."
+   }
+  ],
+  "growth": [
+   {
+    "title": "Microsoft Cloud revenue growth",
+    "evidence": "Highlights from fiscal year 2026 compared with fiscal year 2025 included: Microsoft Cloud revenue increased 27% to $214.4 billion."
+   },
+   {
+    "title": "Commercial remaining performance obligation growth",
+    "evidence": "Highlights from fiscal year 2026 compared with fiscal year 2025 included: Commercial remaining performance obligation increased 84% to $678 billion."
+   }
+  ],
+  "priorities": [
+   "Attracting and retaining qualified employees",
+   "Investing in cloud and AI infrastructure and devices",
+   "Evolving and adapting to changing market conditions"
+  ]
+ },
+ {
+  "ticker": "NVDA",
+  "company": "NVIDIA CORP",
+  "form": "10-K",
+  "filed": "2026-02-25",
+  "summary": "NVIDIA's business is driven by the increasing demand for its data center-scale infrastructure and computing platforms, particularly in the data center and gaming markets. The company's rapid revenue and net income growth are driven by its ability to innovate and adapt to changing market conditions. However, the company's increasing capital expenditures and tax liabilities and uncertainties may impact its financial performance and cash flow.",
+  "risks": [
+   {
+    "title": "Capital Expenditures",
+    "severity": "High",
+    "evidence": "During fiscal year 2026 and fiscal year 2025, we spent $6.1 billion and $3.4 billion on capital expenditures, respectively. We expect to increase capital expenditures in fiscal year 2027 relative to fiscal year 2026 to support the future growth of our business."
+   },
+   {
+    "title": "Unrecognized Tax Benefits",
+    "severity": "High",
+    "evidence": "Unrecognized tax benefits of $4.0 billion, which includes related interest and penalties of $374 million, were recorded in non-current income tax payable at the end of fiscal year 2026."
+   },
+   {
+    "title": "Tax Examination",
+    "severity": "Medium",
+    "evidence": "We are currently under examination by the Internal Revenue Service for our fiscal years 2023 and 2024. Refer to Note 13 of the Notes to the Consolidated Financial Statements in Part IV, Item 15 of this Annual Report on Form 10-K for further information."
+   }
+  ],
+  "growth": [
+   {
+    "title": "Data Center Market",
+    "evidence": "Fueled by an expansion in AI and HPC workloads, the data center has become the new unit of computing, with networking as an integral part."
+   },
+   {
+    "title": "Generative and Agentic AI",
+    "evidence": "With the advent of generative and agentic AI, we expect a broader set of PC users to choose NVIDIA GPUs for running these applications locally on their PC, which is critical for privacy, latency, and cost-sensitive AI applications."
+   }
+  ],
+  "priorities": [
+   "Investing in research and development to drive innovation and growth",
+   "Increasing capital expenditures to support the future growth of the business",
+   "Managing tax liabilities and uncertainties"
+  ]
+ }
+]
