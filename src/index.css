@@ -1,0 +1,186 @@
+@import "tailwindcss";
+@import "@fontsource-variable/archivo/wdth.css";
+@import "@fontsource/jetbrains-mono/400.css";
+@import "@fontsource/jetbrains-mono/600.css";
+
+/* Process-sheet world: ground, ink line-work, information-flow blue, kaizen orange. */
+:root {
+  --ground: #e6e9e3;
+  --ground-2: #d9ddd5;
+  --sheet: #eef0eb;
+  --ink: #111317;
+  --ink-2: #3a4048;
+  --ink-3: #5c636b;
+  --rule: #111317;
+  --flow: #2342e0;
+  --flow-ink: #ffffff;
+  --kaizen: #ff5a1f;
+  --kaizen-ink: #111317;
+  --band: #111317;
+  --band-ink: #e6e9e3;
+  --band-ink-2: #a9b0a6;
+  --shadow: 17 19 23;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ground: #101216;
+    --ground-2: #181b20;
+    --sheet: #15181d;
+    --ink: #e4e7e1;
+    --ink-2: #b4bab2;
+    --ink-3: #8d948c;
+    --rule: #e4e7e1;
+    --flow: #7088ff;
+    --flow-ink: #0b0d12;
+    --kaizen: #ff6a33;
+    --kaizen-ink: #101216;
+    --band: #1c2026;
+    --band-ink: #e4e7e1;
+    --band-ink-2: #9aa198;
+    --shadow: 0 0 0;
+    color-scheme: dark;
+  }
+}
+
+@theme {
+  --font-sans: "Archivo Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  --color-ground: var(--ground);
+  --color-ground-2: var(--ground-2);
+  --color-sheet: var(--sheet);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-ink-3: var(--ink-3);
+  --color-rule: var(--rule);
+  --color-flow: var(--flow);
+  --color-flow-ink: var(--flow-ink);
+  --color-kaizen: var(--kaizen);
+  --color-kaizen-ink: var(--kaizen-ink);
+  --color-band: var(--band);
+  --color-band-ink: var(--band-ink);
+  --color-band-ink-2: var(--band-ink-2);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+html {
+  background: var(--ground);
+  color: var(--ink);
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--ground);
+  font-family: var(--font-sans);
+  font-feature-settings: "ss01";
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--flow);
+  color: var(--flow-ink);
+}
+
+:focus-visible {
+  outline: 2px solid var(--flow);
+  outline-offset: 3px;
+}
+
+a {
+  text-underline-offset: 0.22em;
+  text-decoration-thickness: 1.5px;
+}
+
+html {
+  scrollbar-color: var(--ink-3) var(--ground-2);
+}
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+::-webkit-scrollbar-track {
+  background: var(--ground-2);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--ink-3);
+  border: 3px solid var(--ground-2);
+}
+
+/* Display voice: Archivo pushed wide. */
+.display {
+  font-stretch: 118%;
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  line-height: 0.95;
+  text-wrap: balance;
+}
+.wide {
+  font-stretch: 112%;
+}
+.tnum {
+  font-variant-numeric: tabular-nums;
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* The hopper blinks now and then. */
+.hopper-eyes > span {
+  animation: hopper-blink 4.2s infinite;
+  transform-origin: center;
+}
+@keyframes hopper-blink {
+  0%, 93%, 100% { transform: scaleY(1); }
+  96% { transform: scaleY(0.15); }
+}
+
+/* Restock slider: a taped track with a square handle. */
+.range {
+  appearance: none;
+  height: 22px;
+  background: transparent;
+  cursor: pointer;
+}
+.range::-webkit-slider-runnable-track {
+  height: 4px;
+  background: var(--ink);
+}
+.range::-moz-range-track {
+  height: 4px;
+  background: var(--ink);
+}
+.range::-webkit-slider-thumb {
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  margin-top: -7px;
+  background: var(--flow);
+  border: 2px solid var(--ink);
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.range::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 0;
+  background: var(--flow);
+  border: 2px solid var(--ink);
+}
+.range:hover::-webkit-slider-thumb,
+.range:active::-webkit-slider-thumb {
+  transform: scale(1.2);
+}
