@@ -1,0 +1,437 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-23T12:00:00Z",
+  "title": "Design System: Ates Parilti Portfolio",
+  "extensions": {
+    "colorMeta": {
+      "flow": {
+        "role": "primary",
+        "displayName": "Information-Flow Blue",
+        "canonical": "#2342e0",
+        "dark": "#7088ff",
+        "tonalRamp": [
+          "#0b1554",
+          "#132285",
+          "#1b31b8",
+          "#2342e0",
+          "#5570ec",
+          "#8a9ef3",
+          "#bdc8f8",
+          "#e6eafd"
+        ]
+      },
+      "flow-ink": {
+        "role": "primary",
+        "displayName": "Flow Ink",
+        "canonical": "#ffffff",
+        "dark": "#0b0d12",
+        "tonalRamp": [
+          "#1f1f1f",
+          "#3d3d3d",
+          "#5c5c5c",
+          "#7a7a7a",
+          "#999999",
+          "#b8b8b8",
+          "#d6d6d6",
+          "#ffffff"
+        ]
+      },
+      "kaizen": {
+        "role": "secondary",
+        "displayName": "Kaizen Orange",
+        "canonical": "#ff5a1f",
+        "dark": "#ff6a33",
+        "tonalRamp": [
+          "#4a1403",
+          "#7a2206",
+          "#b0320a",
+          "#e2470f",
+          "#ff5a1f",
+          "#ff8a5e",
+          "#ffbc9f",
+          "#ffe7dc"
+        ]
+      },
+      "kaizen-ink": {
+        "role": "secondary",
+        "displayName": "Kaizen Ink",
+        "canonical": "#111317",
+        "dark": "#101216",
+        "tonalRamp": [
+          "#111317",
+          "#24272d",
+          "#3a4048",
+          "#5c636b",
+          "#80878e",
+          "#a6acb1",
+          "#cdd1d4",
+          "#eef0f1"
+        ]
+      },
+      "ground": {
+        "role": "neutral",
+        "displayName": "Process Sheet",
+        "canonical": "#e6e9e3",
+        "dark": "#101216",
+        "tonalRamp": [
+          "#1e211c",
+          "#383c35",
+          "#555a51",
+          "#737a6f",
+          "#949a8f",
+          "#b6bbb1",
+          "#d9ddd5",
+          "#e6e9e3"
+        ]
+      },
+      "ground-2": {
+        "role": "neutral",
+        "displayName": "Worn Sheet",
+        "canonical": "#d9ddd5",
+        "dark": "#181b20",
+        "tonalRamp": [
+          "#1e211c",
+          "#383c35",
+          "#555a51",
+          "#737a6f",
+          "#949a8f",
+          "#b6bbb1",
+          "#d9ddd5",
+          "#eef0eb"
+        ]
+      },
+      "sheet": {
+        "role": "neutral",
+        "displayName": "Clean Sheet",
+        "canonical": "#eef0eb",
+        "dark": "#15181d",
+        "tonalRamp": [
+          "#1e211c",
+          "#383c35",
+          "#555a51",
+          "#737a6f",
+          "#949a8f",
+          "#b6bbb1",
+          "#d9ddd5",
+          "#eef0eb"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Drafting Ink",
+        "canonical": "#111317",
+        "dark": "#e4e7e1",
+        "tonalRamp": [
+          "#111317",
+          "#24272d",
+          "#3a4048",
+          "#5c636b",
+          "#80878e",
+          "#a6acb1",
+          "#cdd1d4",
+          "#eef0f1"
+        ]
+      },
+      "ink-2": {
+        "role": "neutral",
+        "displayName": "Graphite",
+        "canonical": "#3a4048",
+        "dark": "#b4bab2",
+        "tonalRamp": [
+          "#111317",
+          "#24272d",
+          "#3a4048",
+          "#5c636b",
+          "#80878e",
+          "#a6acb1",
+          "#cdd1d4",
+          "#eef0f1"
+        ]
+      },
+      "ink-3": {
+        "role": "neutral",
+        "displayName": "Pencil",
+        "canonical": "#5c636b",
+        "dark": "#8d948c",
+        "tonalRamp": [
+          "#111317",
+          "#24272d",
+          "#3a4048",
+          "#5c636b",
+          "#80878e",
+          "#a6acb1",
+          "#cdd1d4",
+          "#eef0f1"
+        ]
+      },
+      "band": {
+        "role": "neutral",
+        "displayName": "Ink Band",
+        "canonical": "#111317",
+        "dark": "#1c2026",
+        "tonalRamp": [
+          "#111317",
+          "#24272d",
+          "#3a4048",
+          "#5c636b",
+          "#80878e",
+          "#a6acb1",
+          "#cdd1d4",
+          "#eef0f1"
+        ]
+      },
+      "band-ink": {
+        "role": "neutral",
+        "displayName": "Band Paper",
+        "canonical": "#e6e9e3",
+        "dark": "#e4e7e1",
+        "tonalRamp": [
+          "#1e211c",
+          "#383c35",
+          "#555a51",
+          "#737a6f",
+          "#949a8f",
+          "#b6bbb1",
+          "#d9ddd5",
+          "#e6e9e3"
+        ]
+      },
+      "band-ink-2": {
+        "role": "neutral",
+        "displayName": "Band Graphite",
+        "canonical": "#a9b0a6",
+        "dark": "#9aa198",
+        "tonalRamp": [
+          "#1f231e",
+          "#3b4139",
+          "#596156",
+          "#788274",
+          "#a9b0a6",
+          "#c2c8bf",
+          "#dadfd8",
+          "#eef1ed"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Hero and contact headlines. Archivo 800 at 118% stretch; one blue word at most."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Section headings and project names, same wide voice at smaller clamps."
+      },
+      "title": {
+        "displayName": "Title Bar",
+        "purpose": "Process-box title bars, band-card headers, name mark. 112% stretch."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Lead paragraphs in Graphite, 38 to 60ch."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Data-box field names, stack lists, captions."
+      },
+      "value": {
+        "displayName": "Measured Value",
+        "purpose": "Mono readouts in data boxes, tabular figures."
+      },
+      "value-sm": {
+        "displayName": "Measured Value Small",
+        "purpose": "C/T, queue, wait, lead-time, axis ticks, chart annotations."
+      }
+    },
+    "shadows": [
+      {
+        "name": "pull-lift",
+        "value": "0 8px 24px -10px rgb(var(--shadow) / 0.5)",
+        "purpose": "Primary button on hover only."
+      },
+      {
+        "name": "floating-instrument",
+        "value": "0 6px 24px -12px rgb(var(--shadow) / 0.45)",
+        "purpose": "The fixed timeline ladder."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-out-expo",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "The single easing curve for reveals, draws and state transitions."
+      },
+      {
+        "name": "wipe",
+        "value": "clip-path inset(0 38% 0 0) + opacity 0.4 + x -12px -> rest, 1.0s, once at 25% in view",
+        "purpose": "Headings, demos and figures come online from the flow direction, starting partly visible."
+      },
+      {
+        "name": "settle",
+        "value": "opacity 0 + y 14px -> rest, 0.7s",
+        "purpose": "Supporting text beside a wiped element."
+      },
+      {
+        "name": "push-draw",
+        "value": "scaleX 0 -> 1 from the left, 1.1s",
+        "purpose": "Push arrows draw in the direction work flows."
+      },
+      {
+        "name": "magnetic",
+        "value": "pointer offset x 0.22 / y 0.3, spring stiffness 260 damping 18",
+        "purpose": "Hero and contact CTAs lean toward a mouse pointer; off for touch and reduced motion."
+      },
+      {
+        "name": "hover-transition",
+        "value": "200ms colors, active scale 0.98",
+        "purpose": "Button and control state changes."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "MotionConfig reducedMotion=user; CSS durations 0.001ms; smooth scroll off",
+        "purpose": "Every reveal renders at rest; the sim draws still frames."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "sm",
+        "value": "640px"
+      },
+      {
+        "name": "md",
+        "value": "768px"
+      },
+      {
+        "name": "lg",
+        "value": "1024px"
+      },
+      {
+        "name": "container",
+        "value": "1400px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Ink block CTA that turns information-flow blue and lifts on hover.",
+      "html": "<a class=\"ds-btn-primary\" href=\"#\">See the work <svg width=\"16\" height=\"16\" viewBox=\"0 0 256 256\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"24\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><line x1=\"128\" y1=\"40\" x2=\"128\" y2=\"216\"/><polyline points=\"56 144 128 216 200 144\"/></svg></a>",
+      "css": ".ds-btn-primary { display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; background: var(--ink, #111317); color: var(--ground, #e6e9e3); padding: 12px 20px; font-family: 'Archivo Variable', system-ui, sans-serif; font-size: 15px; font-weight: 700; text-decoration: none; border: 0; border-radius: 0; transition: background-color 0.2s, color 0.2s, box-shadow 0.2s; } .ds-btn-primary:hover { background: var(--flow, #2342e0); color: var(--flow-ink, #fff); box-shadow: 0 8px 24px -10px rgb(17 19 23 / 0.5); } .ds-btn-primary:focus-visible { outline: 2px solid var(--flow, #2342e0); outline-offset: 3px; } .ds-btn-primary:active { transform: scale(0.98); }"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "2px ink outline that fills ink on hover.",
+      "html": "<a class=\"ds-btn-secondary\" href=\"#\">Email me</a>",
+      "css": ".ds-btn-secondary { display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; border: 2px solid var(--ink, #111317); background: transparent; color: var(--ink, #111317); padding: 10px 20px; font-family: 'Archivo Variable', system-ui, sans-serif; font-size: 15px; font-weight: 700; text-decoration: none; border-radius: 0; transition: background-color 0.2s, color 0.2s; } .ds-btn-secondary:hover { background: var(--ink, #111317); color: var(--ground, #e6e9e3); } .ds-btn-secondary:focus-visible { outline: 2px solid var(--flow, #2342e0); outline-offset: 3px; } .ds-btn-secondary:active { transform: scale(0.98); }"
+    },
+    {
+      "name": "Kaizen Trigger",
+      "kind": "button",
+      "refersTo": "button-kaizen",
+      "description": "Small outlined control that runs a live improvement; the only button allowed to go orange.",
+      "html": "<button class=\"ds-btn-kaizen\"><svg class=\"ds-bolt\" width=\"14\" height=\"14\" viewBox=\"0 0 256 256\"><path fill=\"currentColor\" d=\"M215.8 119.6 103.8 239.6A8 8 0 0 1 90.2 232.4L104.9 158.8 47.2 137.1a8 8 0 0 1-3-13l112-120a8 8 0 0 1 13.6 7.2L155.1 85.2l57.7 21.6a8 8 0 0 1 3 12.8Z\"/></svg>Finance</button>",
+      "css": ".ds-btn-kaizen { display: inline-flex; align-items: center; gap: 6px; border: 2px solid var(--ink, #111317); background: transparent; color: var(--ink, #111317); padding: 6px 10px; font-family: 'Archivo Variable', system-ui, sans-serif; font-size: 14px; font-weight: 600; border-radius: 0; cursor: pointer; transition: background-color 0.2s, color 0.2s; } .ds-btn-kaizen .ds-bolt { color: var(--kaizen, #ff5a1f); transition: color 0.2s; } .ds-btn-kaizen:hover { background: var(--kaizen, #ff5a1f); color: var(--kaizen-ink, #111317); } .ds-btn-kaizen:hover .ds-bolt { color: var(--kaizen-ink, #111317); } .ds-btn-kaizen:focus-visible { outline: 2px solid var(--flow, #2342e0); outline-offset: 3px; } .ds-btn-kaizen:active { transform: scale(0.97); }"
+    },
+    {
+      "name": "Navigation",
+      "kind": "nav",
+      "description": "64px bar on the ground: name mark, underline-growing links, ink email action.",
+      "html": "<nav class=\"ds-nav\"><a class=\"ds-nav-mark\" href=\"#\"><span class=\"ds-nav-logo\"><span></span></span>Ates Parilti</a><div class=\"ds-nav-right\"><a class=\"ds-nav-link\" href=\"#\">Work</a><a class=\"ds-nav-link\" href=\"#\">About</a><a class=\"ds-nav-cta\" href=\"#\">Email me</a></div></nav>",
+      "css": ".ds-nav { display: flex; align-items: center; justify-content: space-between; height: 64px; padding: 0 24px; background: var(--ground, #e6e9e3); border-bottom: 2px solid var(--ink, #111317); font-family: 'Archivo Variable', system-ui, sans-serif; } .ds-nav-mark { display: flex; align-items: center; gap: 10px; font-size: 17px; font-weight: 800; font-stretch: 112%; color: var(--ink, #111317); text-decoration: none; } .ds-nav-logo { position: relative; width: 20px; height: 20px; border: 2px solid var(--ink, #111317); box-sizing: border-box; } .ds-nav-logo span { position: absolute; inset: 3px; background: var(--ink, #111317); } .ds-nav-right { display: flex; align-items: center; gap: 4px; } .ds-nav-link { position: relative; padding: 8px 12px; font-size: 15px; font-weight: 600; color: var(--ink-2, #3a4048); text-decoration: none; transition: color 0.2s; } .ds-nav-link::after { content: ''; position: absolute; left: 12px; right: 12px; bottom: 4px; height: 2px; background: var(--ink, #111317); transform: scaleX(0); transform-origin: left; transition: transform 0.3s; } .ds-nav-link:hover { color: var(--ink, #111317); } .ds-nav-link:hover::after { transform: scaleX(1); } .ds-nav-link:focus-visible, .ds-nav-cta:focus-visible { outline: 2px solid var(--flow, #2342e0); outline-offset: 3px; } .ds-nav-cta { margin-left: 8px; padding: 8px 14px; background: var(--ink, #111317); color: var(--ground, #e6e9e3); font-size: 14px; font-weight: 700; text-decoration: none; transition: background-color 0.2s, color 0.2s; } .ds-nav-cta:hover { background: var(--flow, #2342e0); color: var(--flow-ink, #fff); }"
+    },
+    {
+      "name": "Process Box",
+      "kind": "card",
+      "refersTo": "process-title-bar",
+      "description": "The core container: 2px ink box on Clean Sheet with a solid ink title bar naming the station.",
+      "html": "<div class=\"ds-process\"><h3 class=\"ds-process-bar\">Industrial Engineering</h3><dl><div class=\"ds-process-row\"><dt>Queueing models</dt><dd>Forecaster</dd></div><div class=\"ds-process-row\"><dt>Process mapping</dt><dd>This site</dd></div></dl></div>",
+      "css": ".ds-process { border: 2px solid var(--ink, #111317); background: var(--sheet, #eef0eb); font-family: 'Archivo Variable', system-ui, sans-serif; color: var(--ink, #111317); max-width: 360px; } .ds-process-bar { margin: 0; background: var(--ink, #111317); color: var(--ground, #e6e9e3); padding: 10px 16px; font-size: 15px; font-weight: 700; font-stretch: 112%; } .ds-process dl { margin: 0; } .ds-process-row { display: grid; grid-template-columns: 1fr auto; align-items: baseline; gap: 16px; padding: 10px 16px; } .ds-process-row + .ds-process-row { border-top: 1px solid rgb(17 19 23 / 0.15); } .ds-process-row dt { font-size: 15px; font-weight: 500; } .ds-process-row dd { margin: 0; font-size: 13px; color: var(--ink-2, #3a4048); text-align: right; }"
+    },
+    {
+      "name": "Data Box",
+      "kind": "custom",
+      "refersTo": "data-box",
+      "description": "2px ruled grid of measured values: Archivo field names, JetBrains Mono tabular readouts.",
+      "html": "<dl class=\"ds-data\"><div><dt>MAE</dt><dd>4.1</dd></div><div><dt>Products</dt><dd>500</dd></div><div><dt>At risk</dt><dd>178</dd></div><div><dt>Horizon</dt><dd>14 d</dd></div></dl>",
+      "css": ".ds-data { display: grid; grid-template-columns: 1fr 1fr; margin: 0; border: 2px solid var(--ink, #111317); background: var(--sheet, #eef0eb); max-width: 320px; } .ds-data > div { padding: 12px; } .ds-data > div:nth-child(even) { border-left: 2px solid var(--ink, #111317); } .ds-data > div:nth-child(n+3) { border-top: 2px solid var(--ink, #111317); } .ds-data dt { font-family: 'Archivo Variable', system-ui, sans-serif; font-size: 12px; font-weight: 500; color: var(--ink-2, #3a4048); } .ds-data dd { margin: 4px 0 0; font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 24px; font-weight: 600; font-variant-numeric: tabular-nums; color: var(--ink, #111317); }"
+    },
+    {
+      "name": "Push Arrow",
+      "kind": "custom",
+      "description": "Striped VSM push arrow used as the separator between stages; draws left to right.",
+      "html": "<div class=\"ds-push\" aria-hidden=\"true\"><div class=\"ds-push-bar\"></div><div class=\"ds-push-head\"></div></div>",
+      "css": ".ds-push { display: flex; align-items: center; width: 100%; max-width: 480px; } .ds-push-bar { flex: 1; height: 12px; background-image: repeating-linear-gradient(90deg, var(--ink, #111317) 0 12px, transparent 12px 20px); transform-origin: left; animation: ds-push-draw 1.1s cubic-bezier(0.16, 1, 0.3, 1) both; } .ds-push-head { width: 0; height: 0; border-top: 12px solid transparent; border-bottom: 12px solid transparent; border-left: 18px solid var(--ink, #111317); } @keyframes ds-push-draw { from { transform: scaleX(0); } to { transform: scaleX(1); } } @media (prefers-reduced-motion: reduce) { .ds-push-bar { animation: none; } }"
+    },
+    {
+      "name": "Inventory Triangle",
+      "kind": "custom",
+      "description": "VSM inventory symbol: 2px ink triangle with an I, marking a queue between stations.",
+      "html": "<svg class=\"ds-inventory\" width=\"40\" height=\"34\" viewBox=\"0 0 40 34\" aria-hidden=\"true\"><path d=\"M20 2 L38 32 L2 32 Z\" /><line x1=\"20\" y1=\"16\" x2=\"20\" y2=\"27\" /></svg>",
+      "css": ".ds-inventory path { fill: var(--sheet, #eef0eb); stroke: var(--ink, #111317); stroke-width: 2; stroke-linejoin: miter; } .ds-inventory line { stroke: var(--ink, #111317); stroke-width: 2; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Value-Stream Map",
+    "overview": "The whole system is Lean value-stream-map notation drawn at poster scale. A pale grey-green process sheet carries 2px ink line-work; work moves left to right through process boxes, inventory triangles and striped push arrows; the information flow runs back in blue; and a kaizen burst in orange marks the one place something is improving right now. Every surface is read as a station on a line, not as a card on a grid.\n\nDensity is diagrammatic rather than decorative: square boxes, hard ink rules, measured values set in mono beside plain Archivo labels, and wide-set Archivo display type that reads like a poster title block. Depth is almost absent; the page is paper with ink on it. One deep ink band per page inverts the sheet to carry the densest material.\n\nMotion follows the flow direction. Headings and demos come online like stations, wiping in from the left; supporting text settles in; buttons lean toward the pointer. Everything has a still, fully legible reduced-motion state.",
+    "keyCharacteristics": [
+      "Grey-green process-sheet ground with ink line-work at 2px.",
+      "Zero corner radius anywhere.",
+      "Archivo Variable pushed wide (112 to 118% stretch) for display and titles; JetBrains Mono only for measured values.",
+      "VSM notation as the component vocabulary: process boxes, data boxes, inventory triangles, push arrows, kaizen burst, timeline ladder.",
+      "Blue for information and interaction; orange only for live improvement or alarms.",
+      "One ink band per page."
+    ],
+    "rules": [
+      {
+        "name": "The Kaizen Reservation Rule",
+        "body": "Orange means \"improving now\" or \"alarm\". If nothing is changing and nothing is wrong, it does not appear. Never use it for decoration, hover flair, or brand accent.",
+        "section": "colors"
+      },
+      {
+        "name": "The One Blue Word Rule",
+        "body": "A display heading may carry at most one word in Information-Flow Blue, and that word is the destination of the sentence.",
+        "section": "colors"
+      },
+      {
+        "name": "The Measured-Only Mono Rule",
+        "body": "JetBrains Mono is for numbers with units and the labels bolted to them (C/T, WIP, lead time, dates, tickers). Prose, headings and buttons stay in Archivo.",
+        "section": "typography"
+      },
+      {
+        "name": "The Width-Not-Size Rule",
+        "body": "Hierarchy is set by font-stretch and weight first: display 118%, titles 112%, body normal. Don't add a second display face.",
+        "section": "typography"
+      },
+      {
+        "name": "The One Band Rule",
+        "body": "Each page gets exactly one full-bleed ink band (`band` background) for its densest material. A second inverted section breaks the sheet.",
+        "section": "layout"
+      },
+      {
+        "name": "The Flat-At-Rest Rule",
+        "body": "Nothing casts a shadow at rest except the fixed ladder. Shadows are a state, not a style.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do draw every edge as 2px ink with square (0px) corners.",
+      "Do build new containers from VSM notation: process box with an ink title bar, data box with mono readouts, push arrows between stages.",
+      "Do set measured values in JetBrains Mono with tabular figures, and everything else in Archivo.",
+      "Do push display type wide (118% stretch, weight 800, -0.035em) and titles to 112%.",
+      "Do reveal content from the flow direction (left to right) with the wipe, and give every motion a still reduced-motion state.",
+      "Do use Information-Flow Blue for interaction, focus and live data."
+    ],
+    "donts": [
+      "Don't use kaizen orange unless something is improving right now or something is wrong.",
+      "Don't add a second ink band to a page.",
+      "Don't round corners, even on inputs or scrollbar thumbs.",
+      "Don't use hard offset shadows or shadows at rest; depth is line weight and tone.",
+      "Don't set prose, headings or buttons in mono.",
+      "Don't place a label above a heading; station tags sit beside the title as a title bar."
+    ]
+  }
+}
