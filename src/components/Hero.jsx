@@ -43,10 +43,10 @@ export default function Hero() {
       }
       const q = sim.stations[1].queue.length;
       let msg;
-      if (on[1]) msg = q > 2 ? "Kaizen on the bottleneck. The queue is draining and lead time is falling." : "Bottleneck cleared. Work now flows straight through.";
-      else if (on[0]) msg = "IE is faster, but that only piles more work in front of Finance. The bottleneck sets the pace.";
-      else if (on[2]) msg = "Full-stack is faster, but lead time barely moves. Finance still sets the pace.";
-      else msg = "Finance is the bottleneck, so work piles up in front of it.";
+      if (on[1]) msg = q > 2 ? "Improving the bottleneck: the queue drains and total time falls." : "Bottleneck cleared. Work now flows straight through.";
+      else if (on[0]) msg = "Cleaning got faster, but that only piles more work in front of Model. The slowest step sets the pace.";
+      else if (on[2]) msg = "Building got faster, but total time barely moves. Model is still the slowest step.";
+      else msg = "Modelling is the slowest step, so jobs pile up in front of it.";
       if (statusRef.current && statusRef.current.textContent !== msg) statusRef.current.textContent = msg;
     };
     tick();
@@ -106,15 +106,15 @@ export default function Hero() {
       <div className="mx-auto grid max-w-[1400px] gap-5 px-4 pb-12 sm:px-6 md:grid-cols-[minmax(0,1fr)_auto] md:items-center md:gap-8 lg:px-10">
         <div className="order-2 md:order-1">
           <p ref={statusRef} aria-live="polite" className="text-base font-semibold leading-snug text-ink">
-            Finance is the bottleneck, so work piles up in front of it.
+            Modelling is the slowest step, so jobs pile up in front of it.
           </p>
           <p className="mt-1 text-sm leading-relaxed text-ink-2">
-            Tap a station to run a kaizen, a small improvement to that step. Tap it again to undo.
+            Each box is a step from raw data to a finished product, and each blue square is a job. Most of a job's time is spent waiting in a queue, not being worked on. Tap a step to improve it; tap again to undo.
           </p>
         </div>
         <div className="order-1 flex flex-wrap items-stretch gap-2 md:order-2">
           <div className="flex min-w-[8.5rem] flex-col justify-center border-2 border-ink bg-sheet px-3 py-1">
-            <span className="text-xs font-medium text-ink-2">Lead time</span>
+            <span className="text-xs font-medium text-ink-2">Total time per job</span>
             <span className="flex items-baseline gap-2">
               <span ref={leadRef} className="font-mono text-xl font-semibold tnum">
                 0.0 s

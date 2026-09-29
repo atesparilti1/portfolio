@@ -2,15 +2,15 @@ import { useEffect, useRef } from "react";
 
 /*
   A small discrete-event value stream: items arrive from "Raw data", queue in front
-  of three stations, get processed one at a time, and are delivered to "You".
-  Finance is the bottleneck by design. Hovering (or tapping) a station runs a kaizen
+  of three steps (clean, model, build), get processed one at a time, and reach "You".
+  Modelling is the bottleneck by design. Hovering (or tapping) a station runs a kaizen
   that cuts its cycle time, the queue drains, and the timeline ladder re-computes.
 */
 
 const STATIONS = [
-  { name: "Industrial Eng.", short: "IE", ct: 0.7 },
-  { name: "Finance", short: "Finance", ct: 1.45 },
-  { name: "Full-stack", short: "Stack", ct: 0.65 },
+  { name: "Clean data", short: "Clean", ct: 0.7 },
+  { name: "Model", short: "Model", ct: 1.45 },
+  { name: "Build", short: "Build", ct: 0.65 },
 ];
 const ARRIVAL = 0.9; // seconds between released items
 const WIP_CAP = 26;
@@ -253,7 +253,7 @@ function draw(ctx, sim, L, c, pointer) {
   ctx.fillText("You", L.xc, lineY + fh / 2 + fs + 8);
   ctx.font = `500 ${fs - 1}px "JetBrains Mono", monospace`;
   ctx.fillStyle = c.ink3;
-  ctx.fillText(`${sim.delivered} in`, L.xc, lineY + fh / 2 + fs * 2 + 12);
+  ctx.fillText(`${sim.delivered} done`, L.xc, lineY + fh / 2 + fs * 2 + 12);
 
   // Inventory triangles and their queues
   sim.stations.forEach((st, i) => {
@@ -326,7 +326,7 @@ function draw(ctx, sim, L, c, pointer) {
     if (!compact) {
       const dy = top + bh + 12;
       const rows = [
-        ["C/T", `${effCt(st).toFixed(2)} s`],
+        ["Work", `${effCt(st).toFixed(2)} s`],
         ["Queue", `${st.queue.length}`],
         ["Wait", `${(st.waitNow ?? 0).toFixed(1)} s`],
       ];
@@ -422,10 +422,10 @@ function draw(ctx, sim, L, c, pointer) {
   ctx.textAlign = "right";
   ctx.fillStyle = c.ink;
   ctx.font = `700 ${compact ? 10 : 12}px "JetBrains Mono", monospace`;
-  ctx.fillText(`lead ${(sim.leadNow ?? 0).toFixed(1)}s`, W - L.pad, up - 4);
+  ctx.fillText(`total ${(sim.leadNow ?? 0).toFixed(1)}s`, W - L.pad, up - 4);
   ctx.fillStyle = c.ink3;
   ctx.font = `500 ${compact ? 9 : 11}px "JetBrains Mono", monospace`;
-  ctx.fillText(`value-add ${totalCt.toFixed(1)}s`, W - L.pad, ly + (compact ? 12 : 15));
+  ctx.fillText(`working ${totalCt.toFixed(1)}s`, W - L.pad, ly + (compact ? 12 : 15));
   ctx.textAlign = "center";
   void totalWait;
 }
@@ -562,7 +562,7 @@ export default function FlowSim({ simRef: externalRef }) {
         ref={canvasRef}
         className="block w-full touch-pan-y"
         role="img"
-        aria-label="Live value stream simulation. Work items flow from raw data through Industrial Engineering, Finance and Full-stack stations to you. Finance is the bottleneck; running a kaizen on a station shortens its cycle time and the lead time drops."
+        aria-label="Live simulation of how work flows from raw data through three steps, clean data, model and build, to you. Modelling is the slowest step, so jobs queue in front of it; improving that step shortens the total time per job."
       />
     </div>
   );
