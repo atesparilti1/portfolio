@@ -2,15 +2,15 @@
 
 Personal site of Ates Parilti, Industrial Engineering student at TU/e.
 
-The page is drawn as a Lean value-stream map. The hero is a small discrete-event simulation: work flows from raw data through three stations (Industrial Engineering, Finance, Full-stack), Finance is the bottleneck, and running a kaizen on a station shows how lead time responds. Only improving the bottleneck helps, which is the point.
+The page is drawn as a Lean value-stream map. The hero is a small discrete-event simulation: work flows from raw data through three steps (clean data, model, build), modelling is the bottleneck, and improving a step shows how the total time per job responds. Only improving the bottleneck helps, which is the point.
 
 ## Projects on the page
 
-| Project | What the page shows |
-| --- | --- |
-| [Demand Forecaster](https://github.com/atesparilti1/demand-forecaster) | Interactive forecast and stockout demo with the model's real metrics, plus a screenshot of the Streamlit app |
-| [SEC Filing Analyzer](https://github.com/atesparilti1/SEC-filer) | The app's real demo analyses for AAPL, AMD, META, MSFT and NVDA, each risk tied to its quote |
-| [Supply Chain Analytics](https://github.com/atesparilti1/supplychain-dashboard) | KPI and recommendation demo on labeled synthetic orders, using the project's own rules |
+| Project | Live demo | What the page shows |
+| --- | --- | --- |
+| [Demand Forecaster](https://github.com/atesparilti1/demand-forecaster) | [open](https://atesparilti1.github.io/demand-forecaster/) | The real XGBoost backtest next to actual sales, turned into safety stock, a reorder point and an order quantity |
+| [SEC Filing Analyzer](https://github.com/atesparilti1/SEC-filer) | [open](https://atesparilti1.github.io/SEC-filer/) | The app's real analyses for AAPL, AMD, META, MSFT and NVDA, each risk tied to its quote |
+| [Discount Policy Simulator](https://github.com/atesparilti1/supplychain-dashboard) | [open](https://atesparilti1.github.io/supplychain-dashboard/) | 51,290 real Global Superstore order lines: above 20% off every category loses money, and what a cap would change |
 
 ## Stack
 
@@ -23,8 +23,8 @@ npm install
 npm run dev
 ```
 
-`npm run build` writes the static site to `dist/`.
+`npm run build` writes the static site to `dist/` and prerenders the page to HTML, so the content is readable without JavaScript.
 
 ## Deploy
 
-Any static host works. On Vercel, import the repo and keep the detected Vite settings. Set `SITE_URL` in `.env` to the live address (no trailing slash) so the social preview card links correctly.
+Deployed on Vercel at https://atesparilti.com. `SITE_URL` in `.env` sets the canonical and social preview URLs.
