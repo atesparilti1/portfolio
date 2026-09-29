@@ -5,7 +5,7 @@ export const featured = [
     id: "demand-forecaster",
     title: "Demand Forecaster",
     station: "Industrial Eng.",
-    line: "Forecasts daily demand for 500 store-item series and flags which products will run out before the next restock.",
+    line: "Forecasts daily demand for 500 store-item series, flags which products run out before the next delivery, and says how much to order.",
     stack: ["Python", "XGBoost", "SARIMA", "Streamlit"],
     facts: [
       { k: "Series modelled", v: "500" },
@@ -13,7 +13,10 @@ export const featured = [
       { k: "XGBoost MAPE", v: "13.6%" },
       { k: "MASE vs naive", v: "0.74" },
     ],
-    links: { github: "https://github.com/atesparilti1/demand-forecaster" },
+    links: {
+      github: "https://github.com/atesparilti1/demand-forecaster",
+      demo: "https://atesparilti1.github.io/demand-forecaster/",
+    },
     case: [
       ["Problem", "A store must reorder before it runs out. Which of 500 products will stock out before the next delivery, and how much should be ordered?"],
       ["Data", "Kaggle Store Item Demand Forecasting Challenge: 10 stores by 50 items, daily sales from 2013 to 2017."],
@@ -23,7 +26,7 @@ export const featured = [
       ],
       [
         "Result",
-        "SARIMA on one series scored MAPE 33.4% and MASE 1.01, no better than repeating last week. XGBoost across all 500 scored MAPE 13.6% and MASE 0.74. 178 of 500 products run out within a 14-day restock window.",
+        "SARIMA on one series scored MAPE 33.4% and MASE 1.01, no better than repeating last week. XGBoost across all 500 scored MAPE 13.6% and MASE 0.74. 178 of 500 products run out within a 14-day delivery window; each gets a safety stock and reorder point at the chosen service level.",
       ],
     ],
   },
@@ -33,7 +36,10 @@ export const featured = [
     station: "Finance",
     line: "Reads 10-K and 10-Q filings and returns risks, growth bets and priorities, each tied to a quote from the filing itself.",
     stack: ["FastAPI", "React 19", "TypeScript", "Ollama", "SEC XBRL"],
-    links: { github: "https://github.com/atesparilti1/SEC-filer" },
+    links: {
+      github: "https://github.com/atesparilti1/SEC-filer",
+      demo: "https://atesparilti1.github.io/SEC-filer/",
+    },
     case: [
       ["Problem", "A 10-K takes hours to read, and the change that matters is buried in legal boilerplate."],
       ["Data", "SEC EDGAR filings (Business, Risk Factors and MD&A sections) and SEC XBRL financial data."],
