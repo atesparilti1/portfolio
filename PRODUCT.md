@@ -25,12 +25,13 @@ A blend of three identities, none subordinate: **Industrial Engineering student*
 ## Capabilities and Constraints
 
 - Shows only the three projects the owner chose: Demand Forecaster, SEC Filing Analyzer, Supply Chain Analytics. Other workspace projects stay off the site unless the owner adds them.
-- Each project links to its GitHub repo. CV (including phone number, approved by the owner) is downloadable at `public/Ates-Parilti-CV.pdf`. No live demos yet; Dutch version undecided.
+- Each project links to its GitHub repo. CV (including phone number, approved by the owner) is downloadable at `public/Ates-Parilti-CV.pdf`. Each project has a live demo on GitHub Pages. Dutch version undecided.
 
 ## Brand Commitments
 
 - Name: **Ates Parilti** (written without Turkish diacritics, as the owner writes it).
 - Education: B.Sc. Industrial Engineering, Eindhoven University of Technology (TU/e), Sep 2025 to May 2028.
+- Looking for: a supply chain or operations analytics internship for summer 2027 (stated on the site).
 - Links: LinkedIn https://www.linkedin.com/in/atesparilti/, GitHub https://github.com/atesparilti1, email atesparilti@gmail.com.
 
 ## Evidence on Hand
@@ -40,7 +41,7 @@ A blend of three identities, none subordinate: **Industrial Engineering student*
 - **Supply Chain Analytics** (`../dashboard_web`, github.com/atesparilti1/supplychain-dashboard): only a 3-order sample is processed, so the site demo uses labeled synthetic orders with the project's real recommendation rules.
 - CV (owner-provided): coursework in Statistics, Data Analytics, Algorithmic Programming, Business Information Systems, Financial & Managerial Accounting; languages Turkish C2, English C1, Dutch A1.
 
-Absent, and not to be fabricated: testimonials, employers, headshot, live demo URLs.
+Absent, and not to be fabricated: testimonials, employers, headshot.
 
 ## Product Principles
 

@@ -1,5 +1,5 @@
 import { motion, useScroll, useSpring, useTransform } from "motion/react";
-import { DownloadSimple, EnvelopeSimple } from "@phosphor-icons/react";
+import { DownloadSimple, EnvelopeSimple, LinkedinLogo } from "@phosphor-icons/react";
 import { contact } from "../data/projects";
 
 const LINKS = [
@@ -33,6 +33,15 @@ export function Nav() {
               </li>
             ))}
           </ul>
+          <a
+            href={contact.linkedin}
+            target="_blank"
+            rel="noreferrer"
+            aria-label="LinkedIn"
+            className="hidden h-9 w-9 items-center justify-center text-ink-2 transition-colors hover:text-ink sm:inline-flex"
+          >
+            <LinkedinLogo size={19} weight="bold" />
+          </a>
           <a
             href={contact.cv}
             download
