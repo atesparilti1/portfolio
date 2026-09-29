@@ -12,6 +12,8 @@
     <meta name="theme-color" content="#101216" media="(prefers-color-scheme: dark)" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <!-- Without JavaScript the entrance animations never run; show their end state instead. -->
+    <noscript><style>#root [style]{opacity:1!important;transform:none!important;clip-path:none!important}</style></noscript>
 
     <!-- Social preview (LinkedIn, WhatsApp, X). SITE_URL comes from .env. -->
     <meta property="og:type" content="website" />

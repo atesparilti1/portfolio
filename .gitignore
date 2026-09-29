@@ -2,3 +2,4 @@ node_modules
 dist
 .impeccable/review
 .impeccable/questions
+dist-ssr
