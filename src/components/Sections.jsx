@@ -19,18 +19,46 @@ function Stack({ items, tone = "ink" }) {
   );
 }
 
-function Links({ links }) {
-  const entries = Object.entries(links || {}).filter(([, v]) => v);
-  if (!entries.length) return null;
+function Links({ links, tone = "ink" }) {
+  if (!links?.github && !links?.demo) return null;
+  const solid = tone === "band" ? "bg-band-ink text-band hover:bg-flow hover:text-flow-ink" : "bg-ink text-ground hover:bg-flow hover:text-flow-ink";
   return (
-    <div className="flex gap-4">
-      {entries.map(([k, v]) => (
-        <a key={k} href={v} className="inline-flex items-center gap-1.5 text-sm font-bold underline" target="_blank" rel="noreferrer">
-          {k === "github" ? <GithubLogo size={16} weight="bold" /> : <ArrowUpRight size={16} weight="bold" />}
-          {k === "github" ? "Source" : "Live demo"}
+    <div className="flex flex-wrap items-center gap-x-5 gap-y-3">
+      {links.demo && (
+        <a
+          href={links.demo}
+          target="_blank"
+          rel="noreferrer"
+          className={`inline-flex items-center gap-1.5 px-4 py-2.5 text-sm font-bold transition-colors active:scale-[0.98] ${solid}`}
+        >
+          Open live demo
+          <ArrowUpRight size={15} weight="bold" />
         </a>
-      ))}
+      )}
+      {links.github && (
+        <a href={links.github} className="inline-flex items-center gap-1.5 text-sm font-bold underline" target="_blank" rel="noreferrer">
+          <GithubLogo size={16} weight="bold" />
+          Source and README
+        </a>
+      )}
     </div>
+  );
+}
+
+// Problem, data, method, result: the thinking behind each project, in four lines.
+function Case({ rows, tone = "ink", wide = false }) {
+  const muted = tone === "band" ? "text-band-ink-2" : "text-ink-2";
+  const strong = tone === "band" ? "text-band-ink" : "text-ink";
+  const rule = tone === "band" ? "border-band-ink/25" : "border-ink/15";
+  return (
+    <dl className={`grid gap-x-8 ${wide ? "md:grid-cols-2" : ""}`}>
+      {rows.map(([k, v]) => (
+        <div key={k} className={`border-t ${rule} py-3`}>
+          <dt className={`text-sm font-bold ${strong}`}>{k}</dt>
+          <dd className={`mt-1 text-[15px] leading-relaxed ${muted}`}>{v}</dd>
+        </div>
+      ))}
+    </dl>
   );
 }
 
@@ -99,6 +127,7 @@ export function Work() {
           <Reveal kind="settle" className="space-y-6 lg:col-span-4">
             <Title p={fc} />
             <p className="max-w-[48ch] text-lg leading-relaxed text-ink-2">{fc.line}</p>
+            <Case rows={fc.case} />
             <dl className="grid grid-cols-2 border-2 border-ink bg-sheet">
               {fc.facts.map((f, i) => (
                 <div key={f.k} className={`p-3 ${i % 2 ? "border-l-2 border-ink" : ""} ${i > 1 ? "border-t-2 border-ink" : ""}`}>
@@ -138,9 +167,7 @@ export function Work() {
           <Reveal kind="settle" className="order-1 space-y-6 lg:order-2 lg:col-span-5 lg:pt-6" delay={0.1}>
             <Title p={sec} />
             <p className="max-w-[48ch] text-lg leading-relaxed text-ink-2">{sec.line}</p>
-            <p className="max-w-[48ch] leading-relaxed text-ink-2">
-              Every number is computed in Python from SEC XBRL data, never by the model. It runs free on a local LLM through Ollama, and switching to OpenAI takes one line of config.
-            </p>
+            <Case rows={sec.case} />
             <Stack items={sec.stack} />
             <Links links={sec.links} />
           </Reveal>
@@ -163,11 +190,12 @@ export function Work() {
       {/* One deliberate color block: the ink band carries the ops project. */}
       <div id={ops.id} className="mt-24 scroll-mt-16 bg-band text-band-ink lg:mt-32">
         <section className="mx-auto max-w-[1400px] px-4 pb-24 pt-20 sm:px-6 lg:px-10 lg:pb-32 lg:pt-28">
-          <Reveal className="max-w-[70ch] space-y-5">
+          <Reveal className="space-y-5">
             <Title p={ops} tone="band" />
-            <p className="text-lg leading-relaxed text-band-ink-2">{ops.line}</p>
+            <p className="max-w-[70ch] text-lg leading-relaxed text-band-ink-2">{ops.line}</p>
+            <Case rows={ops.case} tone="band" wide />
             <Stack items={ops.stack} tone="band" />
-            <Links links={ops.links} />
+            <Links links={ops.links} tone="band" />
           </Reveal>
           <Reveal className="mt-10" delay={0.1}>
             <OpsDemo />
