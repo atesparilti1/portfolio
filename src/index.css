@@ -184,3 +184,8 @@ html {
 .range:active::-webkit-slider-thumb {
   transform: scale(1.2);
 }
+/* The same slider inside the ink band. */
+.range-band::-webkit-slider-runnable-track { background: var(--band-ink); }
+.range-band::-moz-range-track { background: var(--band-ink); }
+.range-band::-webkit-slider-thumb { border-color: var(--band-ink); }
+.range-band::-moz-range-thumb { border-color: var(--band-ink); }

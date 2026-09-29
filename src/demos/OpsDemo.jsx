@@ -1,89 +1,31 @@
 import { useMemo, useState } from "react";
 import { motion, useReducedMotion } from "motion/react";
-import { ArrowRight } from "@phosphor-icons/react";
+import data from "../data/discount_policy.json";
 
-const REGIONS = ["All", "Central", "East", "South", "West"];
+// Real aggregates from the supply chain project: 51,290 Global Superstore order lines,
+// grouped by market, category and discount level. Same model as the project's simulator.
+const CAPS = [0, 0.1, 0.15, 0.2, 0.25, 0.3, 0.4, 0.5, 1];
 const CATS = ["All", "Furniture", "Office Supplies", "Technology"];
-const MONTHS = ["J", "F", "M", "A", "M", "J", "J", "A", "S", "O", "N", "D"];
+const BAND_MAX = { "0%": 0, "1-10%": 0.1, "11-20%": 0.2, "21-30%": 0.3, "31-50%": 0.5, "over 50%": 1 };
 
-// Synthetic orders shaped like the Superstore set. Margins and delivery days differ per
-// region and category so the recommendation rules have something real to react to.
-const PROFILE = {
-  Central: { rev: 1.0, margin: { Furniture: -0.04, "Office Supplies": 0.09, Technology: 0.13 }, days: 4.3 },
-  East: { rev: 1.25, margin: { Furniture: 0.05, "Office Supplies": 0.14, Technology: 0.17 }, days: 3.8 },
-  South: { rev: 0.8, margin: { Furniture: -0.07, "Office Supplies": 0.06, Technology: 0.11 }, days: 4.6 },
-  West: { rev: 1.35, margin: { Furniture: 0.08, "Office Supplies": 0.16, Technology: 0.19 }, days: 3.6 },
-};
-const CAT_REV = { Furniture: 1.05, "Office Supplies": 0.85, Technology: 1.2 };
-const SEASON = [0.62, 0.55, 0.9, 0.78, 0.84, 0.88, 0.8, 0.86, 1.22, 1.05, 1.34, 1.48];
-
-function build(region, cat) {
-  const regions = region === "All" ? Object.keys(PROFILE) : [region];
-  const cats = cat === "All" ? Object.keys(CAT_REV) : [cat];
-  const monthly = SEASON.map(() => 0);
-  let revenue = 0;
+function simulate(rows, cap, retention) {
   let profit = 0;
-  let daysW = 0;
-  const byCat = {};
-  const byRegion = {};
-  regions.forEach((r) => {
-    cats.forEach((c) => {
-      SEASON.forEach((s, m) => {
-        const v = 18400 * PROFILE[r].rev * CAT_REV[c] * s * (1 + ((m * 7 + r.length + c.length) % 5) * 0.03);
-        monthly[m] += v;
-        revenue += v;
-        profit += v * PROFILE[r].margin[c];
-        daysW += v * PROFILE[r].days;
-        byCat[c] = (byCat[c] || 0) + v;
-        byRegion[r] = (byRegion[r] || 0) + v;
-      });
-    });
-  });
-  const top = (o) => Object.entries(o).sort((a, b) => b[1] - a[1])[0][0];
-  return {
-    monthly,
-    revenue,
-    profit,
-    margin: profit / revenue,
-    days: daysW / revenue,
-    topCat: top(byCat),
-    topRegion: top(byRegion),
-  };
+  for (const r of rows) {
+    if (r.discount <= cap) {
+      profit += r.profit;
+    } else {
+      const capped = r.list_sales * (1 - cap);
+      profit += retention * (capped - (r.sales - r.profit));
+    }
+  }
+  return profit;
 }
 
-// Same rules as python/dashboard_analysis.py in the project.
-function recommend(k) {
-  const out = [];
-  if (k.margin < 0) {
-    out.push({
-      priority: "High",
-      title: "Review low-margin orders",
-      detail: `Profitability is negative. Focus on improving margins in ${k.topCat} and ${k.topRegion}.`,
-    });
-  } else {
-    out.push({
-      priority: "Medium",
-      title: "Scale high-performing categories",
-      detail: `Revenue looks healthy. Put more focus on ${k.topCat} to keep profit growing.`,
-    });
-  }
-  if (k.days > 4) {
-    out.push({
-      priority: "Medium",
-      title: "Watch delivery speed",
-      detail: `Average delivery is ${k.days.toFixed(1)} days, so shipping performance needs a review.`,
-    });
-  } else {
-    out.push({
-      priority: "Low",
-      title: "Keep delivery consistent",
-      detail: "Delivery timing looks stable. Keep monitoring service levels across regions.",
-    });
-  }
-  return out;
-}
-
-const money = (v) => (Math.abs(v) >= 1e6 ? `$${(v / 1e6).toFixed(2)}M` : `$${(v / 1e3).toFixed(0)}k`);
+const money = (v) => {
+  const a = Math.abs(v);
+  const s = a >= 1e6 ? `$${(a / 1e6).toFixed(2)}M` : `$${(a / 1e3).toFixed(0)}k`;
+  return v < 0 ? `−${s}` : s;
+};
 
 function Seg({ label, options, value, onChange }) {
   return (
@@ -96,9 +38,7 @@ function Seg({ label, options, value, onChange }) {
             onClick={() => onChange(o)}
             aria-pressed={o === value}
             className={`border-2 px-2.5 py-1.5 text-sm font-semibold transition-colors duration-200 active:translate-y-px ${
-              o === value
-                ? "border-flow bg-flow text-flow-ink"
-                : "border-band-ink/30 text-band-ink hover:border-band-ink"
+              o === value ? "border-flow bg-flow text-flow-ink" : "border-band-ink/30 text-band-ink hover:border-band-ink"
             }`}
           >
             {o}
@@ -109,73 +49,128 @@ function Seg({ label, options, value, onChange }) {
   );
 }
 
+function Slider({ id, label, value, display, min, max, onChange }) {
+  return (
+    <label htmlFor={id} className="block">
+      <span className="mb-2 flex justify-between text-sm font-medium text-band-ink-2">
+        <span>{label}</span>
+        <span className="font-mono font-semibold text-band-ink">{display}</span>
+      </span>
+      <input id={id} type="range" min={min} max={max} value={value} onChange={(e) => onChange(+e.target.value)} className="range range-band w-full" />
+    </label>
+  );
+}
+
 export default function OpsDemo() {
-  const [region, setRegion] = useState("All");
+  const [capIdx, setCapIdx] = useState(3);
+  const [retention, setRetention] = useState(50);
   const [cat, setCat] = useState("All");
   const reduce = useReducedMotion();
-  const k = useMemo(() => build(region, cat), [region, cat]);
-  const recs = recommend(k);
-  const max = Math.max(...k.monthly);
 
-  const kpis = [
-    { k: "Revenue", v: money(k.revenue) },
-    { k: "Profit", v: money(k.profit), neg: k.profit < 0 },
-    { k: "Margin", v: `${(k.margin * 100).toFixed(1)}%`, neg: k.margin < 0 },
-    { k: "Avg delivery", v: `${k.days.toFixed(1)} d` },
-  ];
+  const cap = CAPS[capIdx];
+  const rows = useMemo(() => (cat === "All" ? data.cube : data.cube.filter((r) => r.category === cat)), [cat]);
+  const base = useMemo(() => rows.reduce((s, r) => s + r.profit, 0), [rows]);
+  const r = retention / 100;
+  const now = simulate(rows, cap, r);
+  const low = simulate(rows, cap, 0);
+  const high = simulate(rows, cap, 1);
+  const delta = now - base;
+
+  // Margin per discount band for the chosen category, from the same cube.
+  const bands = useMemo(() => {
+    const acc = data.bands.map((b) => ({ band: b.band, sales: 0, profit: 0 }));
+    const idx = (d) => (d === 0 ? 0 : d <= 0.1 ? 1 : d <= 0.2 ? 2 : d <= 0.3 ? 3 : d <= 0.5 ? 4 : 5);
+    for (const row of rows) {
+      const a = acc[idx(row.discount)];
+      a.sales += row.sales;
+      a.profit += row.profit;
+    }
+    return acc.map((a) => ({ ...a, margin: a.sales ? a.profit / a.sales : 0 }));
+  }, [rows]);
+  const maxAbs = Math.max(...bands.map((b) => Math.abs(b.margin)), 0.3);
+
+  const lo = Math.min(low, high, base);
+  const hi = Math.max(low, high, base);
+  const at = (v) => (hi === lo ? 50 : ((v - lo) / (hi - lo)) * 100);
 
   return (
     <div className="grid border-2 border-band-ink/80 lg:grid-cols-[minmax(0,4fr)_minmax(0,7fr)]">
       <div className="space-y-6 border-b-2 border-band-ink/80 p-5 lg:border-b-0 lg:border-r-2">
-        <Seg label="Region" options={REGIONS} value={region} onChange={setRegion} />
         <Seg label="Category" options={CATS} value={cat} onChange={setCat} />
-        <dl className="grid grid-cols-2 gap-px bg-band-ink/25">
-          {kpis.map((x) => (
-            <div key={x.k} className="bg-band p-3">
-              <dt className="text-xs font-medium text-band-ink-2">{x.k}</dt>
-              <dd className={`mt-1 font-mono text-2xl font-semibold tnum ${x.neg ? "text-kaizen" : "text-band-ink"}`}>{x.v}</dd>
-            </div>
-          ))}
-        </dl>
+        <Slider
+          id="cap"
+          label="Maximum discount"
+          value={capIdx}
+          min={0}
+          max={CAPS.length - 1}
+          display={cap >= 1 ? "No cap" : `${Math.round(cap * 100)}%`}
+          onChange={setCapIdx}
+        />
+        <Slider
+          id="retention"
+          label="Customers who still buy at the capped discount"
+          value={retention}
+          min={0}
+          max={100}
+          display={`${retention}%`}
+          onChange={setRetention}
+        />
+        <div aria-live="polite">
+          <p className="text-sm font-medium text-band-ink-2">Profit on the same orders</p>
+          <p className="mt-1 font-mono text-4xl font-semibold tnum text-band-ink">{money(now)}</p>
+          <p className="mt-1 font-mono text-sm font-semibold tnum">
+            <span className={delta >= 0 ? "text-flow" : "text-kaizen"}>
+              {delta >= 0 ? "+" : "−"}
+              {money(Math.abs(delta))}
+            </span>
+            <span className="text-band-ink-2"> vs {money(base)} today</span>
+          </p>
+          <div className="relative mt-5 h-2 bg-band-ink/15" aria-hidden="true">
+            <div className="absolute inset-y-0 bg-flow/40" style={{ left: `${at(Math.min(low, high))}%`, width: `${Math.abs(at(high) - at(low))}%` }} />
+            <motion.div
+              className="absolute -top-1.5 h-5 w-2 -translate-x-1/2 bg-flow"
+              animate={{ left: `${at(now)}%` }}
+              transition={reduce ? { duration: 0 } : { type: "spring", stiffness: 260, damping: 28 }}
+            />
+          </div>
+          <div className="mt-2 flex justify-between font-mono text-[11px] text-band-ink-2">
+            <span>nobody stays {money(low)}</span>
+            <span>everyone stays {money(high)}</span>
+          </div>
+        </div>
       </div>
 
       <div className="flex flex-col p-5">
-        <p className="mb-3 text-sm font-medium text-band-ink-2">Monthly revenue</p>
-        <div className="flex h-44 items-end gap-1.5 sm:gap-2" aria-hidden="true">
-          {k.monthly.map((v, i) => (
-            <div key={i} className="flex h-full flex-1 flex-col justify-end">
-              <motion.div
-                className="w-full origin-bottom bg-band-ink"
-                style={{ height: "100%" }}
-                initial={false}
-                animate={{ scaleY: v / max }}
-                transition={reduce ? { duration: 0 } : { type: "spring", stiffness: 180, damping: 24, delay: i * 0.02 }}
-              />
-              <span className="mt-1.5 text-center font-mono text-[10px] text-band-ink-2">{MONTHS[i]}</span>
-            </div>
-          ))}
-        </div>
-
-        <ul className="mt-6 grid gap-3 sm:grid-cols-2" aria-live="polite">
-          {recs.map((r) => (
-            <motion.li
-              key={r.title + r.detail}
-              initial={reduce ? false : { opacity: 0, y: 6 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-              className="bg-band-ink/[0.06] p-3"
-            >
-              <p className="flex items-center gap-2 text-sm font-bold text-band-ink">
-                <ArrowRight size={14} weight="bold" className={r.priority === "High" ? "text-kaizen" : "text-flow"} />
-                {r.title}
-              </p>
-              <p className="mt-1 text-sm leading-snug text-band-ink-2">{r.detail}</p>
-            </motion.li>
-          ))}
+        <p className="mb-4 text-sm font-medium text-band-ink-2">Margin by discount level</p>
+        <ul className="space-y-2.5">
+          {bands.map((b) => {
+            const w = (Math.abs(b.margin) / maxAbs) * 50;
+            const capped = BAND_MAX[b.band] > cap;
+            return (
+              <li key={b.band} className="grid grid-cols-[4.5rem_1fr_4.5rem] items-center gap-3 text-sm">
+                <span className={capped ? "text-band-ink-2 line-through" : "text-band-ink"}>{b.band}</span>
+                <div className="relative h-5">
+                  <div className="absolute inset-y-[-3px] left-1/2 w-px bg-band-ink/40" />
+                  <motion.div
+                    className={`absolute inset-y-0 ${b.margin >= 0 ? "bg-band-ink" : "bg-kaizen"}`}
+                    initial={false}
+                    animate={{ left: b.margin >= 0 ? "50%" : `${50 - w}%`, width: `${w}%`, opacity: capped ? 0.35 : 1 }}
+                    transition={reduce ? { duration: 0 } : { type: "spring", stiffness: 200, damping: 26 }}
+                  />
+                </div>
+                <span className={`text-right font-mono tnum ${b.margin >= 0 ? "text-band-ink" : "text-kaizen"}`}>
+                  {b.margin > 0 ? "+" : b.margin < 0 ? "−" : ""}
+                  {Math.abs(b.margin * 100).toFixed(1)}%
+                </span>
+              </li>
+            );
+          })}
         </ul>
-        <p className="mt-auto pt-4 text-xs text-band-ink-2">
-          Synthetic orders. The recommendation rules are the ones the project ships.
+        <p className="mt-5 text-sm leading-relaxed text-band-ink-2">
+          Crossed-out levels are above your cap. Their orders are re-priced at the cap: list price is sales / (1 − discount), cost is
+          sales − profit, and only the share of customers you set is kept.
         </p>
+        <p className="mt-auto pt-4 text-xs text-band-ink-2">Real data: {data.rows.toLocaleString("en-US")} Global Superstore order lines, 2011 to 2014.</p>
       </div>
     </div>
   );
