@@ -24,7 +24,7 @@ A blend of three identities, none subordinate: **Industrial Engineering student*
 
 ## Capabilities and Constraints
 
-- Shows only the three projects the owner chose: Demand Forecaster, SEC Filing Analyzer, Supply Chain Analytics. Other workspace projects stay off the site unless the owner adds them.
+- Shows only the projects the owner chose: ASML DCF Valuation, Demand Forecaster, SEC Filing Analyzer, Discount Policy Simulator (repo: supplychain-dashboard). Other workspace projects stay off the site unless the owner adds them.
 - Each project links to its GitHub repo. CV (including phone number, approved by the owner) is downloadable at `public/Ates-Parilti-CV.pdf`. Each project has a live demo on GitHub Pages. Dutch version undecided.
 
 ## Brand Commitments
@@ -36,6 +36,7 @@ A blend of three identities, none subordinate: **Industrial Engineering student*
 
 ## Evidence on Hand
 
+- **ASML DCF Valuation** (github.com/atesparilti1/asml-dcf-valuation, live at atesparilti1.github.io/asml-dcf-valuation): ten-year DCF from ASML filings, valuation date 7 Oct 2026. Base €935 vs €1,611 price; reverse DCF 33x / 7.1%. Portfolio demo uses the cash flows exported from its model.py.
 - **Demand Forecaster** (`../demandprediction_web`, github.com/atesparilti1/demand-forecaster): SARIMA and XGBoost on the Kaggle Store Item set (10 stores x 50 items, 5 years). Real results: XGBoost MAPE 13.6%, MASE 0.74; 500 series, 178 at risk in a 14-day window. Real screenshot at `public/work/demand-forecaster-dashboard.png`.
 - **SEC Filing Analyzer** (`../SEC_filing`, github.com/atesparilti1/SEC-filer): real demo analyses for AAPL, AMD, META, MSFT, NVDA in `src/data/filings.json`.
 - **Supply Chain Analytics** (`../dashboard_web`, github.com/atesparilti1/supplychain-dashboard): only a 3-order sample is processed, so the site demo uses labeled synthetic orders with the project's real recommendation rules.

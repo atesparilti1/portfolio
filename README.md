@@ -8,6 +8,7 @@ The page is drawn as a Lean value-stream map. The hero is a small discrete-event
 
 | Project | Live demo | What the page shows |
 | --- | --- | --- |
+| [ASML DCF Valuation](https://github.com/atesparilti1/asml-dcf-valuation) | [open](https://atesparilti1.github.io/asml-dcf-valuation/) | The model's own cash flows re-valued live: change WACC, terminal growth or exit multiple, see the price against the market and what today's price requires |
 | [Demand Forecaster](https://github.com/atesparilti1/demand-forecaster) | [open](https://atesparilti1.github.io/demand-forecaster/) | The real XGBoost backtest next to actual sales, turned into safety stock, a reorder point and an order quantity |
 | [SEC Filing Analyzer](https://github.com/atesparilti1/SEC-filer) | [open](https://atesparilti1.github.io/SEC-filer/) | The app's real analyses for AAPL, AMD, META, MSFT and NVDA, each risk tied to its quote |
 | [Discount Policy Simulator](https://github.com/atesparilti1/supplychain-dashboard) | [open](https://atesparilti1.github.io/supplychain-dashboard/) | 51,290 real Global Superstore order lines: above 20% off every category loses money, and what a cap would change |
