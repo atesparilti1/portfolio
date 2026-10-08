@@ -1,0 +1,167 @@
+%-------------------------
+% Ates Parilti - CV
+% Based on Jake Gutierrez's resume template (MIT licence).
+% Build: tectonic Ates-Parilti-CV.tex   (or pdflatex / Overleaf)
+%-------------------------
+
+\documentclass[letterpaper,11pt]{article}
+
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+\usepackage{iftex}
+\ifPDFTeX\input{glyphtounicode}\fi
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\addtolength{\oddsidemargin}{-0.5in}
+\addtolength{\evensidemargin}{-0.5in}
+\addtolength{\textwidth}{1in}
+\addtolength{\topmargin}{-.5in}
+\addtolength{\textheight}{1.0in}
+
+\urlstyle{same}
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+\titleformat{\section}{
+  \vspace{-4pt}\scshape\raggedright\large
+}{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
+
+\ifPDFTeX\pdfgentounicode=1\fi
+
+\newcommand{\resumeItem}[1]{\item\small{{#1 \vspace{-2pt}}}}
+
+\newcommand{\resumeSubheading}[4]{
+  \vspace{-2pt}\item
+    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & #2 \\
+      \textit{\small#3} & \textit{\small #4} \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeProjectHeading}[2]{
+    \item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \small#1 & #2 \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+% Project bullets are nested inside the section list, so they use the second level.
+\renewcommand\labelitemii{--}
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.15in, label={}]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
+
+% Project links on the right: live demo first, then source.
+\newcommand{\projectLinks}[2]{\small\href{#1}{\underline{Live demo}} $|$ \href{#2}{\underline{GitHub}}}
+
+%-------------------------------------------
+\begin{document}
+
+%----------HEADING----------
+\begin{center}
+    \textbf{\Huge \scshape Ates Parilti} \\ \vspace{1pt}
+    \small +31 6 11 700123 $|$ \href{mailto:atesparilti@gmail.com}{\underline{atesparilti@gmail.com}} $|$ Eindhoven, Netherlands \\
+    \href{https://www.linkedin.com/in/atesparilti/}{\underline{linkedin.com/in/atesparilti}} $|$
+    \href{https://github.com/atesparilti1}{\underline{github.com/atesparilti1}} $|$
+    \href{https://atesparilti.com}{\underline{atesparilti.com}}
+\end{center}
+
+%-----------EDUCATION-----------
+\section{Education}
+  \resumeSubHeadingListStart
+    \resumeSubheading
+      {Eindhoven University of Technology (TU/e)}{Eindhoven, Netherlands}
+      {B.Sc. Industrial Engineering}{Sep. 2025 -- May 2028}
+  \resumeSubHeadingListEnd
+
+%-----------PROJECTS-----------
+\section{Projects}
+    \resumeSubHeadingListStart
+
+      \resumeProjectHeading
+          {\textbf{ASML DCF Valuation Model} $|$ \emph{Excel, Python, React}}
+          {\projectLinks{https://atesparilti1.github.io/asml-dcf-valuation/}{https://github.com/atesparilti1/asml-dcf-valuation}}
+          \resumeItemListStart
+            \resumeItem{Built a ten-year DCF valuation of ASML from 20-F filings, with a bottom-up revenue build (EUV, High-NA EUV and DUV units $\times$ ASP) and a five-year fade to a 2.5\% terminal growth rate.}
+            \resumeItem{Estimated a 9.4\% WACC via CAPM and bottom-up beta; valued the firm with Gordon Growth and exit-multiple methods, cross-checked against trading comps (AMAT, LRCX, KLAC, TEL) and a reverse DCF.}
+            \resumeItem{Ran 9$\times$9 sensitivity grids and Bear/Base/Bull scenarios, arriving at EUR 935 per share (42\% below market); automated 27 model-integrity checks in Python and published the model as an interactive site.}
+          \resumeItemListEnd
+
+      \resumeProjectHeading
+          {\textbf{SEC Filing Analyzer} $|$ \emph{Python, FastAPI, React, TypeScript, LLMs}}
+          {\projectLinks{https://atesparilti1.github.io/SEC-filer/}{https://github.com/atesparilti1/SEC-filer}}
+          \resumeItemListStart
+            \resumeItem{Built a full-stack tool that pulls 10-K and 10-Q filings from SEC EDGAR and uses an LLM to extract key risks, growth opportunities and management priorities, each backed by a quote from the filing.}
+            \resumeItem{Computed revenue, net income, margins and YoY growth in Python directly from SEC XBRL data, so the AI never generates a financial figure.}
+            \resumeItem{Added filing-to-filing comparison that flags new, removed and escalated risks; runs free on a local LLM (Ollama) with SQLite caching.}
+            \resumeItem{Found and fixed a data bug: NVIDIA changed its XBRL revenue tag after FY2022, which silently dropped four years of revenue.}
+          \resumeItemListEnd
+
+      \resumeProjectHeading
+          {\textbf{Demand Forecaster} $|$ \emph{Python, XGBoost, SARIMA, Streamlit}}
+          {\projectLinks{https://atesparilti1.github.io/demand-forecaster/}{https://github.com/atesparilti1/demand-forecaster}}
+          \resumeItemListStart
+            \resumeItem{Forecast daily demand for 500 products (10 stores $\times$ 50 items, five years of sales) with a global XGBoost model using lag, rolling and calendar features.}
+            \resumeItem{Beat a seasonal-naive benchmark by 26\% (MASE 0.74, MAPE 13.6\%), outperforming a SARIMA baseline (MAPE 33.4\%).}
+            \resumeItem{Turned forecasts into inventory decisions (safety stock, reorder point and order quantity per product by service level), flagging 178 of 500 products at stockout risk over a 14-day lead time.}
+          \resumeItemListEnd
+
+      \resumeProjectHeading
+          {\textbf{Discount Policy Simulator} $|$ \emph{Python, pandas, SQL, JavaScript}}
+          {\projectLinks{https://atesparilti1.github.io/supplychain-dashboard/}{https://github.com/atesparilti1/supplychain-dashboard}}
+          \resumeItemListStart
+            \resumeItem{Cleaned and analyzed 51,290 Global Superstore order lines in Python and SQL to measure how discounting affects profit margin.}
+            \resumeItem{Found that every category loses money above a 20\% discount: these lines lost \$815K and made up 81\% of all loss-making order lines.}
+            \resumeItem{Built an interactive simulator showing a 20\% discount cap would raise profit from \$1.47M to \$2.28M--\$2.50M, depending on customer retention.}
+          \resumeItemListEnd
+
+    \resumeSubHeadingListEnd
+
+%-----------TECHNICAL SKILLS-----------
+\section{Technical Skills}
+ \begin{itemize}[leftmargin=0.15in, label={}]
+    \small{\item{
+     \textbf{Programming}{: Python, SQL, JavaScript, TypeScript, Dart} \\
+     \textbf{Web \& App Development}{: React, FastAPI, Node.js, Flutter, Firebase, Tailwind CSS} \\
+     \textbf{Data \& Analytics}{: pandas, XGBoost, SARIMA, Streamlit, LLM APIs (Ollama, OpenAI)} \\
+     \textbf{Financial Modeling}{: Excel, DCF Valuation, WACC, Trading Comparables, Sensitivity \& Scenario Analysis} \\
+     \textbf{Tools}{: Git, GitHub} \\
+     \textbf{Core Areas}{: Financial Analysis, Data Analytics, Demand Forecasting, Supply Chain \& Operations Analytics}
+    }}
+ \end{itemize}
+
+%-----------COURSEWORK-----------
+\section{Relevant Coursework}
+ \begin{itemize}[leftmargin=0.15in, label={}]
+    \small{\item{
+     Statistics $|$ Data Analytics $|$ Algorithmic Programming $|$ Business Information Systems $|$ Financial \& Managerial Accounting
+    }}
+ \end{itemize}
+
+%-----------ADDITIONAL-----------
+\section{Additional Information}
+ \begin{itemize}[leftmargin=0.15in, label={}]
+    \small{\item{
+     \textbf{Languages}{: Turkish (C2), English (C1), Dutch (A1)} \\
+     \textbf{Activities \& Interests}{: Tennis, Padel, Fitness, Personal Investing \& Financial Markets, Data Analytics and Operations}
+    }}
+ \end{itemize}
+
+\end{document}
