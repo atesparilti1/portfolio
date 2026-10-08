@@ -31,7 +31,7 @@ A blend of three identities, none subordinate: **Industrial Engineering student*
 
 - Name: **Ates Parilti** (written without Turkish diacritics, as the owner writes it).
 - Education: B.Sc. Industrial Engineering, Eindhoven University of Technology (TU/e), Sep 2025 to May 2028.
-- Looking for: a supply chain or operations analytics internship for summer 2027 (stated on the site).
+- Looking for: an investment banking internship for summer 2027 (stated on the site).
 - Links: LinkedIn https://www.linkedin.com/in/atesparilti/, GitHub https://github.com/atesparilti1, email atesparilti@gmail.com.
 
 ## Evidence on Hand

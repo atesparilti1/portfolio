@@ -322,7 +322,7 @@ export function Contact() {
         </Reveal>
         <Reveal kind="settle" delay={0.1} className="mt-8 grid gap-8 lg:grid-cols-12 lg:items-end">
           <p className="max-w-[46ch] text-lg leading-relaxed text-ink-2 lg:col-span-6">
-            I'm looking for a supply chain or operations analytics internship for summer 2027. If you have one, a project or a question, send the signal.
+            I'm looking for an investment banking internship for summer 2027. If you have one, a project or a question, send the signal.
           </p>
           <div className="flex flex-wrap items-center gap-3 lg:col-span-6 lg:justify-end">
             <Magnetic href={`mailto:${contact.email}`} className={`${btnPrimary} px-6 py-4 text-base`}>
