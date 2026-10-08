@@ -1,6 +1,7 @@
 import { Fragment, useState } from "react";
 import { motion, useReducedMotion } from "motion/react";
 import { ArrowUp, ArrowUpRight, Check, Copy, DownloadSimple, EnvelopeSimple, GithubLogo, LinkSimple, LinkedinLogo } from "@phosphor-icons/react";
+import DcfDemo from "../demos/DcfDemo";
 import ForecastDemo from "../demos/ForecastDemo";
 import FilingDemo from "../demos/FilingDemo";
 import OpsDemo from "../demos/OpsDemo";
@@ -109,18 +110,47 @@ function Title({ p, tone = "ink" }) {
 }
 
 export function Work() {
-  const [fc, sec, ops] = featured;
+  const [dcf, fc, sec, ops] = featured;
   return (
     <>
       <section id="work" className="mx-auto max-w-[1400px] px-4 pt-16 sm:px-6 lg:px-10 lg:pt-16">
         <Reveal>
-          <h2 className="display max-w-[16ch] text-[clamp(2.4rem,5vw,4.5rem)]">Three stations, one line of work.</h2>
+          <h2 className="display max-w-[16ch] text-[clamp(2.4rem,5vw,4.5rem)]">Four projects, one line of work.</h2>
           <p className="mt-5 max-w-[60ch] text-lg leading-relaxed text-ink-2">
             Each project starts as an operations or money question and ends as software someone can use. Try them here.
           </p>
         </Reveal>
 
         <PushArrow className="mb-14 mt-14 lg:mb-20" />
+
+        {/* ASML DCF: demo left, text right */}
+        <article id={dcf.id} className="grid scroll-mt-24 gap-10 lg:grid-cols-12 lg:gap-12">
+          <Reveal className="order-2 lg:order-1 lg:col-span-7">
+            <DcfDemo />
+          </Reveal>
+          <Reveal kind="settle" className="order-1 space-y-6 lg:order-2 lg:col-span-5 lg:pt-6" delay={0.1}>
+            <Title p={dcf} />
+            <p className="max-w-[48ch] text-lg leading-relaxed text-ink-2">{dcf.line}</p>
+            <Case rows={dcf.case} />
+            <Stack items={dcf.stack} />
+            <Links links={dcf.links} />
+          </Reveal>
+        </article>
+        <Reveal className="mt-10 lg:mt-12">
+          <figure className="group overflow-hidden border-2 border-ink">
+            <img
+              src="/work/asml-dcf.png"
+              alt="The ASML valuation site: a blended DCF of €935 a share against the €1,611 market price, with a football field comparing the 52-week range, trading comps, Gordon growth, exit multiple and scenario values."
+              width="1440"
+              height="900"
+              loading="lazy"
+              className="block aspect-[16/10] w-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+            />
+            <figcaption className="border-t-2 border-ink bg-sheet px-3 py-2 text-xs text-ink-2">The published valuation site, with the Excel model one click away.</figcaption>
+          </figure>
+        </Reveal>
+
+        <PushArrow className="my-16 lg:my-24" />
 
         {/* Demand Forecaster: text left, demo right */}
         <article id={fc.id} className="grid scroll-mt-24 gap-10 lg:grid-cols-12 lg:gap-12">

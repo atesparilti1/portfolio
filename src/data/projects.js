@@ -1,6 +1,32 @@
-// The three projects the owner chose to show. The UI only renders a link when one is set.
+// The projects the owner chose to show. The UI only renders a link when one is set.
 
 export const featured = [
+  {
+    id: "asml-dcf-valuation",
+    title: "ASML DCF Valuation",
+    station: "Finance",
+    line: "A ten-year discounted cash flow valuation of ASML, built bottom-up from its filings, checked against peers, and published as a model you can change.",
+    stack: ["Python", "Excel", "openpyxl", "React", "TypeScript"],
+    links: {
+      github: "https://github.com/atesparilti1/asml-dcf-valuation",
+      demo: "https://atesparilti1.github.io/asml-dcf-valuation/",
+    },
+    case: [
+      ["Problem", "ASML trades as the monopoly behind every leading-edge chip. What do its own cash flows say it is worth, and what does today's price assume?"],
+      [
+        "Data",
+        "ASML's 20-F and quarterly filings (US GAAP, FY2021 to Q2 2026), market data on 7 Oct 2026, Damodaran's equity risk premium and industry betas, and four peers: Applied Materials, Lam Research, KLA and Tokyo Electron.",
+      ],
+      [
+        "Method",
+        "Revenue built from systems shipped times selling price for low-NA EUV, High-NA EUV and DUV, capped by ASML's stated capacity; five forecast years plus a five-year fade; WACC of 9.4%; Gordon growth and exit-multiple terminal values; comps, scenarios and a reverse DCF. 27 automated checks tie the Excel model to an independent Python and TypeScript copy.",
+      ],
+      [
+        "Result",
+        "Base case €935 a share, 42% below the €1,611 price, while peers put it near fair value. Today's price needs a 33x exit multiple or 7.1% growth forever after 2035: the market is pricing the AI cycle as lasting well past a ten-year forecast.",
+      ],
+    ],
+  },
   {
     id: "demand-forecaster",
     title: "Demand Forecaster",
@@ -92,16 +118,16 @@ export const toolbox = [
   {
     station: "Finance",
     rows: [
+      ["DCF valuation, WACC", "ASML DCF"],
+      ["Trading comps, scenarios", "ASML DCF"],
       ["10-K / 10-Q analysis", "SEC Analyzer"],
-      ["XBRL financial data", "SEC Analyzer"],
       ["Profit and margin", "Discount Simulator"],
-      ["Financial accounting", "TU/e coursework"],
     ],
   },
   {
     station: "Full-stack",
     rows: [
-      ["React, TypeScript", "SEC Analyzer"],
+      ["React, TypeScript", "SEC Analyzer, ASML DCF"],
       ["FastAPI", "SEC Analyzer"],
       ["Python, pandas, SQL", "Discount Simulator"],
       ["Streamlit", "Forecaster"],
