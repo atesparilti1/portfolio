@@ -79,7 +79,7 @@ export default function Hero() {
           transition={{ duration: 0.8, delay: 0.5, ease }}
         >
           <p className="max-w-[38ch] text-lg leading-relaxed text-ink-2">
-            I'm Ates, an Industrial Engineering student at TU/e. I'm looking for an investment banking internship for summer 2027.
+            I'm Ates, an Industrial Engineering student at TU/e, looking for a summer 2027 internship in finance or operations.
           </p>
           <div className="flex flex-wrap gap-3">
             <Magnetic href="#work" className={btnPrimary}>
