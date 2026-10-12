@@ -11,7 +11,9 @@
 \usepackage{fancyhdr}
 \usepackage[english]{babel}
 \usepackage{tabularx}
-\input{glyphtounicode}
+\usepackage{iftex}
+% glyphtounicode is pdfLaTeX-only; the guard lets the same file build in XeTeX/Tectonic too.
+\ifPDFTeX\input{glyphtounicode}\fi
 
 \pagestyle{fancy}
 \fancyhf{}
@@ -40,7 +42,7 @@
   {}{0em}{\MakeUppercase}
   [\color{black}\titlerule\vspace{-5pt}]
 
-\pdfgentounicode=1
+\ifPDFTeX\pdfgentounicode=1\fi
 
 %-------------------------
 % Custom commands
