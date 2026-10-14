@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { MotionConfig } from "motion/react";
 import { Ladder, Nav } from "./components/Chrome";
+import Experience from "./components/Experience";
 import Hero from "./components/Hero";
 import Hopper from "./components/Hopper";
 import { About, Contact, Work } from "./components/Sections";
@@ -27,6 +28,7 @@ export default function App() {
       <main>
         <Hero />
         <Work />
+        <Experience />
         <About />
         <Contact />
       </main>

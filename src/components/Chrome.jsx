@@ -4,6 +4,7 @@ import { contact } from "../data/projects";
 
 const LINKS = [
   { href: "#work", label: "Work" },
+  { href: "#experience", label: "Experience" },
   { href: "#about", label: "About" },
 ];
 
@@ -68,6 +69,7 @@ export function Nav() {
 const STEPS = [
   { href: "#top", label: "Flow" },
   { href: "#work", label: "Work" },
+  { href: "#experience", label: "Jobs" },
   { href: "#about", label: "About" },
   { href: "#contact", label: "Pull" },
 ];

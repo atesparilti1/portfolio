@@ -8,7 +8,7 @@ import { AnimatePresence, motion, useMotionValueEvent, useReducedMotion, useScro
 */
 
 const STEPS = 14;
-const SECTIONS = ["#top", "#work", "#about", "#contact"];
+const SECTIONS = ["#top", "#work", "#experience", "#about", "#contact"];
 
 export default function Hopper() {
   const reduce = useReducedMotion();

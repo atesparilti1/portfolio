@@ -104,6 +104,29 @@ export const featured = [
   },
 ];
 
+// Work experience, oldest first so the arrows run with time.
+export const experience = [
+  {
+    company: "Derin Bilgi",
+    role: "Summer Intern",
+    where: "Istanbul, Türkiye (hybrid)",
+    when: "Jun. 2025 – Aug. 2025",
+    points: ["Contributed to application development and debugging alongside experienced developers, then returned in Mar. 2026 as a part-time developer."],
+  },
+  {
+    company: "Derin Bilgi",
+    role: "Software Developer, part-time",
+    where: "Istanbul, Türkiye (remote)",
+    when: "Mar. 2026 – Aug. 2026",
+    points: [
+      "Proposed and built Son Lokma, a full-stack app for buying surplus food from local businesses at a discount: a Too Good To Go-style service adapted to Turkish regulation and habits, in development ahead of launch.",
+      "Owned it end to end: shaped the concept and features with company stakeholders, then designed, implemented and tested it myself.",
+      "Developed and debugged features in an Agile Scrum team, with weekly sprint planning and progress reviews.",
+    ],
+    stack: ["Next.js", "Supabase"],
+  },
+];
+
 // Each skill points at the project that proves it.
 export const toolbox = [
   {
@@ -130,7 +153,7 @@ export const toolbox = [
       ["React, TypeScript", "SEC Analyzer, ASML DCF"],
       ["FastAPI", "SEC Analyzer"],
       ["Python, pandas, SQL", "Discount Simulator"],
-      ["Streamlit", "Forecaster"],
+      ["Next.js, Supabase", "Son Lokma"],
     ],
   },
 ];
