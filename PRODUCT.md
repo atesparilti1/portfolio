@@ -31,7 +31,8 @@ A blend of three identities, none subordinate: **Industrial Engineering student*
 
 - Name: **Ates Parilti** (written without Turkish diacritics, as the owner writes it).
 - Education: B.Sc. Industrial Engineering, Eindhoven University of Technology (TU/e), Sep 2025 to May 2028.
-- Looking for: a summer 2027 internship in finance or operations (investment banking, trading, supply chain, operations). Hero states the umbrella; the contact section lists the roles.
+- Looking for: a summer 2027 internship in software, finance or operations (software, trading/quant, supply chain, operations, investment banking). Hero states the umbrella; the contact section lists the roles, in the CV's order.
+- Experience: Derin Bilgi, Istanbul. Summer intern Jun-Aug 2025; part-time software developer Mar-Aug 2026, proposed and built Son Lokma (Next.js + Supabase, private repo, do not link).
 - Links: LinkedIn https://www.linkedin.com/in/atesparilti/, GitHub https://github.com/atesparilti1, email atesparilti@gmail.com.
 
 ## Evidence on Hand
