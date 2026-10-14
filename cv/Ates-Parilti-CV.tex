@@ -88,7 +88,7 @@
 %-----------SUMMARY-----------
 \section{Summary}
 \begin{itemize}[leftmargin=0.1in, label={}]
-  \item Industrial Engineering student at TU/e working at the intersection of finance, data and software. I build working tools rather than just reports: a published ASML DCF model, an SEC filing analyzer and a demand forecasting system, all with live demos. Seeking internships in supply chain, operations, investment banking or trading/quant.
+  \item Industrial Engineering student at TU/e working at the intersection of finance, data and software. I build working tools rather than just reports: a published ASML DCF model, an SEC filing analyzer, a demand forecasting system and a full-stack mobile app. Seeking internships in software, trading/quant, supply chain, operations or investment banking.
 \end{itemize}
 
 
@@ -104,6 +104,26 @@
   \resumeSubHeadingListEnd
 
 
+%-----------EXPERIENCE-----------
+\section{Experience}
+  \resumeSubHeadingListStart
+    \resumeSubheading
+      {Derin Bilgi}{Istanbul, T\"urkiye (Remote)}
+      {Software Developer, Part-time}{Mar. 2026 -- Aug. 2026}
+      \resumeItemListStart
+        \resumeItem{Proposed and built \textbf{Son Lokma}, a full-stack mobile app that lets users in Turkey buy surplus food from local businesses at a discount (similar to Too Good To Go, a localized version in legal and cultural aspect); currently in development ahead of launch.}
+        \resumeItem{Owned the app end to end: shaped the concept and features with company stakeholders, then designed, implemented and tested it myself.}
+        \resumeItem{Developed and debugged features in an Agile Scrum team, contributing to weekly sprint planning and progress reviews.}
+      \resumeItemListEnd
+    \resumeSubheading
+      {Derin Bilgi}{Istanbul, T\"urkiye (Hybrid)}
+      {Summer Intern}{Jun. 2025 -- Aug. 2025}
+      \resumeItemListStart
+        \resumeItem{Contributed to application development and debugging alongside experienced developers; returned in Mar. 2026 as a part-time developer.}
+      \resumeItemListEnd
+  \resumeSubHeadingListEnd
+
+
 %-----------PROJECTS-----------
 \section{Projects}
     \resumeSubHeadingListStart
@@ -112,9 +132,8 @@
           {\textbf{ASML DCF Valuation Model}\sep\textit{Excel, Python, React}}
           {\href{https://atesparilti1.github.io/asml-dcf-valuation/}{\underline{Live demo}}\sep\href{https://github.com/atesparilti1/asml-dcf-valuation}{\underline{GitHub}}}
           \resumeItemListStart
-            \resumeItem{Built a ten-year DCF valuation of ASML from 20-F filings, with a bottom-up revenue build (EUV, High-NA EUV and DUV units \texttimes{} ASP) and a five-year fade to a 2.5\% terminal growth rate.}
-            \resumeItem{Estimated a 9.4\% WACC via CAPM and bottom-up beta; valued the firm with Gordon Growth and exit-multiple methods, cross-checked against trading comps (AMAT, LRCX, KLAC, TEL) and a reverse DCF.}
-            \resumeItem{Ran 9\texttimes{}9 sensitivity grids and Bear/Base/Bull scenarios, arriving at EUR 935 per share (42\% below market); automated 27 model-integrity checks in Python and published the model as an interactive site.}
+            \resumeItem{Built a ten-year DCF of ASML from 20-F filings with a bottom-up revenue build (EUV, High-NA EUV and DUV units \texttimes{} ASP), a 9.4\% CAPM WACC and Gordon Growth and exit-multiple terminal values, cross-checked against trading comps.}
+            \resumeItem{Ran 9\texttimes{}9 sensitivity grids and Bear/Base/Bull scenarios (EUR 935 per share, 42\% below market); automated 27 model-integrity checks in Python and published the model as an interactive site.}
           \resumeItemListEnd
 
       \resumeProjectHeading
@@ -122,26 +141,22 @@
           {\href{https://atesparilti1.github.io/SEC-filer/}{\underline{Live demo}}\sep\href{https://github.com/atesparilti1/SEC-filer}{\underline{GitHub}}}
           \resumeItemListStart
             \resumeItem{Built a full-stack tool that pulls 10-K and 10-Q filings from SEC EDGAR and uses an LLM to extract key risks, growth opportunities and management priorities, each backed by a quote from the filing.}
-            \resumeItem{Computed revenue, margins and YoY growth directly from XBRL data, so the LLM never generates a financial figure.}
-            \resumeItem{Added filing-to-filing comparison flagging new, removed and escalated risks; runs free on a local LLM (Ollama).}
-            \resumeItem{Fixed a silent data bug: NVIDIA changed its XBRL revenue tag after FY2022, dropping four years of revenue.}
+            \resumeItem{Computed revenue, margins and YoY growth directly from XBRL data so the LLM never generates a number; added filing-to-filing risk comparison running free on a local LLM (Ollama).}
           \resumeItemListEnd
 
       \resumeProjectHeading
           {\textbf{Demand Forecaster}\sep\textit{Python, XGBoost, SARIMA, Streamlit}}
           {\href{https://atesparilti1.github.io/demand-forecaster/}{\underline{Live demo}}\sep\href{https://github.com/atesparilti1/demand-forecaster}{\underline{GitHub}}}
           \resumeItemListStart
-            \resumeItem{Forecast daily demand for 500 products (10 stores \texttimes{} 50 items, five years of sales) with a global XGBoost model using lag, rolling and calendar features.}
-            \resumeItem{Beat a seasonal-naive benchmark by 26\% (MASE 0.74, MAPE 13.6\%) and a SARIMA baseline (MAPE 33.4\%).}
-            \resumeItem{Turned forecasts into inventory decisions (safety stock, reorder point and order quantity per product by service level), flagging 178 of 500 products at stockout risk over a 14-day lead time.}
+            \resumeItem{Forecast daily demand for 500 products with a global XGBoost model (lag, rolling and calendar features), beating a seasonal-naive benchmark by 26\% (MASE 0.74, MAPE 13.6\%) and SARIMA (MAPE 33.4\%).}
+            \resumeItem{Turned forecasts into safety stock, reorder point and order quantity per product, flagging 178 of 500 products at stockout risk over a 14-day lead time.}
           \resumeItemListEnd
 
       \resumeProjectHeading
           {\textbf{Discount Policy Simulator}\sep\textit{Python, pandas, SQL, JavaScript}}
           {\href{https://atesparilti1.github.io/supplychain-dashboard/}{\underline{Live demo}}\sep\href{https://github.com/atesparilti1/supplychain-dashboard}{\underline{GitHub}}}
           \resumeItemListStart
-            \resumeItem{Analyzed 51,290 Superstore order lines in Python and SQL to measure how discounts affect profit margin.}
-            \resumeItem{Found every category loses money above a 20\% discount: these lines lost \$815K (81\% of loss-making lines).}
+            \resumeItem{Analyzed 51,290 Superstore order lines in Python and SQL and found every category loses money above a 20\% discount (\$815K lost, 81\% of loss-making lines).}
             \resumeItem{Built an interactive simulator showing a 20\% discount cap would raise profit from \$1.47M to \$2.28M--\$2.50M, depending on customer retention.}
           \resumeItemListEnd
 
