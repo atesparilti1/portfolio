@@ -46,6 +46,10 @@
 
 %-------------------------
 % Custom commands
+% XeTeX sets tables tighter than pdfTeX; this keeps headings clear of the first bullet.
+\newlength{\headgap}
+\ifPDFTeX\setlength{\headgap}{-7pt}\else\setlength{\headgap}{-5pt}\fi
+
 \newcommand{\resumeItem}[1]{\item{#1}\vspace{-2pt}}
 
 \newcommand{\resumeSubheading}[4]{
@@ -53,14 +57,14 @@
     \begin{tabular*}{0.98\textwidth}[t]{l@{\extracolsep{\fill}}r}
       \textbf{#1} & #2 \\
       \textit{#3} & \textit{#4} \\
-    \end{tabular*}\vspace{-7pt}
+    \end{tabular*}\vspace{\headgap}
 }
 
 \newcommand{\resumeProjectHeading}[2]{
     \item
     \begin{tabular*}{0.98\textwidth}{l@{\extracolsep{\fill}}r}
       #1 & #2 \\
-    \end{tabular*}\vspace{-7pt}
+    \end{tabular*}\vspace{\headgap}
 }
 
 \newcommand{\sep}{\enspace\textbar\enspace}
@@ -88,7 +92,7 @@
 %-----------SUMMARY-----------
 \section{Summary}
 \begin{itemize}[leftmargin=0.1in, label={}]
-  \item Industrial Engineering student at TU/e working at the intersection of finance, data and software. I build working tools rather than just reports: a published ASML DCF model, an SEC filing analyzer, a demand forecasting system and a full-stack mobile app. Seeking internships in software, trading/quant, supply chain, operations or investment banking.
+  \item Industrial Engineering student at TU/e working at the intersection of finance, data and software. I build working tools rather than just reports: a published ASML DCF model, a Monte Carlo study of its EUV supply chain, an SEC filing analyzer and a demand forecasting system. Seeking internships in software, trading/quant, supply chain, operations or investment banking.
 \end{itemize}
 
 
@@ -111,8 +115,7 @@
       {Derin Bilgi}{Istanbul, T\"urkiye (Remote)}
       {Software Developer, Part-time}{Mar. 2026 -- Aug. 2026}
       \resumeItemListStart
-        \resumeItem{Proposed and built \textbf{Son Lokma}, a full-stack mobile app that lets users in Turkey buy surplus food from local businesses at a discount (similar to Too Good To Go, a localized version in legal and cultural aspect); currently in development ahead of launch.}
-        \resumeItem{Owned the app end to end: shaped the concept and features with company stakeholders, then designed, implemented and tested it myself.}
+        \resumeItem{Proposed and built \textbf{Son Lokma} end to end (confidential).}
         \resumeItem{Developed and debugged features in an Agile Scrum team, contributing to weekly sprint planning and progress reviews.}
       \resumeItemListEnd
     \resumeSubheading
@@ -127,6 +130,14 @@
 %-----------PROJECTS-----------
 \section{Projects}
     \resumeSubHeadingListStart
+
+      \resumeProjectHeading
+          {\textbf{ASML EUV Supply-Chain Risk}\sep\textit{Python, TypeScript, React}}
+          {\href{https://atesparilti1.github.io/asml-euv-supply-risk/}{\underline{Live demo}}\sep\href{https://github.com/atesparilti1/asml-euv-supply-risk}{\underline{GitHub}}}
+          \resumeItemListStart
+            \resumeItem{Simulated 20,000 Monte Carlo paths of ASML's single-source EUV supply chain (2027--2030), valuing each buffer policy through my DCF, with 22 validation tests.}
+            \resumeItem{Recommended EUR 82M of light-source and drive-laser spares and no spare optics: +EUR 59M of equity value (95\% CI +55M to +62M), while two spare sets of every module lose EUR 193M.}
+          \resumeItemListEnd
 
       \resumeProjectHeading
           {\textbf{ASML DCF Valuation Model}\sep\textit{Excel, Python, React}}
