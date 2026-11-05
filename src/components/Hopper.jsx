@@ -8,7 +8,7 @@ import { AnimatePresence, motion, useMotionValueEvent, useReducedMotion, useScro
 */
 
 const STEPS = 14;
-const SECTIONS = ["#top", "#work", "#experience", "#about", "#contact"];
+const SECTIONS = ["#top", "#experience", "#work", "#about", "#contact"];
 
 export default function Hopper() {
   const reduce = useReducedMotion();
@@ -84,8 +84,8 @@ export default function Hopper() {
                     x2={x + LEDGE + 3}
                     y1={y}
                     y2={y}
-                    stroke={passed ? "var(--flow)" : "var(--ink)"}
-                    strokeOpacity={passed ? 1 : 0.28}
+                    stroke={passed ? "var(--flow)" : "var(--ink-3)"}
+                    strokeOpacity={passed ? 1 : 0.6}
                     strokeWidth="2.5"
                     style={{ transition: "stroke 0.4s, stroke-opacity 0.4s" }}
                   />

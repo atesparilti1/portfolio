@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, useReducedMotion } from "motion/react";
-import { ArrowDown, EnvelopeSimple, Lightning } from "@phosphor-icons/react";
+import { track } from "@vercel/analytics";
+import { ArrowDown, DownloadSimple, Lightning } from "@phosphor-icons/react";
 import FlowSim, { STATIONS } from "./FlowSim";
 import { Magnetic, btnPrimary, btnSecondary, ease } from "./bits";
 import { contact } from "../data/projects";
@@ -86,9 +87,9 @@ export default function Hero() {
               See the work
               <ArrowDown size={16} weight="bold" />
             </Magnetic>
-            <Magnetic href={`mailto:${contact.email}`} className={btnSecondary}>
-              <EnvelopeSimple size={16} weight="bold" />
-              Email me
+            <Magnetic href={contact.cv} download onClick={() => track("cv_download", { from: "hero" })} className={btnSecondary}>
+              <DownloadSimple size={16} weight="bold" />
+              Download CV
             </Magnetic>
           </div>
         </motion.div>

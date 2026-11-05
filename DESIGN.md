@@ -132,14 +132,14 @@ Motion follows the flow direction. Headings and demos come online like stations,
 - Archivo Variable pushed wide (112 to 118% stretch) for display and titles; JetBrains Mono only for measured values.
 - VSM notation as the component vocabulary: process boxes, data boxes, inventory triangles, push arrows, kaizen burst, timeline ladder.
 - Blue for information and interaction; orange only for live improvement or alarms.
-- One ink band per page.
+- One ink band per page, carrying the project board.
 
 ## Colors
 
 A near-monochrome process sheet with one working blue and one rationed signal orange.
 
 ### Primary
-- **Information-Flow Blue** (`flow`): The system's working color. Data, the demand-signal line, live readouts in the sim, the active tab fill, primary-button hover, the filled timeline ladder, text selection, focus rings, and at most one highlighted word per display heading ("shipped", "project."). Text on it is `flow-ink`.
+- **Information-Flow Blue** (`flow`): The system's working color. Data, the demand-signal line, live readouts in the sim, the active tab fill, primary-button hover, the job square on the project rail, text selection, focus rings, and at most one highlighted word per display heading ("shipped", "project."). Text on it is `flow-ink`.
 
 ### Secondary
 - **Kaizen Orange** (`kaizen`): Reserved for something improving right now or something going wrong: the kaizen burst and boosted cycle time in the sim, the kaizen-trigger buttons, negative KPI values and High-priority recommendations in the ops demo. Text on it is `kaizen-ink`.
@@ -173,7 +173,7 @@ Dark mode (via `prefers-color-scheme`) remaps every token, not individual elemen
 - **Headline** (800, clamp(2.2rem, 4.4vw, 4rem) to clamp(2.4rem, 5vw, 4.5rem), same display settings): Section headings. Project names use the same voice at clamp(2rem, 3.6vw, 3.25rem).
 - **Title** (700, 15px, stretch 112%): Process-box title bars, band-card headers, the name mark (17px, 800).
 - **Body** (400, 18px, 1.625): Lead paragraphs in Graphite, capped at 38 to 60ch. Secondary body is 15px or 14px at the same leading.
-- **Label** (500, 12 to 13px): Data-box field names, stack lists, captions, ladder steps (11px, 600).
+- **Label** (500, 12 to 13px): Data-box field names, stack lists, captions.
 - **Value** (JetBrains Mono 600, 24px, tabular): Fact readouts in data boxes. **Value-sm** (JetBrains Mono 500 to 600, 10 to 12px) for C/T, queue, wait, lead-time, axis ticks and chart annotations.
 
 ### Named Rules
@@ -183,11 +183,13 @@ Dark mode (via `prefers-color-scheme`) remaps every token, not individual elemen
 
 ## Layout
 
-Single column of stations on a 1400px max-width container with side gutters of 16px (mobile), 24px (sm, 640px) and 40px (lg, 1024px). Inside, a 12-column grid at lg with 40 to 48px gaps; text and demo alternate sides between projects (4/8 then 7/5) so the eye zig-zags like material along a line. Sections breathe at 64px to 128px vertical padding; the ink band and contact use the larger end.
+Single column of stations on a 1400px max-width container with side gutters of 16px (mobile), 24px (sm, 640px) and 40px (lg, 1024px). Inside, a 12-column grid at lg with 40 to 48px gaps; the project board is 4/8: a rail of stations and one live stage. Sections breathe at 64px to 128px vertical padding; the ink band and contact use the larger end.
 
 Horizontal flow is literal: the hero sim is a full-width strip, push arrows separate stages, the about toolbox is three process boxes joined by push arrows on one row at lg. Below lg everything stacks top to bottom and inter-box arrows are hidden.
 
-The fixed nav is 64px tall and gains a 2px ink bottom rule once scrolled. The timeline ladder is pinned bottom-left on lg only.
+The fixed nav is 64px tall and gains a 2px ink bottom rule once scrolled. Below md it collapses into a menu.
+
+**Project board.** All projects share one ink band. The rail lists every project and sticks while the stage scrolls; the blue job from the hero moves to the open station. The stage leads with the finding, then three proof numbers, the live demo, links, and a folded "How it was built". Below lg the rail becomes a sticky horizontal strip. Page length does not depend on the project count, so a new project is one entry in `projects.js`.
 
 ### Named Rules
 **The One Band Rule.** Each page gets exactly one full-bleed ink band (`band` background) for its densest material. A second inverted section breaks the sheet.
@@ -198,11 +200,10 @@ The system is flat paper and ink. Depth comes from line weight, the sheet-versus
 
 ### Shadow Vocabulary
 - **Pull lift** (`box-shadow: 0 8px 24px -10px rgb(var(--shadow) / 0.5)`): Primary button on hover only.
-- **Floating instrument** (`box-shadow: 0 6px 24px -12px rgb(var(--shadow) / 0.45)`): The fixed timeline ladder.
 - **Station glow** (canvas shadow, blur 16 to 26px, offset 6px, opacity 0.18 to 0.32 by boost): Sim process boxes while a kaizen is running.
 
 ### Named Rules
-**The Flat-At-Rest Rule.** Nothing casts a shadow at rest except the fixed ladder. Shadows are a state, not a style.
+**The Flat-At-Rest Rule.** Nothing casts a shadow at rest. Shadows are a state, not a style.
 
 ## Shapes
 
@@ -238,7 +239,7 @@ A striped ink bar (12px dash, 8px gap, 12px tall) ending in a solid 18px arrowhe
 An 11-spike orange star with an ink outline drawn over a station while its cycle time is being cut. It is the system's only animated alarm-colored element.
 
 ### Timeline Ladder
-The VSM lead-time ladder as a square-wave line. In the hero it is live (wait above, cycle time below, lead and value-add totals in mono). Fixed at the bottom-left on desktop, it doubles as section navigation and fills blue with scroll progress.
+The VSM lead-time ladder as a square-wave line. It lives in the hero (wait above, cycle time below, lead and value-add totals in mono).
 
 ### Navigation
 64px fixed bar on the ground color. Name mark left (17px, 800, wide); links 15px semibold Graphite, hover to ink with a 2px ink underline that grows from the left; an ink "Email me" action at the right that turns blue on hover. Links hide below md; the email action stays.

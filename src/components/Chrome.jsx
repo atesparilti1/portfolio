@@ -1,16 +1,28 @@
-import { motion, useScroll, useSpring, useTransform } from "motion/react";
-import { DownloadSimple, EnvelopeSimple, LinkedinLogo } from "@phosphor-icons/react";
+import { useEffect, useState } from "react";
+import { AnimatePresence, motion, useReducedMotion, useScroll, useTransform } from "motion/react";
+import { track } from "@vercel/analytics";
+import { DownloadSimple, EnvelopeSimple, GithubLogo, LinkedinLogo, List, X } from "@phosphor-icons/react";
 import { contact } from "../data/projects";
 
 const LINKS = [
-  { href: "#work", label: "Work" },
   { href: "#experience", label: "Experience" },
+  { href: "#work", label: "Work" },
   { href: "#about", label: "About" },
 ];
 
 export function Nav() {
   const { scrollY } = useScroll();
   const border = useTransform(scrollY, [0, 40], [0, 1]);
+  const reduce = useReducedMotion();
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e) => e.key === "Escape" && setOpen(false);
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [open]);
+
   return (
     <header className="fixed inset-x-0 top-0 z-30 bg-ground">
       <nav className="mx-auto flex h-16 max-w-[1400px] items-center justify-between gap-6 px-4 sm:px-6 lg:px-10">
@@ -39,78 +51,83 @@ export function Nav() {
             target="_blank"
             rel="noreferrer"
             aria-label="LinkedIn"
-            className="hidden h-9 w-9 items-center justify-center text-ink-2 transition-colors hover:text-ink sm:inline-flex"
+            className="hidden h-9 w-9 items-center justify-center text-ink-2 transition-colors hover:text-ink md:inline-flex"
           >
             <LinkedinLogo size={19} weight="bold" />
           </a>
           <a
             href={contact.cv}
             download
-            className="inline-flex items-center gap-1.5 px-3 py-2 text-[15px] font-semibold text-ink-2 transition-colors hover:text-ink"
+            onClick={() => track("cv_download", { from: "nav" })}
+            className="hidden items-center gap-1.5 px-3 py-2 text-[15px] font-semibold text-ink-2 transition-colors hover:text-ink md:inline-flex"
           >
             <DownloadSimple size={16} weight="bold" />
             CV
           </a>
           <a
             href={`mailto:${contact.email}`}
-            className="ml-2 inline-flex items-center gap-2 bg-ink px-3.5 py-2 text-sm font-bold text-ground transition-colors hover:bg-flow hover:text-flow-ink active:scale-[0.98]"
+            className="inline-flex h-11 items-center gap-2 bg-ink px-3.5 text-sm font-bold md:ml-2 md:h-auto md:py-2 text-ground transition-colors hover:bg-flow hover:text-flow-ink active:scale-[0.98]"
           >
             <EnvelopeSimple size={16} weight="bold" />
             Email me
           </a>
+          <button
+            type="button"
+            onClick={() => setOpen((o) => !o)}
+            aria-expanded={open}
+            aria-controls="mobile-menu"
+            aria-label={open ? "Close menu" : "Open menu"}
+            className="-mr-2 grid h-11 w-11 place-items-center md:hidden"
+          >
+            {open ? <X size={22} weight="bold" /> : <List size={22} weight="bold" />}
+          </button>
         </div>
       </nav>
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            id="mobile-menu"
+            initial={reduce ? false : { opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.2 }}
+            className="absolute inset-x-0 top-16 border-b-2 border-ink bg-ground px-4 pb-3 sm:px-6 md:hidden"
+          >
+            <ul>
+              {LINKS.map((l) => (
+                <li key={l.href} className="border-b border-ink/15">
+                  <a href={l.href} onClick={() => setOpen(false)} className="flex h-12 items-center text-[17px] font-semibold">
+                    {l.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+            <div className="flex items-center gap-5 pt-3">
+              <a
+                href={contact.cv}
+                download
+                onClick={() => {
+                  setOpen(false);
+                  track("cv_download", { from: "menu" });
+                }}
+                className="inline-flex h-11 items-center gap-1.5 font-semibold"
+              >
+                <DownloadSimple size={18} weight="bold" />
+                CV
+              </a>
+              <a href={contact.linkedin} target="_blank" rel="noreferrer" className="inline-flex h-11 items-center gap-1.5 font-semibold">
+                <LinkedinLogo size={18} weight="bold" />
+                LinkedIn
+              </a>
+              <a href={contact.github} target="_blank" rel="noreferrer" className="inline-flex h-11 items-center gap-1.5 font-semibold">
+                <GithubLogo size={18} weight="bold" />
+                GitHub
+              </a>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
       <motion.div style={{ opacity: border }} className="h-[2px] bg-ink" />
     </header>
-  );
-}
-
-// The page as a timeline ladder: each section is a step, filled as you scroll.
-const STEPS = [
-  { href: "#top", label: "Flow" },
-  { href: "#work", label: "Work" },
-  { href: "#experience", label: "Jobs" },
-  { href: "#about", label: "About" },
-  { href: "#contact", label: "Pull" },
-];
-
-export function Ladder() {
-  const { scrollYProgress } = useScroll();
-  const p = useSpring(scrollYProgress, { stiffness: 120, damping: 24, mass: 0.3 });
-  const clip = useTransform(p, (v) => `inset(0 ${100 - v * 100}% 0 0)`);
-  const { scrollY } = useScroll();
-  const show = useTransform(scrollY, [380, 620], [0, 1]);
-  const vis = useTransform(show, (v) => (v < 0.05 ? "hidden" : "visible"));
-  const segW = 44;
-  const w = segW * STEPS.length;
-  const path = STEPS.map((_, i) => {
-    const x = i * segW;
-    return i % 2 === 0 ? `M${x},4 L${x + segW},4 L${x + segW},16` : `M${x},16 L${x + segW},16 L${x + segW},4`;
-  }).join(" ");
-
-  return (
-    <motion.nav
-      style={{ opacity: show, visibility: vis }}
-      aria-label="Page sections"
-      className="fixed bottom-5 left-6 z-20 hidden bg-ground/90 px-3 pb-1.5 pt-2 shadow-[0_6px_24px_-12px_rgb(var(--shadow)/0.45)] lg:block"
-    >
-      <div className="relative" style={{ width: w }}>
-        <svg width={w} height="20" className="block overflow-visible" aria-hidden="true">
-          <path d={path} fill="none" stroke="var(--ink)" strokeOpacity="0.25" strokeWidth="2" />
-        </svg>
-        <motion.svg width={w} height="20" className="absolute inset-0 block overflow-visible" style={{ clipPath: clip }} aria-hidden="true">
-          <path d={path} fill="none" stroke="var(--flow)" strokeWidth="2.5" />
-        </motion.svg>
-        <ul className="mt-0.5 flex">
-          {STEPS.map((s) => (
-            <li key={s.href} style={{ width: segW }}>
-              <a href={s.href} className="block text-[11px] font-semibold text-ink-2 transition-colors hover:text-flow">
-                {s.label}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </motion.nav>
   );
 }

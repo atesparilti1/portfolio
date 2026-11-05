@@ -1,10 +1,12 @@
 import { useEffect } from "react";
 import { MotionConfig } from "motion/react";
-import { Ladder, Nav } from "./components/Chrome";
+import { Analytics } from "@vercel/analytics/react";
+import { Nav } from "./components/Chrome";
 import Experience from "./components/Experience";
 import Hero from "./components/Hero";
 import Hopper from "./components/Hopper";
-import { About, Contact, Work } from "./components/Sections";
+import { About, Contact } from "./components/Sections";
+import Work from "./components/Work";
 
 export default function App() {
   // The page renders after load, so the browser's own jump to a #hash (a shared
@@ -27,13 +29,13 @@ export default function App() {
       <Nav />
       <main>
         <Hero />
-        <Work />
         <Experience />
+        <Work />
         <About />
         <Contact />
       </main>
-      <Ladder />
       <Hopper />
+      <Analytics />
     </MotionConfig>
   );
 }

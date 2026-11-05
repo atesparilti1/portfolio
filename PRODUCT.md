@@ -24,7 +24,7 @@ A blend of three identities, none subordinate: **Industrial Engineering student*
 
 ## Capabilities and Constraints
 
-- Shows only the projects the owner chose: ASML DCF Valuation, Demand Forecaster, SEC Filing Analyzer, Discount Policy Simulator (repo: supplychain-dashboard). Other workspace projects stay off the site unless the owner adds them.
+- Shows only the projects the owner chose: EUV Supply Risk, ASML DCF Valuation, Demand Forecaster, SEC Filing Analyzer, Discount Policy Simulator (repo: supplychain-dashboard). Other workspace projects stay off the site unless the owner adds them.
 - Each project links to its GitHub repo. CV (including phone number, approved by the owner) is downloadable at `public/Ates-Parilti-CV.pdf`. Each project has a live demo on GitHub Pages. Dutch version undecided.
 
 ## Brand Commitments
@@ -32,11 +32,12 @@ A blend of three identities, none subordinate: **Industrial Engineering student*
 - Name: **Ates Parilti** (written without Turkish diacritics, as the owner writes it).
 - Education: B.Sc. Industrial Engineering, Eindhoven University of Technology (TU/e), Sep 2025 to May 2028.
 - Looking for: a summer 2027 internship in software, finance or operations (software, trading/quant, supply chain, operations, investment banking). Hero states the umbrella; the contact section lists the roles, in the CV's order.
-- Experience: Derin Bilgi, Istanbul. Summer intern Jun-Aug 2025; part-time software developer Mar-Aug 2026, proposed and built Son Lokma (Next.js + Supabase, private repo, do not link).
+- Experience: Derin Bilgi, Istanbul. Summer intern Jun-Aug 2025; part-time software developer Mar-Aug 2026. Son Lokma is confidential: name it in passing only, never its concept, stack, market or status, on the site, in the CV or in docs.
 - Links: LinkedIn https://www.linkedin.com/in/atesparilti/, GitHub https://github.com/atesparilti1, email atesparilti@gmail.com.
 
 ## Evidence on Hand
 
+- **EUV Supply Risk** (github.com/atesparilti1/asml-euv-supply-risk, live at atesparilti1.github.io/asml-euv-supply-risk): 20,000 Monte Carlo paths valued through the ASML DCF. Recommended buffer €82m, +€59m of equity value (95% CI +€55m to +€62m), on-time delivery 57% to 63%; two sets of everything €338m, -€193m. Supplier inputs are illustrative priors and must stay labelled as such.
 - **ASML DCF Valuation** (github.com/atesparilti1/asml-dcf-valuation, live at atesparilti1.github.io/asml-dcf-valuation): ten-year DCF from ASML filings, valuation date 7 Oct 2026. Base €935 vs €1,611 price; reverse DCF 33x / 7.1%. Portfolio demo uses the cash flows exported from its model.py.
 - **Demand Forecaster** (`../demandprediction_web`, github.com/atesparilti1/demand-forecaster): SARIMA and XGBoost on the Kaggle Store Item set (10 stores x 50 items, 5 years). Real results: XGBoost MAPE 13.6%, MASE 0.74; 500 series, 178 at risk in a 14-day window. Real screenshot at `public/work/demand-forecaster-dashboard.png`.
 - **SEC Filing Analyzer** (`../SEC_filing`, github.com/atesparilti1/SEC-filer): real demo analyses for AAPL, AMD, META, MSFT, NVDA in `src/data/filings.json`.

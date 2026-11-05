@@ -8,10 +8,15 @@ The page is drawn as a Lean value-stream map. The hero is a small discrete-event
 
 | Project | Live demo | What the page shows |
 | --- | --- | --- |
+| [EUV Supply Risk](https://github.com/atesparilti1/asml-euv-supply-risk) | [open](https://atesparilti1.github.io/asml-euv-supply-risk/) | The buffer policies from 20,000 Monte Carlo paths, priced through the ASML DCF, with their confidence intervals |
 | [ASML DCF Valuation](https://github.com/atesparilti1/asml-dcf-valuation) | [open](https://atesparilti1.github.io/asml-dcf-valuation/) | The model's own cash flows re-valued live: change WACC, terminal growth or exit multiple, see the price against the market and what today's price requires |
 | [Demand Forecaster](https://github.com/atesparilti1/demand-forecaster) | [open](https://atesparilti1.github.io/demand-forecaster/) | The real XGBoost backtest next to actual sales, turned into safety stock, a reorder point and an order quantity |
 | [SEC Filing Analyzer](https://github.com/atesparilti1/SEC-filer) | [open](https://atesparilti1.github.io/SEC-filer/) | The app's real analyses for AAPL, AMD, META, MSFT and NVDA, each risk tied to its quote |
-| [Discount Policy Simulator](https://github.com/atesparilti1/supplychain-dashboard) | [open](https://atesparilti1.github.io/supplychain-dashboard/) | 51,290 real Global Superstore order lines: above 20% off every category loses money, and what a cap would change |
+| [Discount Policy Simulator](https://github.com/atesparilti1/supplychain-dashboard) | [open](https://atesparilti1.github.io/supplychain-dashboard/) | 51,290 order lines from the public Global Superstore sample dataset: above 20% off every category loses money, and what a cap would change |
+
+## Adding a project
+
+Add an entry to `featured` in `src/data/projects.js`. The board in `src/components/Work.jsx` gives it a rail row, a stage and a place in the "Hiring for" filter, and the page does not get longer. To give it an in-page demo, add the component to `DEMOS` in `Work.jsx`.
 
 ## Stack
 
@@ -28,4 +33,4 @@ npm run dev
 
 ## Deploy
 
-Deployed on Vercel at https://atesparilti.com. `SITE_URL` in `.env` sets the canonical and social preview URLs.
+Deployed on Vercel at https://atesparilti.com. `SITE_URL` in `.env` sets the canonical and social preview URLs. Web Analytics must be enabled once in the Vercel project settings.

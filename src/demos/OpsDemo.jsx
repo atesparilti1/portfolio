@@ -119,7 +119,7 @@ export default function OpsDemo() {
           <p className="text-sm font-medium text-band-ink-2">Profit on the same orders</p>
           <p className="mt-1 font-mono text-4xl font-semibold tnum text-band-ink">{money(now)}</p>
           <p className="mt-1 font-mono text-sm font-semibold tnum">
-            <span className={delta >= 0 ? "text-flow" : "text-kaizen"}>
+            <span className={delta >= 0 ? "text-band-flow" : "text-kaizen"}>
               {delta >= 0 ? "+" : "−"}
               {money(Math.abs(delta))}
             </span>
@@ -170,7 +170,7 @@ export default function OpsDemo() {
           Crossed-out levels are above your cap. Their orders are re-priced at the cap: list price is sales / (1 − discount), cost is
           sales − profit, and only the share of customers you set is kept.
         </p>
-        <p className="mt-auto pt-4 text-xs text-band-ink-2">Real data: {data.rows.toLocaleString("en-US")} Global Superstore order lines, 2011 to 2014.</p>
+        <p className="mt-auto pt-4 text-xs text-band-ink-2">Public sample dataset: {data.rows.toLocaleString("en-US")} Global Superstore order lines, 2011 to 2014.</p>
       </div>
     </div>
   );

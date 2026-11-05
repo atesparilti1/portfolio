@@ -19,6 +19,8 @@
   --band: #111317;
   --band-ink: #e6e9e3;
   --band-ink-2: #a9b0a6;
+  --band-flow: #8297ff;
+  --kaizen-text: #c23a0a;
   --shadow: 17 19 23;
   color-scheme: light;
 }
@@ -39,6 +41,8 @@
     --band: #1c2026;
     --band-ink: #e4e7e1;
     --band-ink-2: #9aa198;
+    --band-flow: #8297ff;
+    --kaizen-text: #ff6a33;
     --shadow: 0 0 0;
     color-scheme: dark;
   }
@@ -61,6 +65,8 @@
   --color-band: var(--band);
   --color-band-ink: var(--band-ink);
   --color-band-ink-2: var(--band-ink-2);
+  --color-band-flow: var(--band-flow);
+  --color-kaizen-text: var(--kaizen-text);
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -136,6 +142,22 @@ html {
   *::after {
     animation-duration: 0.001ms !important;
     transition-duration: 0.001ms !important;
+  }
+}
+
+/* A project stage comes online the way work flows: a short wipe from the left.
+   Re-runs by itself each time the panel is unhidden. */
+[data-panel][data-off] {
+  display: none;
+}
+.stage-in {
+  animation: stage-in 0.55s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+}
+@keyframes stage-in {
+  from {
+    clip-path: inset(0 30% 0 0);
+    opacity: 0.3;
+    transform: translateX(-10px);
   }
 }
 
