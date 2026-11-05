@@ -32,7 +32,7 @@ A blend of three identities, none subordinate: **Industrial Engineering student*
 - Name: **Ates Parilti** (written without Turkish diacritics, as the owner writes it).
 - Education: B.Sc. Industrial Engineering, Eindhoven University of Technology (TU/e), Sep 2025 to May 2028.
 - Looking for: a summer 2027 internship in software, finance or operations (software, trading/quant, supply chain, operations, investment banking). Hero states the umbrella; the contact section lists the roles, in the CV's order.
-- Experience: Derin Bilgi, Istanbul. Summer intern Jun-Aug 2025; part-time software developer Mar-Aug 2026. Son Lokma is confidential: name it in passing only, never its concept, stack, market or status, on the site, in the CV or in docs.
+- Experience: Derin Bilgi, Istanbul. Summer intern Jun-Aug 2025; part-time software developer Mar-Aug 2026. Lup Diye is confidential: name it in passing only, never its concept, stack, market or status, on the site, in the CV or in docs.
 - Links: LinkedIn https://www.linkedin.com/in/atesparilti/, GitHub https://github.com/atesparilti1, email atesparilti@gmail.com.
 
 ## Evidence on Hand

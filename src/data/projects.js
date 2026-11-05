@@ -222,7 +222,7 @@ export const experience = [
     where: "Istanbul, Türkiye (remote)",
     when: "Mar. 2026 – Aug. 2026",
     points: [
-      "Proposed and built Son Lokma end to end (confidential).",
+      "Proposed and built Lup Diye end to end (confidential).",
       "Developed and debugged features in an Agile Scrum team, with weekly sprint planning and progress reviews.",
     ],
   },
