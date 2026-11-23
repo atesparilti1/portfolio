@@ -4,6 +4,10 @@ Personal site of Ates Parilti, Industrial Engineering student at TU/e.
 
 The page is a scroll-driven Three.js scene. The camera starts in space above an open ring of screens, descends through the story, enters the ring where each project has its own screen, and finally drops through the floor as the screens peel off into a tunnel. Clicking a screen flies the camera into it and opens the project: findings, live demo, source, stack, an in-page demo and the case study. The scene lives in `src/space/`, the copy in `src/components/Chapters.jsx`, and projects in `src/data/projects.js`.
 
+## Versions
+
+The site at `/` is version 2. Version 1, the earlier value-stream-map design, stays online at `/v1/` as a frozen static build of commit `6219f6b`, committed in `public/v1/` with a `noindex` tag and a switch back to v2. To rebuild it, check out that commit and run `vite build --base=/v1/`, the SSR build and `scripts/prerender.mjs`, then copy `dist/` (minus `work/` and the CV, which it loads from the root) into `public/v1/`.
+
 ## Projects on the page
 
 | Project | Live demo | What the page shows |

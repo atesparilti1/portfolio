@@ -278,7 +278,13 @@ export function Contact() {
               Download CV
             </a>
           </div>
-          <p className="mt-16 text-[13px] text-ink-3">© 2026 Ates Parilti. Built with React and Three.js.</p>
+          <p className="mt-16 text-[13px] text-ink-3">
+            © 2026 Ates Parilti. Built with React and Three.js.{" "}
+            <a href="/v1/" className="underline decoration-line hover:text-ink">
+              See the first version of this site
+            </a>
+            .
+          </p>
         </motion.div>
       </div>
     </section>

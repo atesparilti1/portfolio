@@ -31,9 +31,20 @@ export function Nav() {
             ))}
           </ul>
         </nav>
-        <a href={`mailto:${contact.email}`} onClick={() => track("email_click", { from: "nav" })} className="btn btn-ghost ml-auto px-4 py-2 text-[14px] backdrop-blur-md">
-          Email me
-        </a>
+        <div className="ml-auto flex items-center gap-3">
+          {/* The first version of the site stays online, frozen, at /v1/. */}
+          <nav aria-label="Site version" className="hidden items-center gap-0.5 rounded-full border border-line bg-[rgb(8_10_16/0.35)] p-1 text-[12px] font-semibold backdrop-blur-md sm:flex">
+            <a href="/v1/" className="rounded-full px-2.5 py-1 text-ink-3 transition-colors hover:text-ink">
+              v1
+            </a>
+            <span aria-current="page" className="rounded-full bg-white/10 px-2.5 py-1 text-ink">
+              v2
+            </span>
+          </nav>
+          <a href={`mailto:${contact.email}`} onClick={() => track("email_click", { from: "nav" })} className="btn btn-ghost px-4 py-2 text-[14px] backdrop-blur-md">
+            Email me
+          </a>
+        </div>
       </div>
     </header>
   );
