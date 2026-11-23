@@ -13,16 +13,19 @@ import { DRAWN, FILLERS } from "./screens";
 const TAU = Math.PI * 2;
 const R = 14; // ring radius
 const COLS = 12;
-const ROWS = [4.6, 0, -4.6];
+const ROWS = [23, 18.4, 13.8, 9.2, 4.6, 0, -4.6]; // a tall ring; projects sit in the y = 0 row
 const SW = 6.4; // screen size, 16:10
 const SH = 4;
+const PROJECT_ROW = ROWS.indexOf(0);
+const TOP_Y = ROWS[0] + SH / 2 + 0.7;
+const BOTTOM_Y = ROWS[ROWS.length - 1] - SH / 2 - 0.7;
 let SLOTS = []; // columns of the project screens in the middle row, spread evenly
 const FLOOR_Y = -7.8;
-const TUNNEL = [-17, -30, -43]; // ring depths below the floor, one per row
 const ACCENT = new THREE.Color("#3b82f6");
 const SUN_DIR = new THREE.Vector3(-0.55, 0.42, -0.72).normalize();
 
 const slotAngle = (k) => TAU + (k * TAU) / COLS;
+const projAngle = (i) => slotAngle(SLOTS[i]) + TAU;
 const smoother = (t) => t * t * t * (t * (t * 6 - 15) + 10);
 const clamp01 = (t) => Math.min(1, Math.max(0, t));
 const lerp = (a, b, t) => a + (b - a) * t;
@@ -283,9 +286,8 @@ export default class Scene {
     this.scene.add(this.ring);
     this.screens = [];
     this.projectScreens = [];
-    this.shotTargets = [];
+    this.shotTargets = new Map(); // screenshot src -> every screen showing it
     const geo = new THREE.PlaneGeometry(SW, SH);
-    let filler = 0;
 
     const texFrom = (canvas) => {
       const t = new THREE.CanvasTexture(canvas);
@@ -294,10 +296,24 @@ export default class Scene {
       return t;
     };
 
+    // A small pool of faces shared by all screens: the data faces and the
+    // project screenshots, scattered at random (seeded, so the ring is stable)
+    // with no face repeated next to or above itself.
+    const fillers = FILLERS.map((f) => texFrom(f()));
+    const shots = this.projects.filter((p) => p.shot).map((p) => p.shot);
+    let seed = 20261123;
+    const rand = () => (seed = (Math.imul(seed, 1664525) + 1013904223) >>> 0) / 4294967296;
+    const keys = [];
+    const showShot = (shot, uniforms) => {
+      uniforms.map.value = fillers[Math.floor(rand() * fillers.length)];
+      if (!this.shotTargets.has(shot.src)) this.shotTargets.set(shot.src, { shot, list: [] });
+      this.shotTargets.get(shot.src).list.push(uniforms);
+    };
+
     ROWS.forEach((y, row) => {
       for (let k = 0; k < COLS; k++) {
         const a = slotAngle(k);
-        const pIndex = row === 1 ? SLOTS.indexOf(k) : -1;
+        const pIndex = row === PROJECT_ROW ? SLOTS.indexOf(k) : -1;
         const project = pIndex >= 0 ? this.projects[pIndex] : null;
         const uniforms = {
           map: { value: null },
@@ -310,13 +326,22 @@ export default class Scene {
           accent: { value: project ? 1 : 0 },
           accentColor: { value: ACCENT },
         };
+        keys[row] ??= [];
         if (project?.shot) {
-          uniforms.map.value = texFrom(FILLERS[filler++ % FILLERS.length]());
-          this.shotTargets.push({ shot: project.shot, uniforms }); // loaded lazily, see loadShots()
+          showShot(project.shot, uniforms);
+          keys[row][k] = project.shot.src;
         } else if (project && DRAWN[project.demo]) {
           uniforms.map.value = texFrom(DRAWN[project.demo]());
+          keys[row][k] = project.demo;
         } else {
-          uniforms.map.value = texFrom(FILLERS[(filler++ + row * 5) % FILLERS.length]());
+          let key;
+          for (let tries = 0; tries < 8; tries++) {
+            key = shots.length && rand() < 0.5 ? `s${Math.floor(rand() * shots.length)}` : `f${Math.floor(rand() * fillers.length)}`;
+            if (key !== keys[row][k - 1] && key !== keys[row - 1]?.[k] && key !== keys[row][0]) break;
+          }
+          keys[row][k] = key;
+          if (key[0] === "s") showShot(shots[Number(key.slice(1))], uniforms);
+          else uniforms.map.value = fillers[Number(key.slice(1))];
         }
         const mat = new THREE.ShaderMaterial({
           side: THREE.DoubleSide,
@@ -361,13 +386,15 @@ export default class Scene {
         });
         const mesh = new THREE.Mesh(geo, mat);
         const home = { r: R, a, y };
-        const away = { r: R * 0.82, a: a + row * 0.26, y: TUNNEL[row] };
+        // In the tunnel the rows reverse: the lowest row peels off first and stays shallowest.
+        const depth = ROWS.length - 1 - row;
+        const away = { r: R * 0.82, a: a + depth * 0.26, y: -15 - depth * 8 };
         mesh.userData = {
           project: pIndex,
           home,
           away,
-          delay: row * 0.22 + (k / COLS) * 0.18,
-          bootAt: 0.6 + Math.random() * 1.8 + (row === 1 ? 0 : 0.4),
+          delay: (depth / (ROWS.length - 1)) * 0.3 + (k / COLS) * 0.15,
+          bootAt: 0.6 + Math.random() * 1.8 + (row === PROJECT_ROW ? 0 : 0.3 + depth * 0.1),
           focus: 0.8,
           scale: 1,
           bob: Math.random() * TAU,
@@ -386,7 +413,7 @@ export default class Scene {
     const glowMat = new THREE.MeshBasicMaterial({ color: ACCENT.clone().multiplyScalar(2.4), toneMapped: false, transparent: true });
     const strutMat = new THREE.MeshBasicMaterial({ color: "#363b44", transparent: true });
     this.frameMats.push(hoopMat, glowMat, strutMat);
-    for (const y of [7.3, -7.3]) {
+    for (const y of [TOP_Y, BOTTOM_Y]) {
       const hoop = new THREE.Mesh(new THREE.TorusGeometry(R + 0.25, 0.09, 8, 160), hoopMat);
       hoop.rotation.x = Math.PI / 2;
       hoop.position.y = y;
@@ -396,10 +423,10 @@ export default class Scene {
       glow.position.y = y - Math.sign(y) * 0.35;
       this.ring.add(glow);
     }
-    const strutGeo = new THREE.CylinderGeometry(0.05, 0.05, 14.6, 6);
+    const strutGeo = new THREE.CylinderGeometry(0.05, 0.05, TOP_Y - BOTTOM_Y, 6);
     for (let k = 0; k < COLS; k++) {
       const s = new THREE.Mesh(strutGeo, strutMat);
-      cyl({ r: R + 0.1, a: slotAngle(k + 0.5), y: 0 }, s.position);
+      cyl({ r: R + 0.1, a: slotAngle(k + 0.5), y: (TOP_Y + BOTTOM_Y) / 2 }, s.position);
       this.ring.add(s);
     }
   }
@@ -407,17 +434,18 @@ export default class Scene {
   // Screenshots load after first paint, so the ring appears without waiting.
   loadShots() {
     const loader = new THREE.TextureLoader();
-    for (const { shot, uniforms } of this.shotTargets) {
+    for (const { shot, list } of this.shotTargets.values()) {
       loader.load(shot.src, (t) => {
         t.colorSpace = THREE.SRGBColorSpace;
         t.anisotropy = 8;
         const ia = shot.w / shot.h;
         const sa = SW / SH;
-        // Cover-fit, keeping the top of tall screenshots.
-        if (ia < sa) uniforms.uvT.value.set(1, ia / sa, 0, 1 - ia / sa);
-        else uniforms.uvT.value.set(sa / ia, 1, (1 - sa / ia) / 2, 0);
-        uniforms.map.value.dispose();
-        uniforms.map.value = t;
+        for (const uniforms of list) {
+          // Cover-fit, keeping the top of tall screenshots.
+          if (ia < sa) uniforms.uvT.value.set(1, ia / sa, 0, 1 - ia / sa);
+          else uniforms.uvT.value.set(sa / ia, 1, (1 - sa / ia) / 2, 0);
+          uniforms.map.value = t;
+        }
       });
     }
   }
@@ -479,26 +507,35 @@ export default class Scene {
           ${OUT}
         }`,
     });
-    const fig = new THREE.Group();
-    const part = (geo, x, y, z = 0, rz = 0) => {
+    // Jointed so it can move: legs swing from the hips, the upper body bends at
+    // the waist and carries the arms (from the shoulders) and the head (from the neck).
+    const mesh = (geo, y = 0) => {
       const m = new THREE.Mesh(geo, mat);
-      m.position.set(x, y, z);
-      m.rotation.z = rz;
-      fig.add(m);
+      m.position.y = y;
       return m;
     };
-    const leg = new THREE.CapsuleGeometry(0.15, 0.95, 6, 12);
-    part(leg, -0.15, 0.62);
-    part(leg, 0.15, 0.62);
-    const torso = part(new THREE.CapsuleGeometry(0.25, 0.62, 6, 16), 0, 1.6);
+    const joint = (x, y, ...children) => {
+      const g = new THREE.Group();
+      g.position.set(x, y, 0);
+      g.add(...children);
+      return g;
+    };
+    const legGeo = new THREE.CapsuleGeometry(0.15, 0.95, 6, 12);
+    const armGeo = new THREE.CapsuleGeometry(0.075, 0.8, 6, 10);
+    const legL = joint(-0.15, 1.22, mesh(legGeo, -0.6));
+    const legR = joint(0.15, 1.22, mesh(legGeo, -0.6));
+    const torso = mesh(new THREE.CapsuleGeometry(0.25, 0.62, 6, 16), 0.5);
     torso.scale.set(1.12, 1, 0.7);
-    const arm = new THREE.CapsuleGeometry(0.075, 0.8, 6, 10);
-    part(arm, -0.39, 1.44, 0, 0.06);
-    part(arm, 0.39, 1.44, 0, -0.06);
-    part(new THREE.CapsuleGeometry(0.09, 0.08, 4, 8), 0, 2.02);
-    this.head = part(new THREE.SphereGeometry(0.19, 24, 16), 0, 2.26);
+    const armL = joint(-0.39, 0.78, mesh(armGeo, -0.44));
+    const armR = joint(0.39, 0.78, mesh(armGeo, -0.44));
+    const head = joint(0, 0.9, mesh(new THREE.CapsuleGeometry(0.09, 0.08, 4, 8), 0.04), mesh(new THREE.SphereGeometry(0.19, 24, 16), 0.27));
+    const body = joint(0, 1.1, torso, armL, armR, head);
+    const fig = new THREE.Group();
+    fig.add(legL, legR, body);
     fig.position.y = FLOOR_Y;
+    fig.rotation.y = slotAngle(3);
     this.figure = fig;
+    this.rig = { legL, legR, body, torso, armL, armR, head, look: new THREE.Vector2(), walk: 0, gestureAt: -10, idleA: slotAngle(3), idleNext: 4, lastActive: -1 };
     this.scene.add(fig);
   }
 
@@ -538,7 +575,7 @@ export default class Scene {
     const wide = aspect > 1.15;
     const share = wide ? 0.55 : 0.9;
     const d = Math.max(SH / (2 * 0.5 * tanH), SW / (share * 2 * tanH * aspect)) * near;
-    const a = slotAngle(SLOTS[i]);
+    const a = projAngle(i);
     const shift = wide ? (0.2 * 2 * d * tanH * aspect) / R : 0;
     return {
       pos: { r: R - d, a, y: 0 },
@@ -553,7 +590,7 @@ export default class Scene {
     const kf = [];
     const add = (at, pose, ease = "linear") => kf.push({ at, pose, ease });
     const P = (pr, pa, py, lr, la, ly, fov = 44) => ({ pos: { r: pr * far, a: pa, y: py * far }, look: { r: lr, a: la, y: ly }, fov });
-    const last = slotAngle(SLOTS[SLOTS.length - 1]);
+    const last = projAngle(SLOTS.length - 1);
     this.chapters = [];
     this.tunnel = null;
 
@@ -563,15 +600,21 @@ export default class Scene {
       const h = el.offsetHeight;
       this.chapters.push({ key, top, bottom: top + h });
       const at = (f) => top + h * f;
-      if (key === "hero") add(at(0.5), P(30, 0.5, 96, 0, 0.5, -4, 40));
-      else if (key === "story-0") add(at(0.5), P(40, 1.4, 64, 0, 1.4, -2, 42));
-      else if (key === "story-1") add(at(0.5), P(44, 2.4, 38, 0, 2.4, 0, 44));
-      else if (key === "story-2") add(at(0.5), P(36, 3.3, 22, 0, 3.3, 0, 44));
+      if (key === "hero") add(at(0.5), P(32, 0.5, 112, 0, 0.5, 6, 40));
+      else if (key === "story-0") add(at(0.5), P(42, 1.4, 78, 0, 1.4, 6, 42));
+      else if (key === "story-1") add(at(0.5), P(48, 2.4, 48, 0, 2.4, 8, 44));
+      else if (key === "story-2") add(at(0.5), P(42, 3.3, 30, 0, 3.3, 9, 44));
       else if (key === "arrive") {
-        add(at(0.2), P(24, 4.1, 15, 0, 4.1, -3, 46));
-        // Over the open top, looking down at the figure on its disc.
-        add(at(0.55), { pos: { r: 3.5, a: 4.7, y: 5 }, look: { r: 0.4, a: 4.7, y: FLOOR_Y + 1.2 }, fov: 50 }, "smooth");
-        add(at(0.85), { pos: { r: 3, a: 5.4, y: 4 }, look: { r: 9, a: TAU, y: -2 }, fov: 48 }, "smooth");
+        add(at(0.12), P(32, 4.1, 38, 0, 4.1, 9, 46));
+        // Over the open top, looking straight down the shaft at the figure.
+        add(at(0.34), { pos: { r: 4, a: 4.5, y: TOP_Y + 16 }, look: { r: 0.3, a: 4.5, y: FLOOR_Y }, fov: 46 }, "smooth");
+        // Down the shaft in a spiral, circling the figure once as it looks up in awe.
+        const head = (k) => ({ r: 0, a: 0, y: FLOOR_Y + k });
+        add(at(0.48), { pos: { r: 5.5, a: 6.6, y: 16 }, look: head(1.5), fov: 50 });
+        add(at(0.6), { pos: { r: 6.5, a: 8.6, y: 4 }, look: head(1.8), fov: 52 });
+        add(at(0.72), { pos: { r: 6, a: 10.4, y: -4.4 }, look: head(2.1), fov: 52 });
+        // Then turn out to the first project.
+        add(at(0.9), { pos: { r: 3, a: 11.7, y: 3 }, look: { r: 9, a: projAngle(0), y: -1 }, fov: 48 }, "smooth");
       } else if (key.startsWith("project-")) {
         const i = Number(key.slice(8));
         add(at(0.3), this.projectPose(i, aspect, 1.06), "smooth");
@@ -587,7 +630,7 @@ export default class Scene {
       } else if (key === "contact") {
         // Under everything, looking back up the tunnel to the floor and the planets.
         const a = last + 2.6;
-        add(at(0.5), { pos: { r: 18 * far, a, y: -78 }, look: { r: 0, a, y: -12 }, fov: 50 }, "smooth");
+        add(at(0.5), { pos: { r: 20 * far, a, y: -100 }, look: { r: 0, a, y: -20 }, fov: 50 }, "smooth");
       }
     }
     kf.sort((x, y) => x.at - y.at);
@@ -695,7 +738,7 @@ export default class Scene {
     // Opening a project flies the camera into its screen.
     this.focusAmt += (this.focusTarget - this.focusAmt) * ease(2.6);
     if (this.focusIndex >= 0 && this.focusAmt > 0.001) {
-      const a = slotAngle(SLOTS[this.focusIndex]);
+      const a = projAngle(this.focusIndex);
       const f = smoother(clamp01(this.focusAmt * 1.02));
       const close = { pos: { r: R - 3.7, a, y: 0 }, look: { r: R, a, y: 0 }, fov: 46 };
       const m = (p, q) => ({ r: lerp(p.r, q.r, f), a: lerp(p.a, q.a, f), y: lerp(p.y, q.y, f) });
@@ -787,12 +830,10 @@ export default class Scene {
       s.scale.setScalar(d.scale);
     }
 
-    // The figure turns to whatever it is looking at.
-    const faceA = this.focusIndex >= 0 && this.focusTarget ? slotAngle(SLOTS[this.focusIndex]) : active >= 0 ? slotAngle(SLOTS[active]) : this.pose.pos.a + this.yaw + Math.PI;
-    const cur = this.figure.rotation.y;
-    const diff = Math.atan2(Math.sin(faceA - cur), Math.cos(faceA - cur));
-    this.figure.rotation.y = cur + diff * ease(2);
-    if (!still) this.head.position.y = 2.26 + Math.sin(t * 1.1) * 0.01;
+    const arrive = this.chapters.find((c) => c.key === "arrive");
+    const ap = arrive ? (anchor - arrive.top) / (arrive.bottom - arrive.top) : -1;
+    const wonder = smoother(clamp01((ap - 0.3) / 0.12)) * (1 - smoother(clamp01((ap - 0.8) / 0.12)));
+    this.animateFigure(t, dt, active, still, ease, wonder);
 
     // World drift.
     const lv = SUN_DIR.clone().transformDirection(cam.matrixWorldInverse);
@@ -810,6 +851,86 @@ export default class Scene {
     }
 
     this.composer.render();
+  }
+
+  // The figure idles like a person: it breathes, shifts its weight, glances
+  // around and up at the camera, walks round to face whatever it attends to,
+  // and points at a project when one comes up.
+  animateFigure(t, dt, active, still, ease, wonder = 0) {
+    const g = this.rig;
+    const fig = this.figure;
+    if (active !== g.lastActive) {
+      if (active >= 0) g.gestureAt = t + 0.6;
+      g.lastActive = active;
+    }
+    if (active < 0 && t > g.idleNext) {
+      g.idleA = slotAngle(Math.floor(Math.random() * COLS));
+      g.idleNext = t + 5 + Math.random() * 5;
+      if (Math.random() < 0.45) g.gestureAt = t + 1.4;
+    }
+    const opened = this.focusIndex >= 0 && this.focusTarget;
+    // In awe it turns slowly on the spot, taking in the ring.
+    if (wonder > 0.01) g.idleA = fig.rotation.y + 0.55 * wonder;
+    const faceA = opened ? slotAngle(SLOTS[this.focusIndex]) : active >= 0 ? slotAngle(SLOTS[active]) : g.idleA;
+    const cur = fig.rotation.y;
+    const diff = Math.atan2(Math.sin(faceA - cur), Math.cos(faceA - cur));
+    fig.rotation.y = cur + diff * ease(1.8);
+    if (still) return;
+
+    // Turning happens in small steps, not on a turntable.
+    g.walk += (Math.min(1, Math.abs(diff) * 2.5) * (1 - wonder * 0.6) - g.walk) * ease(6);
+    const w = g.walk;
+    const step = Math.sin(t * 8.5);
+    g.legL.rotation.x = step * 0.42 * w;
+    g.legR.rotation.x = -step * 0.42 * w;
+    fig.position.y = FLOOR_Y + Math.abs(Math.cos(t * 8.5)) * 0.05 * w;
+
+    const breath = Math.sin(t * 1.7) * 0.018;
+    g.torso.scale.set(1.12 * (1 + breath * 0.6), 1 + breath, 0.7 * (1 + breath));
+    g.body.rotation.z = Math.sin(t * 0.55) * 0.035 - Math.sign(diff) * 0.06 * w;
+    g.body.rotation.x = Math.sin(t * 0.8) * 0.015 - 0.16 * wonder; // leans back to look up
+
+    const ge = t - g.gestureAt;
+    const point = ge < 0 ? 0 : ge < 0.5 ? smoother(ge / 0.5) : ge < 2.3 ? 1 : ge < 2.9 ? 1 - smoother((ge - 2.3) / 0.6) : 0;
+    const sway = Math.sin(t * 1.1) * 0.05;
+    g.armL.rotation.x = step * 0.35 * w + sway;
+    g.armL.rotation.z = -0.06 - Math.sin(t * 0.9) * 0.02;
+    g.armR.rotation.x = lerp(-step * 0.35 * w - sway, -1.25 + Math.sin(t * 2) * 0.04, point);
+    g.armR.rotation.z = lerp(0.06, 0.2, point);
+    // Awe: arms open wide and lift, drifting as it turns.
+    const open = 0.95 + Math.sin(t * 1.3) * 0.18;
+    g.armL.rotation.x = lerp(g.armL.rotation.x, -0.35 + Math.sin(t * 0.9) * 0.12, wonder);
+    g.armR.rotation.x = lerp(g.armR.rotation.x, -0.35 + Math.sin(t * 0.9 + 1.4) * 0.12, wonder);
+    g.armL.rotation.z = lerp(g.armL.rotation.z, -open, wonder);
+    g.armR.rotation.z = lerp(g.armR.rotation.z, open + Math.sin(t * 1.7) * 0.1, wonder);
+
+    // Where the camera is, as seen from the figure's head.
+    this._v ??= new THREE.Vector3();
+    const v = this._v.copy(this.camera.position).sub(fig.position);
+    v.y -= 2.27;
+    v.applyAxisAngle(THREE.Object3D.DEFAULT_UP, -fig.rotation.y);
+    const yaw = Math.atan2(v.x, v.z);
+    const pitch = -Math.atan2(v.y, Math.hypot(v.x, v.z));
+    const glanceYaw = Math.sin(t * 0.37) * 0.45 + Math.sin(t * 0.17 + 1) * 0.25;
+    const glancePitch = Math.sin(t * 0.29) * 0.12 - 0.1;
+    let ty;
+    let tp;
+    if (active >= 0 || opened) {
+      ty = glanceYaw * 0.15; // reading the screen above
+      tp = -0.32 + Math.sin(t * 0.6) * 0.04;
+    } else if (Math.abs(yaw) < 1.2) {
+      ty = Math.max(-1, Math.min(1, yaw)) * 0.8 + glanceYaw * 0.2; // looks back at the viewer
+      tp = Math.max(-0.9, Math.min(0.4, pitch));
+    } else {
+      ty = glanceYaw;
+      tp = glancePitch;
+    }
+    // In awe: head tipped back, sweeping across the towering screens.
+    ty = lerp(ty, Math.sin(t * 0.45) * 0.85, wonder);
+    tp = lerp(tp, -0.7 + Math.sin(t * 0.7) * 0.15, wonder);
+    g.look.x += (ty - g.look.x) * ease(3);
+    g.look.y += (tp - g.look.y) * ease(3);
+    g.head.rotation.set(g.look.y, g.look.x, 0, "YXZ");
   }
 
   dispose() {

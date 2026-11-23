@@ -15,7 +15,7 @@ function Chapter({ cam, id, height, align = "left", place = "center", children, 
   // and only a live motion value replaces it after hydration.
   const still = !!reduce;
   const out = fadeOut && !still;
-  const stops = [0, 0.16, 0.84, 1];
+  const stops = [0, 0.1, 0.9, 1];
   const opacity = useTransform(scrollYProgress, stops, still ? [1, 1, 1, 1] : [0, 1, 1, out ? 0 : 1]);
   const y = useTransform(scrollYProgress, stops, still ? [0, 0, 0, 0] : [70, 0, 0, out ? -70 : 0]);
   const filter = useTransform(scrollYProgress, stops, still ? Array(4).fill("blur(0px)") : ["blur(12px)", "blur(0px)", "blur(0px)", out ? "blur(12px)" : "blur(0px)"]);
@@ -94,7 +94,7 @@ export function Hero() {
 export function Story() {
   return (
     <div id="story">
-      <Chapter cam="story-0" height="200vh">
+      <Chapter cam="story-0" height="300vh">
         <div className="glass p-6 sm:p-8">
           <H2>I study how operations run.</H2>
           <p className="mt-5 text-lg leading-relaxed text-ink-2">
@@ -104,7 +104,7 @@ export function Story() {
         </div>
       </Chapter>
 
-      <Chapter cam="story-1" height="220vh" align="right">
+      <Chapter cam="story-1" height="330vh" align="right">
         <div className="glass p-6 sm:p-8">
           <H2>Three disciplines, equal weight.</H2>
           <div className="mt-6 grid gap-5">
@@ -125,7 +125,7 @@ export function Story() {
         </div>
       </Chapter>
 
-      <Chapter cam="story-2" height="200vh">
+      <Chapter cam="story-2" height="300vh">
         <div className="glass p-6 sm:p-8">
           <H2>Two stints at Derin Bilgi.</H2>
           <ol className="relative mt-6 grid gap-6 border-l border-line pl-6">
@@ -151,7 +151,7 @@ export function Story() {
 
 export function Arrival() {
   return (
-    <Chapter cam="arrive" id="work" height="280vh" align="right">
+    <Chapter cam="arrive" id="work" height="520vh" align="right">
       <div className="glass p-6 sm:p-8">
         <H2>
           Six working <span className="text-band-flow">systems.</span>
@@ -166,7 +166,7 @@ export function Arrival() {
 
 export function ProjectChapter({ p, i, onOpen }) {
   return (
-    <Chapter cam={`project-${i}`} id={p.id} height="190vh" place="bottom">
+    <Chapter cam={`project-${i}`} id={p.id} height="280vh" place="bottom">
       <article className="glass p-5 sm:p-7">
         <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
           <h3 className="display text-[clamp(1.7rem,3vw,2.5rem)]">{p.title}</h3>
@@ -212,7 +212,7 @@ const ROLES = ["Software", "Trading and quant", "Supply chain", "Operations", "I
 
 export function Beyond() {
   return (
-    <Chapter cam="below" id="about" height="300vh" align="right">
+    <Chapter cam="below" id="about" height="400vh" align="right">
       <div className="glass p-6 sm:p-8">
         <H2>
           Looking for summer <span className="text-band-flow">2027.</span>

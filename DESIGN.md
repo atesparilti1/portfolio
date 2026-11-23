@@ -64,8 +64,8 @@ Text floats over the scene on frosted glass (`.glass`): a dark translucent fill,
 
 ## Scene vocabulary
 
-- **Ring:** 12 columns by 3 rows of 16:10 screens at radius 14, between two hoops with a thin blue inner glow. Project screens sit in the middle row, spread evenly; the rest show faces drawn from the projects' real data (`src/space/screens.js`).
-- **Figure:** a dark silhouette lit only by a blue rim from the floor. It turns to face the active project.
+- **Ring:** a tall tower of 12 columns by 7 rows of 16:10 screens at radius 14, between two hoops with a thin blue inner glow. Project screens sit in the second row from the bottom, spread evenly. The other screens share a small pool of faces, the project screenshots and faces drawn from the projects' real data (`src/space/screens.js`), scattered at random with no face next to or above itself.
+- **Figure:** a jointed dark silhouette lit only by a blue rim from the floor. It breathes, shifts its weight, glances around and up at the camera, walks round in small steps to face what it attends to, and points at each project as it comes up. While the camera spirals down the shaft around it, it leans back in awe with its arms open, turning slowly to take in the tower.
 - **Floor:** a blue glowing disc with a slow ripple and a pulse ring, over a faint grid that fades out past the ring.
 - **Sky:** twinkling stars, an fbm nebula in navy with a trace of red, five shaded planets (one ringed), and a distant white star as the key light.
 - **Tunnel:** in the last chapter the three rows peel off, staggered, into rings below the floor.
@@ -73,7 +73,7 @@ Text floats over the scene on frosted glass (`.glass`): a dark translucent fill,
 ## Motion
 
 - Lenis smooths the page scroll; the camera follows with exponential damping. Dragging spins the view around the ring with inertia, then it settles back.
-- Chapter copy pins while the camera travels, fading and un-blurring in, and out as the chapter leaves.
+- Chapters are long and the wheel is slowed, so each block of copy stays readable for most of its stretch. Chapter copy pins while the camera travels, fading and un-blurring in, and out as the chapter leaves.
 - Screens boot with a short flicker on load, brighten when their project is active, and scale up slightly on hover.
 - Opening a project flies the camera into its screen; the project window then grows out of the middle of the view.
 - **Reduced motion:** no smoothing, no boot flicker, no drift or twinkle, no camera flight; the camera still follows scroll (user-driven) and all copy renders at its final state.
