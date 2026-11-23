@@ -94,7 +94,7 @@ export function Hero() {
 export function Story() {
   return (
     <div id="story">
-      <Chapter cam="story-0" height="300vh">
+      <Chapter cam="story-0" height="200vh">
         <div className="glass p-6 sm:p-8">
           <H2>I study how operations run.</H2>
           <p className="mt-5 text-lg leading-relaxed text-ink-2">
@@ -104,7 +104,7 @@ export function Story() {
         </div>
       </Chapter>
 
-      <Chapter cam="story-1" height="330vh" align="right">
+      <Chapter cam="story-1" height="220vh" align="right">
         <div className="glass p-6 sm:p-8">
           <H2>Three disciplines, equal weight.</H2>
           <div className="mt-6 grid gap-5">
@@ -125,7 +125,7 @@ export function Story() {
         </div>
       </Chapter>
 
-      <Chapter cam="story-2" height="300vh">
+      <Chapter cam="story-2" height="200vh">
         <div className="glass p-6 sm:p-8">
           <H2>Two stints at Derin Bilgi.</H2>
           <ol className="relative mt-6 grid gap-6 border-l border-line pl-6">
@@ -151,7 +151,7 @@ export function Story() {
 
 export function Arrival() {
   return (
-    <Chapter cam="arrive" id="work" height="520vh" align="right">
+    <Chapter cam="arrive" id="work" height="340vh" align="right">
       <div className="glass p-6 sm:p-8">
         <H2>
           Six working <span className="text-band-flow">systems.</span>
@@ -166,22 +166,22 @@ export function Arrival() {
 
 export function ProjectChapter({ p, i, onOpen }) {
   return (
-    <Chapter cam={`project-${i}`} id={p.id} height="280vh" place="bottom">
-      <article className="glass p-5 sm:p-7">
+    <Chapter cam={`project-${i}`} id={p.id} height="180vh" place="bottom">
+      <article className="glass p-4 sm:p-7">
         <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
           <h3 className="display text-[clamp(1.7rem,3vw,2.5rem)]">{p.title}</h3>
           <span className="rounded-full border border-line px-2.5 py-0.5 text-[12px] font-semibold text-ink-2">{p.station}</span>
         </div>
-        <p className="mt-3 text-[17px] leading-snug text-ink sm:text-lg">{p.headline}</p>
-        <dl className="mt-5 grid grid-cols-3 gap-3 border-t border-line pt-4">
+        <p className="mt-2.5 text-[16px] leading-snug text-ink sm:mt-3 sm:text-lg">{p.headline}</p>
+        <dl className="mt-4 grid grid-cols-3 gap-3 border-t border-line pt-3.5 sm:mt-5 sm:pt-4">
           {p.proof.map((x) => (
             <div key={x.k}>
               <dd className="font-mono text-[clamp(1rem,1.7vw,1.35rem)] font-semibold text-band-flow tnum">{x.v}</dd>
-              <dt className="mt-1 text-[12px] leading-tight text-ink-3">{x.k}</dt>
+              <dt className="mt-1 text-[11px] leading-tight text-ink-3 sm:text-[12px]">{x.k}</dt>
             </div>
           ))}
         </dl>
-        <div className="mt-6 flex flex-wrap gap-2.5">
+        <div className="mt-4 flex flex-wrap gap-2.5 sm:mt-6">
           <button type="button" onClick={() => onOpen(i)} className="btn btn-primary">
             <CornersOut size={17} weight="bold" />
             Step inside
@@ -212,7 +212,7 @@ const ROLES = ["Software", "Trading and quant", "Supply chain", "Operations", "I
 
 export function Beyond() {
   return (
-    <Chapter cam="below" id="about" height="400vh" align="right">
+    <Chapter cam="below" id="about" height="260vh" align="right">
       <div className="glass p-6 sm:p-8">
         <H2>
           Looking for summer <span className="text-band-flow">2027.</span>
@@ -244,7 +244,9 @@ export function Contact() {
   const reduce = useReducedMotion();
   return (
     <section id="contact" data-cam="contact" className="relative flex min-h-[130vh] items-end">
-      <div className="mx-auto w-full max-w-[1400px] px-4 pb-10 sm:px-6 lg:px-12">
+      {/* On a phone the tunnel runs behind the copy; a low scrim keeps it readable. */}
+      <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 bottom-0 h-[75vh] bg-gradient-to-t from-[rgb(5_6_10/0.94)] via-[rgb(5_6_10/0.65)] to-transparent md:hidden" />
+      <div className="relative mx-auto w-full max-w-[1400px] px-4 pb-10 sm:px-6 lg:px-12">
         <motion.div
           className="pointer-events-auto max-w-[52rem]"
           initial={reduce ? false : { opacity: 0, y: 40 }}

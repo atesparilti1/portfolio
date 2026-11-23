@@ -607,7 +607,7 @@ export default class Scene {
       else if (key === "arrive") {
         add(at(0.12), P(32, 4.1, 38, 0, 4.1, 9, 46));
         // Over the open top, looking straight down the shaft at the figure.
-        add(at(0.34), { pos: { r: 4, a: 4.5, y: TOP_Y + 16 }, look: { r: 0.3, a: 4.5, y: FLOOR_Y }, fov: 46 }, "smooth");
+        add(at(0.34), { pos: { r: 4, a: 4.5, y: TOP_Y + (aspect < 1 ? 44 : 16) }, look: { r: 0.3, a: 4.5, y: FLOOR_Y }, fov: 46 }, "smooth");
         // Down the shaft in a spiral, circling the figure once as it looks up in awe.
         const head = (k) => ({ r: 0, a: 0, y: FLOOR_Y + k });
         add(at(0.48), { pos: { r: 5.5, a: 6.6, y: 16 }, look: head(1.5), fov: 50 });
@@ -673,8 +673,11 @@ export default class Scene {
   }
 
   pointerMove(e) {
-    this.mouse.set((e.clientX / innerWidth) * 2 - 1, -(e.clientY / innerHeight) * 2 + 1);
-    this.pointerOnCanvas = e.target === this.canvas;
+    // Only a mouse steers the parallax and hover; a finger moving to scroll must not.
+    if (e.pointerType === "mouse") {
+      this.mouse.set((e.clientX / innerWidth) * 2 - 1, -(e.clientY / innerHeight) * 2 + 1);
+      this.pointerOnCanvas = e.target === this.canvas;
+    }
     if (this.drag && e.pointerId === this.drag.id && !this.focusTarget) {
       const dx = e.clientX - this.drag.last;
       this.drag.last = e.clientX;
@@ -690,14 +693,24 @@ export default class Scene {
     this.drag = null;
   }
 
-  click() {
-    if ((this.lastDragMoved ?? 0) > 6 || this.hovered < 0 || this.focusTarget) return;
-    this.onOpen?.(this.hovered);
+  // A click or tap opens the project screen under it, found where it landed
+  // (touch has no hover to rely on).
+  click(e) {
+    if ((this.lastDragMoved ?? 0) > 6 || this.focusTarget) return;
+    const at = new THREE.Vector2((e.clientX / innerWidth) * 2 - 1, -(e.clientY / innerHeight) * 2 + 1);
+    this.ray ??= new THREE.Raycaster();
+    this.ray.setFromCamera(at, this.camera);
+    const hit = this.ray.intersectObjects(this.projectScreens.filter(Boolean), false)[0];
+    if (hit && hit.distance < 45 && hit.face && hit.face.normal.z > 0) this.onOpen?.(hit.object.userData.project);
   }
 
   resize() {
-    const w = innerWidth;
-    const h = innerHeight;
+    // Size to the canvas (100lvh), so a phone's address bar sliding in and out
+    // neither stretches the picture nor reallocates the buffers.
+    const w = this.canvas.clientWidth || innerWidth;
+    const h = this.canvas.clientHeight || innerHeight;
+    if (w === this.size?.w && h === this.size?.h) return this.layout();
+    this.size = { w, h };
     this.renderer.setSize(w, h, false);
     this.composer.setSize(w, h);
     this.bloom.setSize(Math.round(w / 2), Math.round(h / 2));

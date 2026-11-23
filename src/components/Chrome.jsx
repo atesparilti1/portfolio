@@ -11,6 +11,8 @@ const LINKS = [
 export function Nav() {
   return (
     <header className="fixed inset-x-0 top-0 z-40">
+      {/* Keeps the bar readable over bright screens without a hard edge. */}
+      <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-24 bg-gradient-to-b from-[rgb(5_6_10/0.8)] to-transparent" />
       <div className="mx-auto flex h-16 max-w-[1400px] items-center gap-8 px-4 sm:px-6 lg:px-12">
         <a href="#top" className="wide flex items-center gap-2.5 text-[17px] font-extrabold tracking-tight">
           <span aria-hidden="true" className="relative grid size-5 place-items-center rounded-full border-[1.5px] border-ink">

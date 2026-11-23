@@ -24,7 +24,7 @@ export default function App() {
   // Smooth, weighted scrolling; native scrolling when motion is reduced.
   useEffect(() => {
     if (reduce) return;
-    const lenis = new Lenis({ lerp: 0.07, wheelMultiplier: 0.65, touchMultiplier: 1, anchors: true, autoRaf: true });
+    const lenis = new Lenis({ lerp: 0.085, wheelMultiplier: 1.15, touchMultiplier: 1.2, anchors: true, autoRaf: true });
     lenisRef.current = lenis;
     return () => {
       lenis.destroy();

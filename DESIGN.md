@@ -73,7 +73,7 @@ Text floats over the scene on frosted glass (`.glass`): a dark translucent fill,
 ## Motion
 
 - Lenis smooths the page scroll; the camera follows with exponential damping. Dragging spins the view around the ring with inertia, then it settles back.
-- Chapters are long and the wheel is slowed, so each block of copy stays readable for most of its stretch. Chapter copy pins while the camera travels, fading and un-blurring in, and out as the chapter leaves.
+- Chapter copy stays fully visible for 80% of its stretch, so a short scroll still reads it. Chapter copy pins while the camera travels, fading and un-blurring in, and out as the chapter leaves.
 - Screens boot with a short flicker on load, brighten when their project is active, and scale up slightly on hover.
 - Opening a project flies the camera into its screen; the project window then grows out of the middle of the view.
 - **Reduced motion:** no smoothing, no boot flicker, no drift or twinkle, no camera flight; the camera still follows scroll (user-driven) and all copy renders at its final state.
