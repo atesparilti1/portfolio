@@ -69,7 +69,7 @@ export function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, delay: 1.6, ease }}
           >
-            TU/e student building finance, data and supply-chain tools end to end. Open to summer 2027 internships.
+            TU/e student building finance, data and supply-chain tools end to end. Open to jobs or internships from summer 2027.
           </motion.p>
           <motion.div
             className="mt-8 flex flex-wrap gap-3"
@@ -217,7 +217,7 @@ export function Beyond() {
         <H2>
           Looking for summer <span className="text-band-flow">2027.</span>
         </H2>
-        <p className="mt-5 text-lg leading-relaxed text-ink-2">An internship in software, finance or operations, in any of these roles:</p>
+        <p className="mt-5 text-lg leading-relaxed text-ink-2">A job or internship in software, finance or operations, in any of these roles:</p>
         <ul className="mt-4 flex flex-wrap gap-2">
           {ROLES.map((r) => (
             <li key={r} className="rounded-full border border-line bg-white/[0.03] px-3 py-1 text-[14px] font-semibold">
