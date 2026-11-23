@@ -2,12 +2,13 @@
 
 Personal site of Ates Parilti, Industrial Engineering student at TU/e.
 
-The page is drawn as a Lean value-stream map. The hero is a small discrete-event simulation: work flows from raw data through three steps (clean data, model, build), modelling is the bottleneck, and improving a step shows how the total time per job responds. Only improving the bottleneck helps, which is the point.
+The page is a scroll-driven Three.js scene. The camera starts in space above an open ring of screens, descends through the story, enters the ring where each project has its own screen, and finally drops through the floor as the screens peel off into a tunnel. Clicking a screen flies the camera into it and opens the project: findings, live demo, source, stack, an in-page demo and the case study. The scene lives in `src/space/`, the copy in `src/components/Chapters.jsx`, and projects in `src/data/projects.js`.
 
 ## Projects on the page
 
 | Project | Live demo | What the page shows |
 | --- | --- | --- |
+| [FabTwin](https://github.com/atesparilti1/fabtwin) | [open](https://atesparilti1.github.io/fabtwin/) | Scheduling, overhead transport and maintenance for a wafer fab, tested in a 3D digital twin: cycle time -16.1% and weighted tardiness -97% against critical-ratio dispatching |
 | [EUV Supply Risk](https://github.com/atesparilti1/asml-euv-supply-risk) | [open](https://atesparilti1.github.io/asml-euv-supply-risk/) | The buffer policies from 20,000 Monte Carlo paths, priced through the ASML DCF, with their confidence intervals |
 | [ASML DCF Valuation](https://github.com/atesparilti1/asml-dcf-valuation) | [open](https://atesparilti1.github.io/asml-dcf-valuation/) | The model's own cash flows re-valued live: change WACC, terminal growth or exit multiple, see the price against the market and what today's price requires |
 | [Demand Forecaster](https://github.com/atesparilti1/demand-forecaster) | [open](https://atesparilti1.github.io/demand-forecaster/) | The real XGBoost backtest next to actual sales, turned into safety stock, a reorder point and an order quantity |
@@ -16,11 +17,11 @@ The page is drawn as a Lean value-stream map. The hero is a small discrete-event
 
 ## Adding a project
 
-Add an entry to `featured` in `src/data/projects.js`. The board in `src/components/Work.jsx` gives it a rail row, a stage and a place in the "Hiring for" filter, and the page does not get longer. To give it an in-page demo, add the component to `DEMOS` in `Work.jsx`.
+Add an entry to `featured` in `src/data/projects.js`. It gets a screen on the ring (spread evenly, up to 12), a chapter of its own and a window with its findings. A `shot` puts its screenshot on the screen; without one the screen shows a drawn face from `src/space/screens.js`. To give it an in-page demo, add the component to `DEMOS` in `src/components/ProjectDetail.jsx`.
 
 ## Stack
 
-React 19, Vite, Tailwind CSS v4, Motion, Canvas 2D. Fonts: Archivo and JetBrains Mono, self-hosted.
+React 19, Vite, Tailwind CSS v4, Three.js (WebGL, bloom post-processing), Lenis smooth scrolling, Motion. Fonts: Archivo and JetBrains Mono, self-hosted.
 
 ## Run locally
 

@@ -24,7 +24,7 @@ A blend of three identities, none subordinate: **Industrial Engineering student*
 
 ## Capabilities and Constraints
 
-- Shows only the projects the owner chose: EUV Supply Risk, ASML DCF Valuation, Demand Forecaster, SEC Filing Analyzer, Discount Policy Simulator (repo: supplychain-dashboard). Other workspace projects stay off the site unless the owner adds them.
+- Shows only the projects the owner chose: FabTwin, EUV Supply Risk, ASML DCF Valuation, Demand Forecaster, SEC Filing Analyzer, Discount Policy Simulator (repo: supplychain-dashboard). Other workspace projects stay off the site unless the owner adds them; the owner ruled out wishlist_hub and budgetspender.
 - Each project links to its GitHub repo. CV (including phone number, approved by the owner) is downloadable at `public/Ates-Parilti-CV.pdf`. Each project has a live demo on GitHub Pages. Dutch version undecided.
 
 ## Brand Commitments
@@ -37,6 +37,7 @@ A blend of three identities, none subordinate: **Industrial Engineering student*
 
 ## Evidence on Hand
 
+- **FabTwin** (github.com/atesparilti1/fabtwin, live at atesparilti1.github.io/fabtwin): stochastic scheduling, OHT transport and maintenance for a synthetic SMT2020-style fab, checked in a discrete-event twin. vs critical ratio over 200 paired CRN replications: cycle time -16.1% (95% CI ±1.0), weighted tardiness -97%, on-time +17.0%. CP-SAT optimal on 12/12 small instances; dispatching 36% and ALNS 27% above optimum. Robust PM vs run-to-failure: unplanned downtime -32%. Fab parameters are labelled assumptions, not fab data. Screenshot at `public/work/fabtwin.png`.
 - **EUV Supply Risk** (github.com/atesparilti1/asml-euv-supply-risk, live at atesparilti1.github.io/asml-euv-supply-risk): 20,000 Monte Carlo paths valued through the ASML DCF. Recommended buffer €82m, +€59m of equity value (95% CI +€55m to +€62m), on-time delivery 57% to 63%; two sets of everything €338m, -€193m. Supplier inputs are illustrative priors and must stay labelled as such.
 - **ASML DCF Valuation** (github.com/atesparilti1/asml-dcf-valuation, live at atesparilti1.github.io/asml-dcf-valuation): ten-year DCF from ASML filings, valuation date 7 Oct 2026. Base €935 vs €1,611 price; reverse DCF 33x / 7.1%. Portfolio demo uses the cash flows exported from its model.py.
 - **Demand Forecaster** (`../demandprediction_web`, github.com/atesparilti1/demand-forecaster): SARIMA and XGBoost on the Kaggle Store Item set (10 stores x 50 items, 5 years). Real results: XGBoost MAPE 13.6%, MASE 0.74; 500 series, 178 at risk in a 14-day window. Real screenshot at `public/work/demand-forecaster-dashboard.png`.

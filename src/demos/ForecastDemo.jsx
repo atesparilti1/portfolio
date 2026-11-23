@@ -208,7 +208,7 @@ export default function ForecastDemo() {
         </div>
       </div>
       <p className="border-t border-ink/20 px-4 py-2 text-xs text-ink-3">
-        Real backtest: grey is what sold, blue is the XGBoost forecast. Safety stock = z × σ × √days, with σ the daily forecast error.
+        Real backtest: grey is what sold, amber is the XGBoost forecast. Safety stock = z × σ × √days, with σ the daily forecast error.
       </p>
     </div>
   );

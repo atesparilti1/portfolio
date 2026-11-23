@@ -1,133 +1,70 @@
-import { useEffect, useState } from "react";
-import { AnimatePresence, motion, useReducedMotion, useScroll, useTransform } from "motion/react";
+import { motion, useScroll, useSpring } from "motion/react";
 import { track } from "@vercel/analytics";
-import { DownloadSimple, EnvelopeSimple, GithubLogo, LinkedinLogo, List, X } from "@phosphor-icons/react";
-import { contact } from "../data/projects";
+import { contact, featured } from "../data/projects";
 
 const LINKS = [
-  { href: "#experience", label: "Experience" },
-  { href: "#work", label: "Work" },
-  { href: "#about", label: "About" },
+  ["Story", "#story"],
+  ["Work", "#work"],
+  ["Contact", "#contact"],
 ];
 
 export function Nav() {
-  const { scrollY } = useScroll();
-  const border = useTransform(scrollY, [0, 40], [0, 1]);
-  const reduce = useReducedMotion();
-  const [open, setOpen] = useState(false);
-
-  useEffect(() => {
-    if (!open) return;
-    const onKey = (e) => e.key === "Escape" && setOpen(false);
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [open]);
-
   return (
-    <header className="fixed inset-x-0 top-0 z-30 bg-ground">
-      <nav className="mx-auto flex h-16 max-w-[1400px] items-center justify-between gap-6 px-4 sm:px-6 lg:px-10">
-        <a href="#top" className="group flex items-center gap-2.5 text-[17px] font-extrabold wide" aria-label="Ates Parilti, back to top">
-          <span aria-hidden="true" className="relative block h-5 w-5">
-            <span className="absolute inset-0 border-2 border-ink transition-transform duration-300 ease-out group-hover:rotate-45" />
-            <span className="absolute inset-[5px] bg-ink transition-colors duration-300 group-hover:bg-flow" />
+    <header className="fixed inset-x-0 top-0 z-40">
+      <div className="mx-auto flex h-16 max-w-[1400px] items-center gap-8 px-4 sm:px-6 lg:px-12">
+        <a href="#top" className="wide flex items-center gap-2.5 text-[17px] font-extrabold tracking-tight">
+          <span aria-hidden="true" className="relative grid size-5 place-items-center rounded-full border-[1.5px] border-ink">
+            <span className="size-1.5 rounded-full bg-flow shadow-[0_0_10px_2px_rgb(59_130_246/0.9)]" />
           </span>
           Ates Parilti
         </a>
-        <div className="flex items-center gap-1 sm:gap-2">
-          <ul className="hidden items-center md:flex">
-            {LINKS.map((l) => (
-              <li key={l.href}>
-                <a
-                  href={l.href}
-                  className="relative px-3 py-2 text-[15px] font-semibold text-ink-2 transition-colors hover:text-ink after:absolute after:inset-x-3 after:bottom-1 after:h-[2px] after:origin-left after:scale-x-0 after:bg-ink after:transition-transform after:duration-300 hover:after:scale-x-100"
-                >
-                  {l.label}
+        <nav aria-label="Sections" className="hidden md:block">
+          <ul className="flex gap-7 text-[15px] font-semibold text-ink-2">
+            {LINKS.map(([label, href]) => (
+              <li key={href}>
+                <a href={href} className="transition-colors hover:text-ink">
+                  {label}
                 </a>
               </li>
             ))}
           </ul>
-          <a
-            href={contact.linkedin}
-            target="_blank"
-            rel="noreferrer"
-            aria-label="LinkedIn"
-            className="hidden h-9 w-9 items-center justify-center text-ink-2 transition-colors hover:text-ink md:inline-flex"
-          >
-            <LinkedinLogo size={19} weight="bold" />
-          </a>
-          <a
-            href={contact.cv}
-            download
-            onClick={() => track("cv_download", { from: "nav" })}
-            className="hidden items-center gap-1.5 px-3 py-2 text-[15px] font-semibold text-ink-2 transition-colors hover:text-ink md:inline-flex"
-          >
-            <DownloadSimple size={16} weight="bold" />
-            CV
-          </a>
-          <a
-            href={`mailto:${contact.email}`}
-            className="inline-flex h-11 items-center gap-2 bg-ink px-3.5 text-sm font-bold md:ml-2 md:h-auto md:py-2 text-ground transition-colors hover:bg-flow hover:text-flow-ink active:scale-[0.98]"
-          >
-            <EnvelopeSimple size={16} weight="bold" />
-            Email me
-          </a>
-          <button
-            type="button"
-            onClick={() => setOpen((o) => !o)}
-            aria-expanded={open}
-            aria-controls="mobile-menu"
-            aria-label={open ? "Close menu" : "Open menu"}
-            className="-mr-2 grid h-11 w-11 place-items-center md:hidden"
-          >
-            {open ? <X size={22} weight="bold" /> : <List size={22} weight="bold" />}
-          </button>
-        </div>
-      </nav>
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            id="mobile-menu"
-            initial={reduce ? false : { opacity: 0, y: -8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
-            transition={{ duration: 0.2 }}
-            className="absolute inset-x-0 top-16 border-b-2 border-ink bg-ground px-4 pb-3 sm:px-6 md:hidden"
-          >
-            <ul>
-              {LINKS.map((l) => (
-                <li key={l.href} className="border-b border-ink/15">
-                  <a href={l.href} onClick={() => setOpen(false)} className="flex h-12 items-center text-[17px] font-semibold">
-                    {l.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-            <div className="flex items-center gap-5 pt-3">
-              <a
-                href={contact.cv}
-                download
-                onClick={() => {
-                  setOpen(false);
-                  track("cv_download", { from: "menu" });
-                }}
-                className="inline-flex h-11 items-center gap-1.5 font-semibold"
-              >
-                <DownloadSimple size={18} weight="bold" />
-                CV
-              </a>
-              <a href={contact.linkedin} target="_blank" rel="noreferrer" className="inline-flex h-11 items-center gap-1.5 font-semibold">
-                <LinkedinLogo size={18} weight="bold" />
-                LinkedIn
-              </a>
-              <a href={contact.github} target="_blank" rel="noreferrer" className="inline-flex h-11 items-center gap-1.5 font-semibold">
-                <GithubLogo size={18} weight="bold" />
-                GitHub
-              </a>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-      <motion.div style={{ opacity: border }} className="h-[2px] bg-ink" />
+        </nav>
+        <a href={`mailto:${contact.email}`} onClick={() => track("email_click", { from: "nav" })} className="btn btn-ghost ml-auto px-4 py-2 text-[14px] backdrop-blur-md">
+          Email me
+        </a>
+      </div>
     </header>
+  );
+}
+
+// Where you are on the journey: a progress line, and the projects while inside the ring.
+export function Rail({ chapter, onJump }) {
+  const { scrollYProgress } = useScroll();
+  const scaleY = useSpring(scrollYProgress, { stiffness: 120, damping: 30 });
+  const active = chapter?.startsWith("project-") ? Number(chapter.slice(8)) : -1;
+  const inWork = active >= 0 || chapter === "arrive";
+  return (
+    <aside aria-label="Projects" className="pointer-events-none fixed right-6 top-1/2 z-30 hidden -translate-y-1/2 items-center gap-5 xl:flex">
+      <motion.ol
+        className="pointer-events-auto grid gap-3"
+        animate={{ opacity: inWork ? 1 : 0, x: inWork ? 0 : 16 }}
+        transition={{ duration: 0.5 }}
+        style={{ visibility: inWork ? "visible" : "hidden" }}
+      >
+        {featured.map((p, i) => (
+          <li key={p.id} className="flex justify-end">
+            <button type="button" onClick={() => onJump(p.id)} aria-label={p.title} aria-current={i === active ? "step" : undefined} className="group flex items-center gap-3 py-1">
+              <span className="pointer-events-none whitespace-nowrap rounded-full bg-[rgb(8_10_16/0.75)] px-2.5 py-1 text-[13px] font-semibold text-ink opacity-0 backdrop-blur-md transition-opacity duration-200 group-hover:opacity-100 group-focus-visible:opacity-100">
+                {p.title}
+              </span>
+              <span className={`h-[2px] rounded-full transition-all duration-500 ${i === active ? "w-8 bg-flow shadow-[0_0_8px_rgb(59_130_246/0.9)]" : "w-3.5 bg-ink-3 group-hover:bg-ink"}`} />
+            </button>
+          </li>
+        ))}
+      </motion.ol>
+      <div className="relative h-48 w-px bg-line">
+        <motion.div className="absolute inset-0 origin-top bg-flow shadow-[0_0_10px_rgb(59_130_246/0.9)]" style={{ scaleY }} />
+      </div>
+    </aside>
   );
 }

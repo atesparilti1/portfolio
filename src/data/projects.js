@@ -10,6 +10,51 @@ export const LENSES = ["All", "Software", "Finance", "Operations"];
 
 export const featured = [
   {
+    id: "fabtwin",
+    title: "FabTwin",
+    station: "Operations research",
+    lenses: ["Software", "Operations"],
+    metric: "−16.1%",
+    short: "How should a wafer fab schedule its lots, vehicles and maintenance?",
+    headline: "My scheduling policy cut fab cycle time by 16% and weighted tardiness by 97%.",
+    line: "Schedules a semiconductor fab under uncertainty (lots, overhead transport vehicles and maintenance) and tests every policy in a 3D digital twin I built.",
+    proof: [
+      { k: "Cycle time vs critical ratio", v: "−16.1%" },
+      { k: "Proved optimal, small instances", v: "12 of 12" },
+      { k: "Unplanned downtime vs run-to-failure", v: "−32%" },
+    ],
+    stack: ["Python", "CP-SAT", "HiGHS MIP", "ALNS", "React", "Three.js"],
+    links: {
+      github: "https://github.com/atesparilti1/fabtwin",
+      demo: "https://atesparilti1.github.io/fabtwin/",
+    },
+    shot: {
+      src: "/work/fabtwin.png",
+      alt: "The FabTwin digital twin: a 3D wafer fab with lithography, furnace, etch and CMP tool groups linked by an overhead rail, a simulation clock at day 41, and live readouts of WIP, throughput, cycle time and litho utilisation.",
+      w: 1440,
+      h: 900,
+      caption: "The 3D twin replaying a seven-day simulation.",
+    },
+    case: [
+      [
+        "Problem",
+        "A wafer fab is a re-entrant job shop: lots revisit lithography once per mask layer, furnaces batch, scanners pay a setup on every reticle change and Q-time windows cap the wait between steps. Which dispatching, transport and maintenance policy keeps lots on time when tools fail?",
+      ],
+      [
+        "Data",
+        "A synthetic fab with the structure of the public SMT2020 testbed: 16 tool groups, 55 machines and 3 products with routes of 58 to 69 steps. Parameter values are labelled order-of-magnitude assumptions, not fab data.",
+      ],
+      [
+        "Method",
+        "CP-SAT and a time-indexed MIP in HiGHS as exact ground truth, then bottleneck-first decomposition and ALNS for scale. Overhead hoist vehicles are assigned with the Hungarian method and routed with congestion-aware A*. Every policy runs in my own discrete-event simulator: 200 paired replications with common random numbers.",
+      ],
+      [
+        "Result",
+        "Against critical-ratio dispatching: cycle time −16.1% (95% CI ±1.0), weighted tardiness −97% and on-time delivery +17.0%. CP-SAT proved optimality on 12 of 12 small instances, where the best dispatching rule sat 36% above optimum and ALNS 27%. A rolling-horizon CP-SAT planner did not help, and is reported anyway.",
+      ],
+    ],
+  },
+  {
     id: "euv-supply-risk",
     title: "EUV Supply Risk",
     station: "Supply chain",
@@ -185,7 +230,7 @@ export const featured = [
     proof: [
       { k: "Order lines", v: "51,290" },
       { k: "Lost above 20% off", v: "−$815k" },
-      { k: "Profit with a 20% cap", v: "$2.28–2.50M" },
+      { k: "Profit with a 20% cap", v: "$2.28-2.50M" },
     ],
     stack: ["Python", "pandas", "SQL", "JavaScript"],
     links: {
@@ -213,14 +258,14 @@ export const experience = [
     company: "Derin Bilgi",
     role: "Summer Intern",
     where: "Istanbul, Türkiye (hybrid)",
-    when: "Jun. 2025 – Aug. 2025",
+    when: "Jun 2025 - Aug 2025",
     points: ["Contributed to application development and debugging alongside experienced developers, then returned in Mar. 2026 as a part-time developer."],
   },
   {
     company: "Derin Bilgi",
     role: "Software Developer, part-time",
     where: "Istanbul, Türkiye (remote)",
-    when: "Mar. 2026 – Aug. 2026",
+    when: "Mar 2026 - Aug 2026",
     points: [
       "Proposed and built Lup Diye end to end (confidential).",
       "Developed and debugged features in an Agile Scrum team, with weekly sprint planning and progress reviews.",
@@ -233,10 +278,11 @@ export const toolbox = [
   {
     station: "Industrial Engineering",
     rows: [
+      ["Scheduling with CP-SAT and MIP", "FabTwin"],
+      ["Discrete-event simulation", "FabTwin"],
       ["Monte Carlo simulation", "EUV Supply Risk"],
       ["Demand forecasting, stockout risk", "Forecaster"],
       ["Pricing policy analysis", "Discount Simulator"],
-      ["Flow analysis", "this page"],
     ],
   },
   {
@@ -252,6 +298,7 @@ export const toolbox = [
     station: "Full-stack",
     rows: [
       ["React, TypeScript", "SEC Analyzer, ASML DCF"],
+      ["3D in the browser, Three.js", "FabTwin"],
       ["FastAPI", "SEC Analyzer"],
       ["Python, pandas, SQL", "Discount Simulator"],
       ["Simulation in the browser", "EUV Supply Risk"],
